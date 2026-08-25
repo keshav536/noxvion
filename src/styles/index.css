@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nox-base: #0A0A0B;
+    --nox-layer: #161618;
+    --nox-border: #262626;
+    --nox-cyan: #00F0FF;
+    --nox-text: #d4e4fa;
+    --nox-text-muted: #94A3B8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0A0A0B;
+    color: #d4e4fa;
+    font-family: 'Geist', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid #00F0FF;
+    outline-offset: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(0, 240, 255, 0.2);
+    color: #d4e4fa;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+  }
+}
+
+@layer components {
+  /* Container */
+  .nox-container {
+    @apply w-full max-w-[1440px] mx-auto px-5 md:px-16;
+  }
+
+  /* Section spacing */
+  .nox-section {
+    @apply py-20 md:py-28;
+  }
+
+  /* Label caps */
+  .label-caps {
+    @apply text-xs font-semibold tracking-widest uppercase;
+  }
+
+  /* Technical label */
+  .technical-label {
+    @apply text-[13px] font-normal tracking-normal;
+  }
+
+  /* Card base */
+  .nox-card {
+    @apply bg-nox-layer border border-nox-border transition-all duration-300;
+  }
+  .nox-card:hover {
+    @apply border-nox-border-active;
+  }
+
+  /* Cyan accent line */
+  .cyan-line {
+    @apply w-8 h-px bg-nox-cyan;
+  }
+
+  /* Grid line background */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}
+
+@layer utilities {
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #d4e4fa 0%, #00F0FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
