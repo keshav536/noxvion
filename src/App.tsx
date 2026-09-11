@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
@@ -11,23 +11,19 @@ import { WorkWithUs } from './pages/WorkWithUs';
 import { Contact } from './pages/Contact';
 import { NotFound } from './pages/NotFound';
 import { LegalPage } from './pages/LegalPage';
+import { MotionToggle } from './components/ui/MotionToggle';
+import { useMotionPreference } from './hooks/useMotionPreference';
+import { Navbar } from './components/layout/Navbar';
+import { Footer } from './components/layout/Footer';
+import { AppLoader } from './components/effects/AppLoader';
+import { RouteTransition } from './components/layout/RouteTransition';
 
-// Scroll Restoration component
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
+const AnimatedRoutes: React.FC = () => {
+  const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
-
-export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
+    <RouteTransition>
+      <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
@@ -123,8 +119,25 @@ export const App: React.FC = () => {
         {/* 404 Fallback */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+    </RouteTransition>
+  );
+};
+
+const AppContent: React.FC = () => {
+  useMotionPreference();
+  return (
+    <BrowserRouter>
+      <AppLoader />
+      <div className="min-h-screen flex flex-col bg-nox-base">
+        <Navbar />
+        <AnimatedRoutes />
+        <Footer />
+      </div>
+      <MotionToggle />
     </BrowserRouter>
   );
 };
+
+export const App: React.FC = () => <AppContent />;
 
 export default App;

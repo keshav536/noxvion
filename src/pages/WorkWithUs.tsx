@@ -4,6 +4,8 @@ import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Button } from '../components/ui/Button';
 import { FoldText } from '../components/effects/FoldText';
+import { Card3D } from '../components/effects/Card3D';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import logo from '../assets/logo.png';
 
@@ -66,8 +68,9 @@ export const WorkWithUs: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg" aria-label="Work With Us Hero">
-        <div className="nox-container">
+      <section className="relative py-20 md:py-28 border-b border-nox-border grid-bg overflow-hidden" aria-label="Work With Us Hero">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
@@ -89,28 +92,30 @@ export const WorkWithUs: React.FC = () => {
               </p>
             </div>
 
-            {/* Right Brand Vector Visual */}
+            {/* Right Brand Vector Visual with 3D Depth */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <div className="border border-nox-border bg-nox-layer p-8 relative max-w-sm w-full">
-                <div className="flex justify-between items-center mb-6 border-b border-nox-border/60 pb-3">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-nox-cyan">
-                    VECTOR SPEC
-                  </span>
-                  <span className="text-[10px] font-mono text-nox-text-dim">IMG_6_SYS</span>
+              <Card3D intensity="low" glowColor="rgba(0, 240, 255, 0.12)" className="max-w-sm w-full">
+                <div className="border border-nox-border bg-nox-layer p-8 relative rounded-sm shadow-card">
+                  <div className="flex justify-between items-center mb-6 border-b border-nox-border/60 pb-3">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-nox-cyan">
+                      VECTOR SPEC
+                    </span>
+                    <span className="text-[10px] font-mono text-nox-text-dim">IMG_6_SYS</span>
+                  </div>
+                  <div className="flex items-center justify-center p-6 bg-nox-base border border-nox-border">
+                    <img
+                      src={logo}
+                      alt="NOXVION emblem"
+                      className="w-32 h-auto object-contain"
+                    />
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-[10px] font-mono tracking-widest text-nox-text-dim uppercase">
+                      COLLABORATION PROTOCOL: ACTIVE
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center justify-center p-6 bg-nox-base border border-nox-border">
-                  <img
-                    src={logo}
-                    alt="NOXVION emblem"
-                    className="w-32 h-auto object-contain"
-                  />
-                </div>
-                <div className="mt-4 text-center">
-                  <p className="text-[10px] font-mono tracking-widest text-nox-text-dim uppercase">
-                    COLLABORATION PROTOCOL: ACTIVE
-                  </p>
-                </div>
-              </div>
+              </Card3D>
             </div>
           </div>
         </div>
@@ -130,31 +135,30 @@ export const WorkWithUs: React.FC = () => {
             {collaborationVectors.map((v) => {
               const Icon = v.icon;
               return (
-                <div
-                  key={v.num}
-                  className="bg-nox-layer border border-nox-border p-8 flex flex-col justify-between hover:border-nox-border-active transition-colors"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="text-xs font-mono font-semibold tracking-widest text-nox-cyan">
-                        {v.num}
-                      </span>
-                      <Icon size={20} className="text-nox-text-dim" />
+                <Card3D key={v.num} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
+                  <div className="h-full bg-nox-layer border border-nox-border p-8 flex flex-col justify-between hover:border-nox-border-active transition-colors">
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="text-xs font-mono font-semibold tracking-widest text-nox-cyan">
+                          {v.num}
+                        </span>
+                        <Icon size={20} className="text-nox-text-dim" />
+                      </div>
+
+                      <h2 className="text-xl font-semibold text-nox-text mb-3">{v.title}</h2>
+                      <p className="text-sm text-nox-text-muted leading-relaxed mb-8">
+                        {v.description}
+                      </p>
                     </div>
 
-                    <h2 className="text-xl font-semibold text-nox-text mb-3">{v.title}</h2>
-                    <p className="text-sm text-nox-text-muted leading-relaxed mb-8">
-                      {v.description}
-                    </p>
+                    <div className="pt-4 border-t border-nox-border">
+                      <Button to={v.action} variant="secondary" size="sm">
+                        {v.cta}
+                        <ArrowRight size={14} />
+                      </Button>
+                    </div>
                   </div>
-
-                  <div className="pt-4 border-t border-nox-border">
-                    <Button to={v.action} variant="secondary" size="sm">
-                      {v.cta}
-                      <ArrowRight size={14} />
-                    </Button>
-                  </div>
-                </div>
+                </Card3D>
               );
             })}
           </div>

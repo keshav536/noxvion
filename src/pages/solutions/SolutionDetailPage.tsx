@@ -5,6 +5,8 @@ import { PageContainer } from '../../components/layout/PageContainer';
 import { SectionHeader } from '../../components/ui/SectionHeader';
 import { Badge, TechBadge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
+import { Card3D } from '../../components/effects/Card3D';
+import { AmbientScene } from '../../components/effects/AmbientOrb';
 import { useSEO } from '../../hooks/useSEO';
 import { solutions } from '../../data/solutions';
 
@@ -41,7 +43,8 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
     <PageContainer>
       {/* ── HERO ── */}
       <section className="relative py-20 md:py-28 grid-bg border-b border-nox-border overflow-hidden" aria-label="Solution Hero">
-        <div className="nox-container">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <div className="flex items-center gap-3 mb-4">
             <Link to="/solutions" className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-text-dim hover:text-nox-cyan transition-colors">
               SOLUTIONS
@@ -70,23 +73,27 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
               </div>
             </div>
 
-            {/* Right Tech Card */}
-            <div className="lg:col-span-4 bg-nox-layer border border-nox-border p-6">
-              <div className="flex items-center justify-between border-b border-nox-border/60 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <Icon size={18} className="text-nox-cyan" />
-                  <span className="text-xs font-mono text-nox-text">{solution.id} SPEC</span>
+            {/* Right Tech Card with 3D Depth */}
+            <div className="lg:col-span-4">
+              <Card3D intensity="low" glowColor="rgba(0, 240, 255, 0.12)">
+                <div className="bg-nox-layer border border-nox-border p-6 shadow-card rounded-sm">
+                  <div className="flex items-center justify-between border-b border-nox-border/60 pb-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Icon size={18} className="text-nox-cyan" />
+                      <span className="text-xs font-mono text-nox-text">{solution.id} SPEC</span>
+                    </div>
+                    <Badge variant="cyan">PRODUCTION</Badge>
+                  </div>
+                  <p className="text-[10px] uppercase font-mono tracking-widest text-nox-text-dim mb-3">
+                    INTEGRATED TOOLSET
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {solution.tools.map((t) => (
+                      <TechBadge key={t} label={t} />
+                    ))}
+                  </div>
                 </div>
-                <Badge variant="cyan">PRODUCTION</Badge>
-              </div>
-              <p className="text-[10px] uppercase font-mono tracking-widest text-nox-text-dim mb-3">
-                INTEGRATED TOOLSET
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {solution.tools.map((t) => (
-                  <TechBadge key={t} label={t} />
-                ))}
-              </div>
+              </Card3D>
             </div>
           </div>
         </div>
@@ -104,23 +111,22 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {solution.capabilities.map((cap, i) => (
-              <div
-                key={i}
-                className="bg-nox-layer border border-nox-border p-6 flex items-start gap-4 hover:border-nox-border-active transition-colors"
-              >
-                <div className="p-2 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
-                  <CheckCircle2 size={16} />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono text-nox-text-dim">CAP-{String(i + 1).padStart(2, '0')}</span>
+              <Card3D key={i} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
+                <div className="h-full bg-nox-layer border border-nox-border p-6 flex items-start gap-4 hover:border-nox-border-active transition-colors">
+                  <div className="p-2 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
+                    <CheckCircle2 size={16} />
                   </div>
-                  <h3 className="text-base font-semibold text-nox-text mb-1">{cap}</h3>
-                  <p className="text-xs text-nox-text-muted leading-relaxed">
-                    Engineered according to rigorous validation benchmarks, failsafe redundancies, and clean modular APIs.
-                  </p>
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-mono text-nox-text-dim">CAP-{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <h3 className="text-base font-semibold text-nox-text mb-1">{cap}</h3>
+                    <p className="text-xs text-nox-text-muted leading-relaxed">
+                      Engineered according to rigorous validation benchmarks, failsafe redundancies, and clean modular APIs.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Card3D>
             ))}
           </div>
         </div>

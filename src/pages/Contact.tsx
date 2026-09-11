@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, AlertCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/ui/Button';
 import { FoldText } from '../components/effects/FoldText';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 
 interface ContactFormInputs {
@@ -57,11 +59,17 @@ export const Contact: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg" aria-label="Contact Hero">
-        <div className="nox-container">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
+      <section className="py-20 md:py-28 border-b border-nox-border grid-bg relative overflow-hidden" aria-label="Contact Hero">
+        <AmbientScene variant="subtle" />
+        <div className="nox-container relative z-10">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4"
+          >
             NOXVION / CONTACT
-          </p>
+          </motion.p>
           <FoldText
             as="h1"
             splitBy="word"
@@ -72,9 +80,14 @@ export const Contact: React.FC = () => {
             Let's Build Something<br />
             <span className="text-nox-cyan">Intelligent.</span>
           </FoldText>
-          <p className="text-nox-text-muted text-base md:text-xl leading-relaxed max-w-2xl">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-nox-text-muted text-base md:text-xl leading-relaxed max-w-2xl"
+          >
             Have an idea, research concept, technical challenge, or collaboration opportunity? Let's start a conversation.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -113,7 +126,7 @@ export const Contact: React.FC = () => {
                       <input
                         type="text"
                         {...register('fullName', { required: 'Full name is required' })}
-                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text focus:border-nox-cyan focus:outline-none"
+                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
                         placeholder="Dr. Jane Doe"
                       />
                       {errors.fullName && (
@@ -136,7 +149,7 @@ export const Contact: React.FC = () => {
                             message: 'Invalid email address',
                           },
                         })}
-                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text focus:border-nox-cyan focus:outline-none"
+                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
                         placeholder="jane@organization.com"
                       />
                       {errors.email && (
@@ -156,7 +169,7 @@ export const Contact: React.FC = () => {
                       <input
                         type="text"
                         {...register('organization')}
-                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text focus:border-nox-cyan focus:outline-none"
+                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
                         placeholder="Enterprise / Lab / University"
                       />
                     </div>
@@ -167,7 +180,7 @@ export const Contact: React.FC = () => {
                       </label>
                       <select
                         {...register('projectType', { required: 'Please select a project type' })}
-                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text focus:border-nox-cyan focus:outline-none cursor-pointer"
+                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow cursor-pointer"
                       >
                         {projectTypeOptions.map((opt) => (
                           <option key={opt} value={opt} className="bg-nox-base text-nox-text">
@@ -186,7 +199,7 @@ export const Contact: React.FC = () => {
                     <textarea
                       rows={5}
                       {...register('message', { required: 'Message details are required' })}
-                      className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text focus:border-nox-cyan focus:outline-none resize-none"
+                      className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow resize-none"
                       placeholder="Detail your engineering challenges, research objectives, or deployment timeline..."
                     />
                     {errors.message && (

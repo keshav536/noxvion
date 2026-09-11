@@ -5,6 +5,8 @@ import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { FoldText } from '../components/effects/FoldText';
+import { Card3D } from '../components/effects/Card3D';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import { articleCategories } from '../data/articles';
 
@@ -38,8 +40,9 @@ export const InnovationHub: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg" aria-label="Innovation Hub Hero">
-        <div className="nox-container">
+      <section className="relative py-20 md:py-28 border-b border-nox-border grid-bg overflow-hidden" aria-label="Innovation Hub Hero">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
             NOXVION / INNOVATION HUB
           </p>
@@ -84,7 +87,8 @@ export const InnovationHub: React.FC = () => {
       {/* ── FEATURED INSIGHT CARD (Coming Soon) ── */}
       <section className="nox-section border-b border-nox-border" aria-label="Featured Insight">
         <div className="nox-container">
-          <div className="border border-nox-border bg-nox-layer grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+          <Card3D intensity="low" glowColor="rgba(0, 240, 255, 0.1)">
+            <div className="border border-nox-border bg-nox-layer grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-card">
             <div
               className="lg:col-span-6 bg-nox-base p-8 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-nox-border relative min-h-[260px]"
               style={{
@@ -125,6 +129,7 @@ export const InnovationHub: React.FC = () => {
               </div>
             </div>
           </div>
+          </Card3D>
         </div>
       </section>
 
@@ -161,27 +166,26 @@ export const InnovationHub: React.FC = () => {
                 date: '2024.09.28',
               },
             ].map((article) => (
-              <div
-                key={article.id}
-                className="bg-nox-layer border border-nox-border p-6 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4 text-[10px] font-mono">
-                    <span className="text-nox-cyan uppercase">{article.category}</span>
-                    <span className="text-nox-text-dim">{article.id}</span>
+              <Card3D key={article.id} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
+                <div className="h-full bg-nox-layer border border-nox-border p-6 flex flex-col justify-between hover:border-nox-border-active transition-colors">
+                  <div>
+                    <div className="flex items-center justify-between mb-4 text-[10px] font-mono">
+                      <span className="text-nox-cyan uppercase">{article.category}</span>
+                      <span className="text-nox-text-dim">{article.id}</span>
+                    </div>
+                    <h3 className="text-base font-semibold text-nox-text mb-3 leading-snug">
+                      {article.title}
+                    </h3>
+                    <p className="text-xs text-nox-text-muted leading-relaxed mb-6">
+                      {article.desc}
+                    </p>
                   </div>
-                  <h3 className="text-base font-semibold text-nox-text mb-3 leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs text-nox-text-muted leading-relaxed mb-6">
-                    {article.desc}
-                  </p>
+                  <div className="pt-4 border-t border-nox-border flex items-center justify-between text-[10px] font-mono text-nox-text-dim">
+                    <span>{article.date}</span>
+                    <span className="text-nox-cyan">ARCHIVED REPORT</span>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-nox-border flex items-center justify-between text-[10px] font-mono text-nox-text-dim">
-                  <span>{article.date}</span>
-                  <span className="text-nox-cyan">ARCHIVED REPORT</span>
-                </div>
-              </div>
+              </Card3D>
             ))}
           </div>
         </div>

@@ -3,6 +3,8 @@ import { ArrowRight } from 'lucide-react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/ui/Button';
 import { FoldText } from '../components/effects/FoldText';
+import { Card3D } from '../components/effects/Card3D';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import { projectCategories } from '../data/projects';
 
@@ -66,8 +68,9 @@ export const Projects: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg" aria-label="Projects Hero">
-        <div className="nox-container">
+      <section className="relative py-20 md:py-28 border-b border-nox-border grid-bg overflow-hidden" aria-label="Projects Hero">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4 font-mono">
             [SYS_LOG] / NOXVION / PROJECTS
           </p>
@@ -114,56 +117,57 @@ export const Projects: React.FC = () => {
         <div className="nox-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filtered.map((proj) => (
-              <div
-                key={proj.id}
-                className="bg-nox-layer border border-nox-border flex flex-col justify-between"
-              >
-                {/* Tech Visual Placeholder */}
-                <div
-                  className="w-full aspect-[16/9] bg-nox-base border-b border-nox-border flex items-center justify-center p-6"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px)',
-                    backgroundSize: '32px 32px',
-                  }}
-                >
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim border border-nox-border/80 bg-nox-layer/60 px-4 py-2">
-                    [ IMG_SYS_AWAITING_DATA ]
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 md:p-8">
-                  <div className="flex items-center justify-between mb-4 font-mono text-[11px]">
-                    <span className="text-nox-cyan uppercase">{proj.id}</span>
-                    <span className="text-nox-text-dim">T-MINUS</span>
-                  </div>
-
-                  <h2 className="text-xl font-semibold text-nox-text mb-3">
-                    {proj.title}
-                  </h2>
-                  <p className="text-sm text-nox-text-muted leading-relaxed mb-6">
-                    {proj.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {proj.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="text-[10px] font-mono tracking-widest text-nox-text-dim uppercase border border-nox-border px-2.5 py-1 bg-nox-base"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="pt-4 border-t border-nox-border">
-                    <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-nox-text-muted font-mono">
-                      VIEW CASE STUDY <ArrowRight size={14} />
+              <Card3D key={proj.id} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
+                <div className="h-full bg-nox-layer border border-nox-border flex flex-col justify-between hover:border-nox-border-active transition-colors">
+                  {/* Tech Visual Placeholder */}
+                  <div
+                    className="w-full aspect-[16/9] bg-nox-base border-b border-nox-border flex items-center justify-center p-6 relative overflow-hidden"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px)',
+                      backgroundSize: '32px 32px',
+                    }}
+                  >
+                    <span className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim border border-nox-border/80 bg-nox-layer/60 px-4 py-2">
+                      [ IMG_SYS_AWAITING_DATA ]
                     </span>
                   </div>
+
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-4 font-mono text-[11px]">
+                        <span className="text-nox-cyan uppercase">{proj.id}</span>
+                        <span className="text-nox-text-dim">T-MINUS</span>
+                      </div>
+
+                      <h2 className="text-xl font-semibold text-nox-text mb-3">
+                        {proj.title}
+                      </h2>
+                      <p className="text-sm text-nox-text-muted leading-relaxed mb-6">
+                        {proj.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {proj.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="text-[10px] font-mono tracking-widest text-nox-text-dim uppercase border border-nox-border px-2.5 py-1 bg-nox-base"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-nox-border">
+                      <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-nox-cyan font-mono group-hover:text-nox-text transition-colors">
+                        VIEW CASE STUDY <ArrowRight size={14} />
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Card3D>
             ))}
           </div>
         </div>

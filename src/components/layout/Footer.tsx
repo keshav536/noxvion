@@ -23,31 +23,69 @@ const legalLinks = [
 export const Footer: React.FC = () => {
   return (
     <footer
-      className="bg-[#0A0A0B] border-t border-nox-border mt-auto"
+      className="bg-[#0A0A0B] footer-top-glow mt-auto relative overflow-hidden"
       role="contentinfo"
     >
-      <div className="nox-container py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 pb-12 border-b border-nox-border">
+      {/* Subtle ambient glow in the background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,240,255,0.025) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* Subtle grid in footer */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(0,240,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.015) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 80%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 80%)',
+        }}
+      />
+
+      <div className="nox-container py-16 md:py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 pb-12 border-b border-nox-border/60">
           {/* Brand */}
           <div className="flex flex-col gap-4 md:col-span-1">
-            <Link to="/" className="flex items-center gap-3" aria-label="NOXVION Home">
+            <Link
+              to="/"
+              className="flex items-center gap-3 group w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nox-cyan"
+              aria-label="NOXVION Home"
+            >
               <img
                 src={logo}
                 alt="NOXVION logo"
-                className="h-8 w-auto object-contain"
+                className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,240,255,0.5)]"
                 width={32}
                 height={32}
               />
-              <span className="text-nox-text font-semibold tracking-[0.08em] uppercase text-base">
+              <span className="text-nox-text font-semibold tracking-[0.08em] uppercase text-base transition-colors duration-200 group-hover:text-nox-cyan">
                 NOXVION
               </span>
             </Link>
             <p className="text-nox-text-muted text-sm leading-relaxed max-w-xs">
               Building Intelligent Technology for a Smarter Future.
             </p>
-            <p className="text-nox-text-dim text-[11px] tracking-widest uppercase mt-2">
+            <p className="text-nox-text-dim text-[11px] tracking-widest uppercase">
               Technical Precision Guaranteed.
             </p>
+
+            {/* Status indicator */}
+            <div className="flex items-center gap-2 mt-2">
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-nox-cyan status-dot-active"
+                aria-hidden="true"
+              />
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-nox-text-dim">
+                Systems Nominal
+              </span>
+            </div>
           </div>
 
           {/* Navigation */}
@@ -60,8 +98,12 @@ export const Footer: React.FC = () => {
                 <li key={item.to} role="listitem">
                   <Link
                     to={item.to}
-                    className="text-sm text-nox-text-muted hover:text-nox-text transition-colors duration-200"
+                    className="text-sm text-nox-text-muted hover:text-nox-text transition-colors duration-200 relative group flex items-center gap-2 w-fit"
                   >
+                    <span
+                      className="w-0 h-px bg-nox-cyan/60 group-hover:w-3 transition-all duration-200"
+                      aria-hidden="true"
+                    />
                     {item.label}
                   </Link>
                 </li>
@@ -79,7 +121,7 @@ export const Footer: React.FC = () => {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center px-5 py-2.5 text-xs font-semibold tracking-widest uppercase bg-transparent border border-nox-border text-nox-text-muted hover:border-nox-text hover:text-nox-text transition-colors duration-200"
+              className="inline-flex items-center px-5 py-2.5 text-xs font-semibold tracking-widest uppercase bg-transparent border border-nox-border text-nox-text-muted hover:border-nox-cyan/40 hover:text-nox-text hover:shadow-[0_0_12px_rgba(0,240,255,0.08)] transition-all duration-300 btn-depth-secondary"
             >
               Contact Us
             </Link>

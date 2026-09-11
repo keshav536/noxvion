@@ -7,6 +7,8 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { FoldText } from '../components/effects/FoldText';
+import { Card3D } from '../components/effects/Card3D';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import { solutions } from '../data/solutions';
 
@@ -28,8 +30,9 @@ export const Solutions: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg" aria-label="Solutions overview">
-        <div className="nox-container">
+      <section className="relative py-20 md:py-28 border-b border-nox-border grid-bg overflow-hidden" aria-label="Solutions overview">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
             NOXVION / CAPABILITY DIRECTORY
           </p>
@@ -59,16 +62,19 @@ export const Solutions: React.FC = () => {
               const isLarge = index === 1; // Web & Software can take 2 cols on lg if desired, or 3-col uniform
 
               return (
-                <motion.div
+                <Card3D
                   key={sol.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className={`bg-nox-layer border border-nox-border hover:border-nox-border-active transition-all duration-300 p-8 flex flex-col justify-between group ${
-                    isLarge ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'
-                  }`}
+                  intensity="low"
+                  glowColor="rgba(0, 240, 255, 0.08)"
+                  className={`h-full ${isLarge ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'}`}
                 >
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08, duration: 0.5 }}
+                    className="h-full bg-nox-layer border border-nox-border hover:border-nox-border-active transition-all duration-300 p-8 flex flex-col justify-between group"
+                  >
                   <div>
                     {/* Header */}
                     <div className="flex items-start justify-between mb-8">
@@ -134,6 +140,7 @@ export const Solutions: React.FC = () => {
                     </Link>
                   </div>
                 </motion.div>
+                </Card3D>
               );
             })}
           </div>
@@ -141,8 +148,9 @@ export const Solutions: React.FC = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="nox-section border-t border-nox-border bg-nox-layer/30">
-        <div className="nox-container text-center">
+      <section className="relative nox-section border-t border-nox-border bg-nox-layer/30 overflow-hidden">
+        <AmbientScene variant="cta" />
+        <div className="nox-container relative z-10 text-center">
           <SectionHeader
             align="center"
             eyebrow="BESPOKE ARCHITECTURE"

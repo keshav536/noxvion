@@ -6,6 +6,8 @@ import { SectionHeader } from '../components/ui/SectionHeader';
 import { Button } from '../components/ui/Button';
 import { TechBadge } from '../components/ui/Badge';
 import { FoldText } from '../components/effects/FoldText';
+import { Card3D } from '../components/effects/Card3D';
+import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 
 const methodology = [
@@ -60,7 +62,8 @@ export const ResearchBuild: React.FC = () => {
     <PageContainer>
       {/* ── HERO ── */}
       <section className="relative py-20 md:py-28 grid-bg border-b border-nox-border overflow-hidden" aria-label="Research & Build Hero">
-        <div className="nox-container">
+        <AmbientScene variant="hero" />
+        <div className="nox-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
@@ -87,37 +90,39 @@ export const ResearchBuild: React.FC = () => {
               </Button>
             </div>
 
-            {/* Technical Blueprint Visual on Right */}
+            {/* Technical Blueprint Visual on Right with 3D depth */}
             <div className="lg:col-span-5">
-              <div className="border border-nox-border bg-nox-layer p-6 relative">
-                <div className="flex items-center justify-between border-b border-nox-border/60 pb-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-nox-cyan inline-block" />
-                    <span className="text-[11px] font-mono tracking-widest text-nox-text">R&D SCHEMATIC V4</span>
+              <Card3D intensity="medium" glowColor="rgba(0, 240, 255, 0.12)">
+                <div className="border border-nox-border bg-nox-layer p-6 relative rounded-sm shadow-card">
+                  <div className="flex items-center justify-between border-b border-nox-border/60 pb-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-nox-cyan inline-block animate-pulse" />
+                      <span className="text-[11px] font-mono tracking-widest text-nox-text">R&D SCHEMATIC V4</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-nox-text-dim">SYS.DEV // 098</span>
                   </div>
-                  <span className="text-[10px] font-mono text-nox-text-dim">SYS.DEV // 098</span>
-                </div>
 
-                <div className="space-y-3 font-mono text-xs text-nox-text-muted">
-                  <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
-                    <span>ALGORITHM MATRIX:</span>
-                    <span className="text-nox-cyan">CONVERGED (99.8%)</span>
+                  <div className="space-y-3 font-mono text-xs text-nox-text-muted">
+                    <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
+                      <span>ALGORITHM MATRIX:</span>
+                      <span className="text-nox-cyan">CONVERGED (99.8%)</span>
+                    </div>
+                    <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
+                      <span>HARDWARE PROTOTYPE:</span>
+                      <span className="text-nox-text">STAGE 2 READY</span>
+                    </div>
+                    <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
+                      <span>SENSOR CALIBRATION:</span>
+                      <span className="text-nox-cyan">PASS &lt; 0.05ms</span>
+                    </div>
                   </div>
-                  <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
-                    <span>HARDWARE PROTOTYPE:</span>
-                    <span className="text-nox-text">STAGE 2 READY</span>
-                  </div>
-                  <div className="bg-nox-base p-3 border border-nox-border flex justify-between items-center">
-                    <span>SENSOR CALIBRATION:</span>
-                    <span className="text-nox-cyan">PASS &lt; 0.05ms</span>
-                  </div>
-                </div>
 
-                <div className="mt-4 pt-3 border-t border-nox-border/60 flex items-center justify-between text-[10px] text-nox-text-dim">
-                  <span>DISCIPLINE: MECHATRONICS / AI</span>
-                  <span>CONFIDENTIAL</span>
+                  <div className="mt-4 pt-3 border-t border-nox-border/60 flex items-center justify-between text-[10px] text-nox-text-dim">
+                    <span>DISCIPLINE: MECHATRONICS / AI</span>
+                    <span>CONFIDENTIAL</span>
+                  </div>
                 </div>
-              </div>
+              </Card3D>
             </div>
           </div>
         </div>
