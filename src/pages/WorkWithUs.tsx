@@ -136,13 +136,21 @@ export const WorkWithUs: React.FC = () => {
               const Icon = v.icon;
               return (
                 <Card3D key={v.num} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
-                  <div className="h-full bg-nox-layer border border-nox-border p-8 flex flex-col justify-between hover:border-nox-border-active transition-colors">
+                  <div className="h-full bg-nox-layer border border-nox-border p-8 flex flex-col justify-between hover:border-nox-border-active transition-colors new-icon-rotate-parent">
                     <div>
                       <div className="flex items-center justify-between mb-6">
                         <span className="text-xs font-mono font-semibold tracking-widest text-nox-cyan">
                           {v.num}
                         </span>
-                        <Icon size={20} className="text-nox-text-dim" />
+                        {/*
+                          NEW-06 — Collaboration icon hover rotation.
+                          Protected existing effects must not be modified.
+                          Wrapping div gets new-icon-rotate for CSS transition.
+                          The Icon component itself is untouched.
+                        */}
+                        <div className="new-icon-rotate" aria-hidden="true">
+                          <Icon size={20} className="text-nox-text-dim" />
+                        </div>
                       </div>
 
                       <h2 className="text-xl font-semibold text-nox-text mb-3">{v.title}</h2>
@@ -182,10 +190,11 @@ export const WorkWithUs: React.FC = () => {
                     <div
                       className={`w-6 h-6 border mb-3 flex items-center justify-center text-[9px] font-mono ${
                         idx === 0
-                          ? 'border-nox-cyan bg-nox-cyan text-nox-base font-bold'
+                          ? 'border-nox-cyan bg-nox-cyan text-nox-base font-bold new-step-active'
                           : 'border-nox-border bg-nox-base text-nox-text-dim'
                       }`}
                     >
+                      {/* NEW-07 — Active step glow pulse on first node only. Protected existing effects must not be modified. */}
                       {String(idx + 1).padStart(2, '0')}
                     </div>
                     <span

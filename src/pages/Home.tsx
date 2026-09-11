@@ -14,6 +14,7 @@ import { RevealSection, RevealItem } from '../components/effects/RevealSection';
 import { useSEO } from '../hooks/useSEO';
 import { solutions } from '../data/solutions';
 import { timeline } from '../data/timeline';
+import { NewSvgPathDraw } from '../components/effects/NewSvgPathDraw';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -302,7 +303,7 @@ export const Home: React.FC = () => {
                     <div
                       className={`w-9 h-9 border flex items-center justify-center text-[10px] font-semibold transition-all duration-300 ${
                         i === 2
-                          ? 'border-nox-cyan bg-nox-cyan/10 text-nox-cyan shadow-[0_0_12px_rgba(0,240,255,0.15)]'
+                          ? 'border-nox-cyan bg-nox-cyan/10 text-nox-cyan shadow-[0_0_12px_rgba(0,240,255,0.15)] new-step-active'
                           : i < 2
                           ? 'border-nox-border-active bg-nox-layer text-nox-text-dim'
                           : 'border-nox-border bg-nox-layer text-nox-text-dim'
@@ -338,6 +339,17 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/*
+        NEW-04 — Decorative SVG path draw.
+        Protected existing effects must not be modified.
+        NewSvgPathDraw is an isolated component; it uses its own IntersectionObserver
+        and cleans up on unmount. It produces no layout shift and has no global side effects.
+        Positioned as a visual accent between Engineering and Capabilities sections.
+      */}
+      <div className="relative overflow-hidden" aria-hidden="true">
+        <NewSvgPathDraw className="opacity-80" />
+      </div>
 
       {/* ── CAPABILITIES ── */}
       <section

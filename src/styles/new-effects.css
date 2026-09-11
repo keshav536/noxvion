@@ -1,0 +1,186 @@
+/*
+ * ═══════════════════════════════════════════════════════════════
+ * NOXVION — NEW MOTION EFFECTS
+ * ═══════════════════════════════════════════════════════════════
+ *
+ * IMPORTANT: Protected existing effects must not be modified.
+ * This file contains ONLY newly added effects that were confirmed
+ * absent from the codebase after a full audit on 2026-09-11.
+ *
+ * Effects registered here:
+ *   NEW-01  Tab active indicator slide   (Projects.tsx)
+ *   NEW-02  Form error micro-shake       (Contact.tsx)
+ *   NEW-03  Success state spring         (Contact.tsx)
+ *   NEW-04  SVG path draw               (NewSvgPathDraw.tsx / Home.tsx)
+ *   NEW-05  Placeholder breathe pulse   (Projects.tsx)
+ *   NEW-06  Icon hover rotation         (WorkWithUs.tsx)
+ *   NEW-07  Active step glow pulse      (Home.tsx, WorkWithUs.tsx)
+ *
+ * All new selectors are prefixed `.new-` to prevent collisions.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ── NEW-02 — Form validation error micro-shake ───────────────
+   A restrained horizontal shake fired once when the error
+   message enters the DOM. Duration 0.35 s, 3 px max offset.
+   ─────────────────────────────────────────────────────────── */
+@keyframes newErrorShake {
+  0%   { transform: translateX(0); }
+  18%  { transform: translateX(-3px); }
+  36%  { transform: translateX(3px); }
+  54%  { transform: translateX(-2px); }
+  72%  { transform: translateX(2px); }
+  88%  { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+/* ── NEW-04 — Decorative SVG path draw ───────────────────────
+   Viewport-triggered stroke-dashoffset animation.
+   The component sets --new-path-length via JS.
+   ─────────────────────────────────────────────────────────── */
+@keyframes newSvgDraw {
+  from { stroke-dashoffset: var(--new-path-length, 600); }
+  to   { stroke-dashoffset: 0; }
+}
+
+.new-svg-draw-path {
+  stroke-dasharray: var(--new-path-length, 600);
+  stroke-dashoffset: var(--new-path-length, 600);
+  /* Default static state (before intersection fires) */
+}
+
+.new-svg-draw-path.new-svg-is-visible {
+  animation: newSvgDraw 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── NEW-05 — Empty placeholder breathe pulse ────────────────
+   Slow opacity oscillation signalling "data pending".
+   Duration 2.8 s — deliberately slower than dotPulse (2 s).
+   ─────────────────────────────────────────────────────────── */
+@keyframes newPlaceholderPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.85; }
+}
+
+.new-placeholder-pulse {
+  animation: newPlaceholderPulse 2.8s ease-in-out infinite;
+}
+
+/* ── NEW-07 — Active process step glow pulse ─────────────────
+   Subtle box-shadow and scale breathe on the active node only.
+   Different from dotPulse (which is scale+opacity on a dot).
+   This affects a bordered box element.
+   ─────────────────────────────────────────────────────────── */
+@keyframes newStepPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.3), 0 0 8px rgba(0, 240, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.5), 0 0 18px rgba(0, 240, 255, 0.28);
+  }
+}
+
+.new-step-active {
+  animation: newStepPulse 2.4s ease-in-out infinite;
+}
+
+/* ── NEW-06 — Collaboration icon hover rotation ──────────────
+   A single gentle arc on hover; resets on mouse-leave.
+   Uses CSS transition — no JS required.
+   ─────────────────────────────────────────────────────────── */
+.new-icon-rotate {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-icon-rotate:hover,
+.new-icon-rotate-parent:hover .new-icon-rotate,
+.group:hover .new-icon-rotate {
+  transform: rotate(18deg);
+}
+
+/* Focus fallback — keyboard users see a brief rotate on focus-within */
+.new-icon-rotate-parent:focus-within .new-icon-rotate {
+  transform: rotate(18deg);
+}
+
+/* ── NEW-01 — Tab indicator is handled by Framer Motion layoutId ──
+   No CSS keyframes needed; Framer handles the spring.
+   This placeholder comment confirms it is intentionally CSS-free.   */
+
+/* ── NEW-03 — Success spring is handled by Framer Motion ─────────
+   No CSS keyframes needed; Framer spring handles the scale.
+   This placeholder comment confirms it is intentionally CSS-free.   */
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION OVERRIDES — NEW EFFECTS ONLY
+   Mirrors the pattern of styles/index.css without touching it.
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .new-placeholder-pulse {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+
+  .new-step-active {
+    animation: none !important;
+  }
+
+  .new-svg-draw-path.new-svg-is-visible {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .new-icon-rotate,
+  .new-icon-rotate:hover,
+  .group:hover .new-icon-rotate,
+  .new-icon-rotate-parent:hover .new-icon-rotate,
+  .new-icon-rotate-parent:focus-within .new-icon-rotate {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* data-reduced-motion user-toggle mirror */
+[data-reduced-motion='true'] .new-placeholder-pulse {
+  animation: none !important;
+  opacity: 0.6 !important;
+}
+
+[data-reduced-motion='true'] .new-step-active {
+  animation: none !important;
+}
+
+[data-reduced-motion='true'] .new-svg-draw-path.new-svg-is-visible {
+  animation: none !important;
+  stroke-dashoffset: 0 !important;
+}
+
+[data-reduced-motion='true'] .new-icon-rotate,
+[data-reduced-motion='true'] .group:hover .new-icon-rotate,
+[data-reduced-motion='true'] .new-icon-rotate-parent:hover .new-icon-rotate {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* ── Mobile — reduce decorative intensity ────────────────────
+   On small screens, the breathe pulse and step glow are toned
+   down. No horizontal effects or layout changes are added.
+   ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .new-placeholder-pulse {
+    animation-duration: 4s; /* slower on mobile, less distracting */
+  }
+
+  .new-step-active {
+    animation: none; /* remove glow on mobile — too intense on small viewport */
+  }
+
+  .new-icon-rotate:hover,
+  .group:hover .new-icon-rotate,
+  .new-icon-rotate-parent:hover .new-icon-rotate {
+    transform: none; /* hover not reliable on touch devices */
+  }
+}

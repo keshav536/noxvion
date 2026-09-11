@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/ui/Button';
 import { FoldText } from '../components/effects/FoldText';
@@ -92,20 +93,40 @@ export const Projects: React.FC = () => {
       </section>
 
       {/* ── CATEGORY BAR ── */}
-      <section className="border-b border-nox-border bg-nox-base sticky top-16 md:top-[70px] z-30 overflow-x-auto">
+      {/*
+        NEW-01 — Tab active indicator slide.
+        Protected existing effects must not be modified.
+        Framer Motion layoutId creates a shared spring-animated underline
+        that slides between whichever tab is currently active.
+        The button's own text/color classes are untouched.
+      */}
+      <section className="border-b border-nox-border bg-nox-base sticky top-16 md:top-[70px] z-30 overflow-x-auto" aria-label="Project category filter">
         <div className="nox-container">
-          <div className="flex items-center gap-6 py-4 min-w-max">
+          <div className="flex items-center gap-6 py-4 min-w-max" role="tablist" aria-label="Filter projects by category">
             {projectCategories.map((cat) => (
               <button
                 key={cat}
+                id={`projects-tab-${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                role="tab"
+                aria-selected={activeCat === cat}
                 onClick={() => setActiveCat(cat)}
-                className={`text-xs font-semibold tracking-widest uppercase pb-1 transition-colors ${
+                className={`relative text-xs font-semibold tracking-widest uppercase pb-1 transition-colors focus-visible:outline-2 focus-visible:outline-nox-cyan focus-visible:outline-offset-2 ${
                   activeCat === cat
-                    ? 'text-nox-text border-b-2 border-nox-cyan'
+                    ? 'text-nox-text'
                     : 'text-nox-text-muted hover:text-nox-text'
                 }`}
               >
                 {cat}
+                {/* NEW-01: Shared animated underline — slides between tabs */}
+                {activeCat === cat && (
+                  <motion.span
+                    layoutId="new-tab-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-nox-cyan"
+                    style={{ borderRadius: 1 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    aria-hidden="true"
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -128,7 +149,8 @@ export const Projects: React.FC = () => {
                       backgroundSize: '32px 32px',
                     }}
                   >
-                    <span className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim border border-nox-border/80 bg-nox-layer/60 px-4 py-2">
+                    {/* NEW-05 — Empty placeholder breathe pulse. Protected existing effects must not be modified. */}
+                    <span className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim border border-nox-border/80 bg-nox-layer/60 px-4 py-2 new-placeholder-pulse" aria-label="Project image pending">
                       [ IMG_SYS_AWAITING_DATA ]
                     </span>
                   </div>

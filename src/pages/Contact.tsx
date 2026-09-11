@@ -105,8 +105,22 @@ export const Contact: React.FC = () => {
               </div>
 
               {isSuccess ? (
-                <div className="bg-nox-cyan/10 border border-nox-cyan/40 p-8 text-center my-8">
-                  <CheckCircle2 size={32} className="text-nox-cyan mx-auto mb-4" />
+                <motion.div
+                  key="contact-success-state"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 22, mass: 0.8 }}
+                  className="bg-nox-cyan/10 border border-nox-cyan/40 p-8 text-center my-8"
+                >
+                  {/* NEW-03 — Success state spring entrance. Protected existing effects must not be modified. */}
+                  <motion.div
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 18, delay: 0.08 }}
+                    className="inline-block mb-4"
+                  >
+                    <CheckCircle2 size={32} className="text-nox-cyan" />
+                  </motion.div>
                   <h3 className="text-lg font-semibold text-nox-text mb-2">Inquiry Transmitted</h3>
                   <p className="text-sm text-nox-text-muted mb-6 leading-relaxed">
                     Your request has been registered in the Noxvion intake pipeline. Our engineering syndicate will review and respond.
@@ -114,7 +128,7 @@ export const Contact: React.FC = () => {
                   <Button onClick={() => setIsSuccess(false)} variant="secondary" size="sm">
                     Send Another Inquiry
                   </Button>
-                </div>
+                </motion.div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Row 1: Full Name & Email */}
@@ -129,10 +143,20 @@ export const Contact: React.FC = () => {
                          className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
                         placeholder="Dr. Jane Doe"
                       />
+                      {/* NEW-02 — Error micro-shake entrance. Protected existing effects must not be modified. */}
                       {errors.fullName && (
-                        <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                          <AlertCircle size={12} /> {errors.fullName.message}
-                        </p>
+                        <motion.p
+                          key="err-fullName"
+                          initial={{ opacity: 0, x: 0 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.35 }}
+                          className="text-red-400 text-xs mt-1 flex items-center gap-1 new-error-shake"
+                          style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
+                          role="alert"
+                          aria-live="polite"
+                        >
+                          <AlertCircle size={12} aria-hidden="true" /> {errors.fullName.message}
+                        </motion.p>
                       )}
                     </div>
 
@@ -152,10 +176,20 @@ export const Contact: React.FC = () => {
                          className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
                         placeholder="jane@organization.com"
                       />
+                      {/* NEW-02 — Error micro-shake entrance. */}
                       {errors.email && (
-                        <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                          <AlertCircle size={12} /> {errors.email.message}
-                        </p>
+                        <motion.p
+                          key="err-email"
+                          initial={{ opacity: 0, x: 0 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.35 }}
+                          className="text-red-400 text-xs mt-1 flex items-center gap-1"
+                          style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
+                          role="alert"
+                          aria-live="polite"
+                        >
+                          <AlertCircle size={12} aria-hidden="true" /> {errors.email.message}
+                        </motion.p>
                       )}
                     </div>
                   </div>
@@ -202,10 +236,20 @@ export const Contact: React.FC = () => {
                       className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow resize-none"
                       placeholder="Detail your engineering challenges, research objectives, or deployment timeline..."
                     />
+                    {/* NEW-02 — Error micro-shake entrance. */}
                     {errors.message && (
-                      <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.message.message}
-                      </p>
+                      <motion.p
+                        key="err-message"
+                        initial={{ opacity: 0, x: 0 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35 }}
+                        className="text-red-400 text-xs mt-1 flex items-center gap-1"
+                        style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
+                        role="alert"
+                        aria-live="polite"
+                      >
+                        <AlertCircle size={12} aria-hidden="true" /> {errors.message.message}
+                      </motion.p>
                     )}
                   </div>
 
