@@ -8,14 +8,14 @@ interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className = '' }) => {
   const variantClasses = {
-    default: 'bg-nox-layer border border-nox-border text-nox-text-muted',
-    cyan: 'bg-nox-cyan/10 border border-nox-cyan/30 text-nox-cyan',
-    dim: 'bg-nox-border/30 border border-transparent text-nox-text-dim',
+    default: 'bg-[#EFF6FF] border border-[#BBD3F2] text-[#1E3A8A]',
+    cyan: 'bg-[#EFF6FF] border border-[#3B82F6] text-[#1E3A8A]',
+    dim: 'bg-[#F8FAFC] border border-[#D9E7F5] text-[#627D98]',
   };
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-1 text-[10px] font-semibold tracking-[0.12em] uppercase ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center rounded-md px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] uppercase ${variantClasses[variant]} ${className}`}
     >
       {children}
     </span>
@@ -30,13 +30,13 @@ interface TechBadgeProps {
 export const TechBadge: React.FC<TechBadgeProps> = ({ label, accent = false }) => {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase border ${
+      className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase border ${
         accent
-          ? 'bg-nox-cyan/10 border-nox-cyan/40 text-nox-cyan'
-          : 'bg-nox-layer border-nox-border text-nox-text-muted'
+          ? 'bg-[#EFF6FF] border-[#3B82F6] text-[#1E3A8A]'
+          : 'bg-[#F8FAFC] border-[#D9E7F5] text-[#334E68]'
       }`}
     >
-      {accent && <span className="w-1.5 h-1.5 bg-nox-cyan block" aria-hidden="true" />}
+      {accent && <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] block" aria-hidden="true" />}
       {label}
     </span>
   );

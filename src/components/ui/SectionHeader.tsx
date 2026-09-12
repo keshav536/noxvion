@@ -27,7 +27,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   return (
     <div className={`flex flex-col gap-4 ${alignClass} ${className}`} id={id}>
       {eyebrow && (
-        <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-nox-cyan">
+        <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-[#1E3A8A]">
           {eyebrow}
         </p>
       )}
@@ -37,17 +37,17 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           splitBy="word"
           hinge="top"
           trigger="scroll"
-          className={`text-3xl md:text-[40px] font-medium leading-[1.2] tracking-[-0.02em] text-nox-text ${titleClassName}`}
+          className={`text-3xl md:text-[40px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0A2540] ${titleClassName}`}
         >
           {title}
         </FoldText>
       ) : (
-        <h2 className={`text-3xl md:text-[40px] font-medium leading-[1.2] tracking-[-0.02em] text-nox-text ${titleClassName}`}>
+        <h2 className={`text-3xl md:text-[40px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0A2540] ${titleClassName}`}>
           {title}
         </h2>
       )}
       {description && (
-        <p className="text-nox-text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        <p className="text-[#334E68] text-base md:text-lg leading-relaxed max-w-2xl">
           {description}
         </p>
       )}

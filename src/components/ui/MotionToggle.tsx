@@ -31,7 +31,7 @@ export const MotionToggle: React.FC = () => {
     >
       <button
         onClick={toggle}
-        className="group flex items-center gap-2 px-3 py-2 bg-nox-layer/80 backdrop-blur-sm border border-nox-border hover:border-nox-border-active transition-all duration-200 text-[10px] font-semibold tracking-widest uppercase text-nox-text-dim hover:text-nox-text-muted"
+        className="group flex items-center gap-2 px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#D9E7F5] shadow-[0_4px_16px_rgba(10,37,64,0.08)] hover:border-[#BBD3F2] hover:shadow-[0_6px_20px_rgba(10,37,64,0.12)] rounded-[10px] transition-all duration-200 text-[10px] font-semibold tracking-widest uppercase text-[#334E68] hover:text-[#1E3A8A]"
         aria-label={isReduced ? 'Enable motion effects' : 'Reduce motion effects'}
         title={isReduced ? 'Enable motion effects' : 'Reduce motion effects'}
         id="motion-toggle"

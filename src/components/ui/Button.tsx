@@ -21,11 +21,11 @@ interface ButtonProps {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-nox-cyan text-nox-base font-semibold border border-nox-cyan hover:bg-nox-cyan-dim hover:border-nox-cyan-dim active:scale-[0.98]',
+    'bg-[#1E3A8A] text-white font-semibold border border-[#1E3A8A] hover:bg-[#3B82F6] hover:border-[#3B82F6] shadow-[0_4px_14px_rgba(30,58,138,0.2)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] active:scale-[0.98]',
   secondary:
-    'bg-transparent text-nox-text border border-nox-border hover:border-nox-text hover:bg-white/5 active:scale-[0.98]',
+    'bg-white text-[#1E3A8A] border border-[#1E3A8A] hover:bg-[#EFF6FF] hover:border-[#3B82F6] hover:text-[#1E3A8A] active:scale-[0.98]',
   ghost:
-    'bg-transparent text-nox-text-muted border border-transparent hover:text-nox-text hover:border-nox-border active:scale-[0.98]',
+    'bg-transparent text-[#334E68] border border-transparent hover:text-[#1E3A8A] hover:bg-[#EFF6FF] active:scale-[0.98]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -49,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
   'aria-label': ariaLabel,
 }) => {
   const base =
-    'inline-flex items-center gap-2 font-semibold transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none';
+    'inline-flex items-center justify-center gap-2 font-semibold rounded-[10px] transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2';
   const classes = `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   if (to) {

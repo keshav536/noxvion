@@ -29,7 +29,7 @@ interface AmbientOrbProps {
  * Very low opacity — purely atmospheric depth.
  */
 export const AmbientOrb: React.FC<AmbientOrbProps> = ({
-  color = '#00F0FF',
+  color = '#3B82F6',
   size = 400,
   top,
   left,

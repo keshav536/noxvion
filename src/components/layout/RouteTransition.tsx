@@ -111,7 +111,7 @@ export const RouteTransition: React.FC<RouteTransitionProps> = ({ children }) =>
           initial="initial"
           animate="animate"
           exit="exit"
-          className="w-full flex-1 flex flex-col"
+          className="w-full flex-1 flex flex-col bg-white text-[#0A2540]"
         >
           {children}
         </motion.div>

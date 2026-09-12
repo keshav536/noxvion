@@ -78,7 +78,10 @@ export const Home: React.FC = () => {
     <PageContainer>
       {/* ── HERO ── */}
       <section
-        className="relative min-h-[calc(100vh-70px)] flex items-center grid-bg overflow-hidden"
+        className="relative min-h-[calc(100vh-70px)] flex items-center overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #0A2540 0%, #1E3A8A 60%, #3B82F6 100%)',
+        }}
         aria-label="Hero"
       >
         {/* Layered ambient background */}
@@ -89,8 +92,13 @@ export const Home: React.FC = () => {
           className="absolute inset-0 pointer-events-none"
           aria-hidden="true"
           style={{
-            background:
-              'radial-gradient(ellipse 70% 60% at 65% 50%, rgba(0,240,255,0.035) 0%, transparent 65%)',
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+            maskImage:
+              'radial-gradient(ellipse 70% 60% at 65% 50%, black 20%, transparent 75%)',
+            WebkitMaskImage:
+              'radial-gradient(ellipse 70% 60% at 65% 50%, black 20%, transparent 75%)',
           }}
         />
 
@@ -103,8 +111,9 @@ export const Home: React.FC = () => {
                 initial="hidden"
                 animate="visible"
                 custom={0}
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-6"
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#D9E7F5] mb-6 flex items-center gap-2"
               >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                 NOXVION / TECHNOLOGY & INNOVATION
               </motion.p>
               <FoldText
@@ -117,10 +126,10 @@ export const Home: React.FC = () => {
                 ease="power3.out"
                 perspective={700}
                 creaseShading={0.35}
-                className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-nox-text mb-6"
+                className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6"
               >
                 Building Intelligent{' '}
-                <span className="text-nox-cyan">Technology</span> for a
+                <span className="text-[#93C5FD]">Technology</span> for a
                 Smarter Future.
               </FoldText>
               <motion.p
@@ -128,7 +137,7 @@ export const Home: React.FC = () => {
                 initial="hidden"
                 animate="visible"
                 custom={2}
-                className="text-nox-text-muted text-base md:text-lg leading-relaxed mb-10 max-w-lg"
+                className="text-[#D9E7F5] text-base md:text-lg leading-relaxed mb-10 max-w-lg"
               >
                 Noxvion transforms ideas, research, and emerging technologies
                 into practical software, AI, hardware, IoT, and automation
@@ -141,11 +150,23 @@ export const Home: React.FC = () => {
                 custom={3}
                 className="flex flex-wrap gap-4"
               >
-                <Button to="/solutions" variant="primary" size="md" id="hero-cta-solutions" className="btn-depth-primary">
+                <Button
+                  to="/solutions"
+                  variant="primary"
+                  size="md"
+                  id="hero-cta-solutions"
+                  className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] hover:!text-[#1E3A8A] font-bold shadow-[0_8px_24px_rgba(10,37,64,0.3)] btn-depth-primary"
+                >
                   Explore Our Solutions
                   <ArrowRight size={14} aria-hidden="true" />
                 </Button>
-                <Button to="/work-with-us" variant="secondary" size="md" id="hero-cta-work" className="btn-depth-secondary">
+                <Button
+                  to="/work-with-us"
+                  variant="secondary"
+                  size="md"
+                  id="hero-cta-work"
+                  className="!bg-white/10 !text-white !border-white/30 hover:!bg-white/20 hover:!border-white btn-depth-secondary"
+                >
                   Work With Us
                   <ChevronRight size={14} aria-hidden="true" />
                 </Button>
@@ -162,9 +183,9 @@ export const Home: React.FC = () => {
                 {['AI Engine', 'IoT Layer', 'R&D Core'].map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase border border-nox-border/80 text-nox-text-dim bg-nox-layer/40"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase border border-white/20 text-[#D9E7F5] bg-white/10 rounded-full backdrop-blur-sm"
                   >
-                    <span className="w-1 h-1 rounded-full bg-nox-cyan status-dot-active" aria-hidden="true" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#93C5FD] status-dot-active" aria-hidden="true" />
                     {tag}
                   </span>
                 ))}
@@ -180,23 +201,23 @@ export const Home: React.FC = () => {
               className="hidden lg:block"
             >
               <div
-                className="hero-canvas-container scan-line-container"
+                className="hero-canvas-container scan-line-container rounded-2xl border border-white/20"
                 style={{
-                  boxShadow: '0 0 0 1px rgba(0,240,255,0.08), 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.04)',
+                  boxShadow: '0 20px 60px rgba(10,37,64,0.4), 0 0 40px rgba(59,130,246,0.15)',
                 }}
               >
                 {/* Header bar */}
-                <div className="relative z-20 flex items-center justify-between px-4 py-3 border-b border-nox-border/60 bg-nox-layer/80 backdrop-blur-sm">
+                <div className="relative z-20 flex items-center justify-between px-4 py-3 border-b border-white/15 bg-[#0A2540]/90 backdrop-blur-sm">
                   <div className="flex items-center gap-2">
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-nox-cyan status-dot-active"
+                      className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] status-dot-active"
                       aria-hidden="true"
                     />
-                    <span className="text-[10px] font-semibold tracking-widest uppercase text-nox-cyan">
+                    <span className="text-[10px] font-semibold tracking-widest uppercase text-[#93C5FD]">
                       SYS.ARCH.v2 / LIVE
                     </span>
                   </div>
-                  <span className="text-[10px] text-nox-text-dim font-mono">
+                  <span className="text-[10px] text-[#D9E7F5]/80 font-mono">
                     NODES: ACTIVE
                   </span>
                 </div>
@@ -207,10 +228,10 @@ export const Home: React.FC = () => {
 
                   {/* Overlay labels */}
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none z-20">
-                    <span className="text-[10px] font-mono text-nox-text-dim">
+                    <span className="text-[10px] font-mono text-[#D9E7F5]/70">
                       NOX_MESH_NET / v4.2
                     </span>
-                    <span className="text-[10px] font-mono text-nox-cyan/60">
+                    <span className="text-[10px] font-mono text-[#93C5FD]">
                       {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                     </span>
                   </div>
@@ -223,25 +244,25 @@ export const Home: React.FC = () => {
 
       {/* ── WHO WE ARE ── */}
       <section
-        className="nox-section border-t border-nox-border relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-white relative overflow-hidden"
         aria-label="Who we are"
       >
         <AmbientScene variant="subtle" />
         <div className="nox-container relative z-10">
           <RevealSection className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <RevealItem>
-              <h2 className="text-3xl md:text-[40px] font-medium leading-[1.2] tracking-[-0.02em] text-nox-text mb-6">
+              <h2 className="text-3xl md:text-[40px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0A2540] mb-6">
                 From Ideas to Real-World Technology
               </h2>
             </RevealItem>
             <RevealItem delay={0.1}>
-              <p className="text-nox-text-muted text-base leading-relaxed mb-6">
+              <p className="text-[#334E68] text-base leading-relaxed mb-6">
                 Noxvion is an innovation-driven technology startup focused on transforming ideas
                 into practical technology solutions. We combine artificial intelligence, software
                 engineering, IoT, automation, and emerging technologies to develop products and
                 systems that address real-world challenges.
               </p>
-              <p className="text-nox-text-muted text-base leading-relaxed mb-8">
+              <p className="text-[#334E68] text-base leading-relaxed mb-8">
                 We bridge the gap between high-level conceptual academic papers and hard
                 production-ready environments — connecting software routing layers, hardware
                 sensors, and intelligent systems into cohesive solutions.
@@ -260,7 +281,7 @@ export const Home: React.FC = () => {
 
       {/* ── ENGINEERING APPROACH / PROCESS FLOW ── */}
       <section
-        className="nox-section border-t border-nox-border bg-nox-layer/30 relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-[#F8FAFC] relative overflow-hidden"
         aria-label="Engineering approach"
       >
         {/* Subtle depth grid */}
@@ -269,7 +290,7 @@ export const Home: React.FC = () => {
           aria-hidden="true"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(0,240,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.025) 1px, transparent 1px)',
+              'linear-gradient(rgba(30,58,138,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,138,0.03) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
             maskImage:
               'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
@@ -280,10 +301,10 @@ export const Home: React.FC = () => {
 
         <div className="nox-container relative z-10">
           <div className="text-center mb-12">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-3">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#1E3A8A] mb-3">
               RESEARCH TO REALITY
             </p>
-            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-nox-text">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-[#0A2540]">
               Engineering Lifecycle V.4
             </h2>
           </div>
@@ -301,12 +322,12 @@ export const Home: React.FC = () => {
                 >
                   <div className="flex flex-col items-center gap-3 px-4 md:px-6">
                     <div
-                      className={`w-9 h-9 border flex items-center justify-center text-[10px] font-semibold transition-all duration-300 ${
+                      className={`w-10 h-10 rounded-lg border flex items-center justify-center text-[10px] font-semibold transition-all duration-300 ${
                         i === 2
-                          ? 'border-nox-cyan bg-nox-cyan/10 text-nox-cyan shadow-[0_0_12px_rgba(0,240,255,0.15)] new-step-active'
+                          ? 'border-[#1E3A8A] bg-[#EFF6FF] text-[#1E3A8A] shadow-[0_0_14px_rgba(30,58,138,0.2)] new-step-active'
                           : i < 2
-                          ? 'border-nox-border-active bg-nox-layer text-nox-text-dim'
-                          : 'border-nox-border bg-nox-layer text-nox-text-dim'
+                          ? 'border-[#BBD3F2] bg-white text-[#1E3A8A]'
+                          : 'border-[#D9E7F5] bg-white text-[#627D98]'
                       }`}
                       aria-label={`Phase ${i + 1}: ${step}`}
                     >
@@ -314,14 +335,14 @@ export const Home: React.FC = () => {
                     </div>
                     <span
                       className={`text-[10px] font-semibold tracking-[0.12em] uppercase whitespace-nowrap ${
-                        i === 2 ? 'text-nox-cyan' : 'text-nox-text-dim'
+                        i === 2 ? 'text-[#1E3A8A]' : 'text-[#627D98]'
                       }`}
                     >
                       {step}
                     </span>
                     <span
                       className={`text-[10px] tracking-widest uppercase ${
-                        i === 2 ? 'text-nox-cyan/60' : 'text-transparent'
+                        i === 2 ? 'text-[#3B82F6]' : 'text-transparent'
                       }`}
                     >
                       PHASE {String(i + 1).padStart(2, '0')}
@@ -329,7 +350,7 @@ export const Home: React.FC = () => {
                   </div>
                   {i < engineeringSteps.length - 1 && (
                     <div
-                      className={`h-px w-8 md:w-12 ${i < 2 ? 'bg-nox-border-active' : 'bg-nox-border'}`}
+                      className={`h-px w-8 md:w-12 ${i < 2 ? 'bg-[#BBD3F2]' : 'bg-[#D9E7F5]'}`}
                       aria-hidden="true"
                     />
                   )}
@@ -347,13 +368,13 @@ export const Home: React.FC = () => {
         and cleans up on unmount. It produces no layout shift and has no global side effects.
         Positioned as a visual accent between Engineering and Capabilities sections.
       */}
-      <div className="relative overflow-hidden" aria-hidden="true">
+      <div className="relative overflow-hidden bg-white" aria-hidden="true">
         <NewSvgPathDraw className="opacity-80" />
       </div>
 
       {/* ── CAPABILITIES ── */}
       <section
-        className="nox-section border-t border-nox-border relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-white relative overflow-hidden"
         aria-label="Capabilities and systems"
         id="capabilities"
       >
@@ -371,33 +392,29 @@ export const Home: React.FC = () => {
             </Badge>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-nox-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {solutions.map((sol, i) => {
               const Icon = solutionIcons[sol.icon] || Brain;
               return (
                 <Card3D key={sol.id} className="w-full h-full" maxTilt={5}>
                   <Link
                     to={`/solutions/${sol.slug}`}
-                    className="group bg-nox-base hover:bg-nox-layer transition-all duration-300 p-6 md:p-8 flex flex-col gap-4 focus-visible:outline-2 focus-visible:outline-nox-cyan w-full h-full"
+                    className="group bg-white hover:bg-[#F8FAFC] border border-[#D9E7F5] hover:border-[#BBD3F2] rounded-2xl shadow-[0_12px_30px_rgba(10,37,64,0.06)] hover:shadow-[0_20px_40px_rgba(10,37,64,0.1)] transition-all duration-300 p-6 md:p-8 flex flex-col gap-4 focus-visible:outline-2 focus-visible:outline-[#3B82F6] w-full h-full"
                     id={`capability-${sol.slug}`}
-                    style={{
-                      boxShadow: 'none',
-                      transition: 'background 0.3s ease, box-shadow 0.3s ease',
-                    }}
                   >
                     <div className="flex items-start justify-between">
-                      <div className="p-2 border border-nox-border/60 bg-nox-layer/40 transition-all duration-300 group-hover:border-nox-cyan/30 group-hover:bg-nox-cyan/5 group-hover:shadow-[0_0_12px_rgba(0,240,255,0.08)]">
-                        <Icon size={18} className="text-nox-cyan" aria-hidden="true" />
+                      <div className="p-2.5 rounded-xl border border-[#D9E7F5] bg-[#EFF6FF] text-[#1E3A8A] transition-all duration-300 group-hover:border-[#3B82F6] group-hover:bg-[#DBEAFE]">
+                        <Icon size={20} className="text-[#1E3A8A]" aria-hidden="true" />
                       </div>
-                      <span className="text-[11px] font-semibold tracking-widest text-nox-text-dim">
+                      <span className="text-[11px] font-semibold tracking-widest text-[#627D98]">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-nox-text mb-2 group-hover:text-nox-cyan transition-colors duration-200">
+                      <h3 className="text-base font-semibold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors duration-200">
                         {sol.title}
                       </h3>
-                      <p className="text-sm text-nox-text-muted leading-relaxed">
+                      <p className="text-sm text-[#334E68] leading-relaxed">
                         {sol.shortDesc}
                       </p>
                     </div>
@@ -409,9 +426,9 @@ export const Home: React.FC = () => {
                       ))}
                     </div>
                     {/* Arrow indicator */}
-                    <div className="flex items-center gap-1.5 text-nox-cyan/0 group-hover:text-nox-cyan/60 transition-all duration-300 text-[10px] font-semibold tracking-widest uppercase">
+                    <div className="flex items-center gap-1.5 text-[#1E3A8A] transition-all duration-300 text-[10px] font-semibold tracking-widest uppercase">
                       <span>Explore</span>
-                      <ArrowRight size={10} aria-hidden="true" className="translate-x-0 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight size={12} aria-hidden="true" className="translate-x-0 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </Link>
                 </Card3D>
@@ -423,7 +440,7 @@ export const Home: React.FC = () => {
 
       {/* ── TECHNOLOGY ECOSYSTEM ── */}
       <section
-        className="nox-section border-t border-nox-border bg-nox-layer/20 relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-[#F8FAFC] relative overflow-hidden"
         aria-label="Technology ecosystem"
       >
         <div className="nox-container relative z-10">
@@ -441,22 +458,22 @@ export const Home: React.FC = () => {
                 <RevealItem key={domain.domain} delay={idx * 0.06}>
                   <Card3D maxTilt={4} className="w-full h-full">
                     <div
-                      className="border border-nox-border bg-nox-base p-6 h-full relative overflow-hidden group transition-all duration-300 hover:border-nox-border-active"
+                      className="border border-[#D9E7F5] bg-white rounded-2xl p-6 h-full relative overflow-hidden group transition-all duration-300 hover:border-[#BBD3F2] hover:shadow-[0_12px_30px_rgba(10,37,64,0.08)]"
                       style={{
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                        boxShadow: '0 4px 16px rgba(10,37,64,0.05)',
                       }}
                     >
                       {/* Top accent line on hover */}
                       <div
-                        className="absolute top-0 left-0 right-0 h-px bg-nox-cyan/0 group-hover:bg-nox-cyan/20 transition-colors duration-300"
+                        className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#3B82F6] transition-colors duration-300"
                         aria-hidden="true"
                       />
-                      <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-nox-cyan mb-4">
+                      <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-[#1E3A8A] mb-4">
                         {domain.domain}
                       </p>
                       <div className="flex flex-col gap-2">
                         {domain.tools.map((tool) => (
-                          <span key={tool} className="text-sm text-nox-text-muted group-hover:text-nox-text/80 transition-colors duration-200">
+                          <span key={tool} className="text-sm text-[#334E68] group-hover:text-[#0A2540] transition-colors duration-200">
                             {tool}
                           </span>
                         ))}
@@ -472,7 +489,7 @@ export const Home: React.FC = () => {
 
       {/* ── PROJECTS ── */}
       <section
-        className="nox-section border-t border-nox-border relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-white relative overflow-hidden"
         aria-label="Featured projects"
       >
         <div className="nox-container relative z-10">
@@ -486,14 +503,14 @@ export const Home: React.FC = () => {
             {[0, 1].map((idx) => (
               <Card3D key={idx} maxTilt={4} className="w-full h-full">
                 <div
-                  className="border border-nox-border bg-nox-layer group transition-all duration-300 hover:border-nox-border-active"
+                  className="border border-[#D9E7F5] bg-white rounded-2xl group transition-all duration-300 hover:border-[#BBD3F2] overflow-hidden"
                   style={{ boxShadow: 'var(--shadow-card)' }}
                 >
                   <div
-                    className="w-full aspect-video bg-nox-base flex items-center justify-center border-b border-nox-border relative overflow-hidden"
+                    className="w-full aspect-video bg-[#F8FAFC] flex items-center justify-center border-b border-[#D9E7F5] relative overflow-hidden"
                     style={{
                       backgroundImage:
-                        'linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px)',
+                        'linear-gradient(rgba(30,58,138,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,138,0.04) 1px, transparent 1px)',
                       backgroundSize: '32px 32px',
                     }}
                     aria-label="Project image coming soon"
@@ -503,19 +520,19 @@ export const Home: React.FC = () => {
                       className="absolute top-0 left-0 w-full h-0.5 pointer-events-none"
                       aria-hidden="true"
                       style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(0,240,255,0.3), transparent)',
+                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent)',
                         animation: `scanLine ${4 + idx * 1.5}s ease-in-out infinite`,
                         animationDelay: `${idx * 1.2}s`,
                       }}
                     />
                     <div className="text-center">
                       <div
-                        className="w-8 h-8 border border-nox-border/60 flex items-center justify-center mx-auto mb-3"
+                        className="w-10 h-10 rounded-xl border border-[#D9E7F5] bg-[#EFF6FF] flex items-center justify-center mx-auto mb-3 text-[#1E3A8A]"
                         aria-hidden="true"
                       >
-                        <span className="text-nox-text-dim text-xs">⬡</span>
+                        <span className="text-sm">⬡</span>
                       </div>
-                      <span className="text-[10px] font-semibold tracking-widest uppercase text-nox-text-dim">
+                      <span className="text-[10px] font-semibold tracking-widest uppercase text-[#627D98]">
                         [ IMG_SYS_AWAITING_DATA ]
                       </span>
                     </div>
@@ -524,10 +541,10 @@ export const Home: React.FC = () => {
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="dim">Coming Soon</Badge>
                     </div>
-                    <h3 className="text-base font-semibold text-nox-text-muted mb-2">
+                    <h3 className="text-base font-semibold text-[#0A2540] mb-2">
                       Project Title — Coming Soon
                     </h3>
-                    <p className="text-sm text-nox-text-dim">
+                    <p className="text-sm text-[#334E68]">
                       Project details will be published upon completion.
                     </p>
                   </div>
@@ -540,7 +557,7 @@ export const Home: React.FC = () => {
 
       {/* ── TIMELINE ── */}
       <section
-        className="nox-section border-t border-nox-border bg-nox-layer/20 relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-[#F8FAFC] relative overflow-hidden"
         aria-label="Company timeline"
       >
         <AmbientScene variant="subtle" />
@@ -559,7 +576,7 @@ export const Home: React.FC = () => {
                 className="absolute top-3 left-12 right-12 h-px"
                 aria-hidden="true"
                 style={{
-                  background: 'linear-gradient(90deg, rgba(0,240,255,0.1), rgba(0,240,255,0.3) 50%, rgba(0,240,255,0.1))',
+                  background: 'linear-gradient(90deg, rgba(59,130,246,0.15), rgba(30,58,138,0.35) 50%, rgba(59,130,246,0.15))',
                 }}
               />
               {timeline.map((item, idx) => (
@@ -573,31 +590,31 @@ export const Home: React.FC = () => {
                   className="flex-1 flex flex-col items-center text-center px-4 md:px-6 min-w-[200px] lg:min-w-0"
                 >
                   <div
-                    className={`relative z-10 w-6 h-6 border-2 mb-4 transition-all duration-300 ${
+                    className={`relative z-10 w-6 h-6 rounded-full border-2 mb-4 transition-all duration-300 ${
                       item.status === 'completed'
-                        ? 'border-nox-cyan bg-nox-cyan/20 shadow-[0_0_10px_rgba(0,240,255,0.2)]'
+                        ? 'border-[#1E3A8A] bg-[#EFF6FF] shadow-[0_0_10px_rgba(30,58,138,0.2)]'
                         : item.status === 'current'
-                        ? 'border-nox-cyan bg-nox-cyan/10 shadow-[0_0_8px_rgba(0,240,255,0.15)]'
-                        : 'border-nox-border bg-nox-base'
+                        ? 'border-[#3B82F6] bg-[#EFF6FF] shadow-[0_0_8px_rgba(59,130,246,0.25)]'
+                        : 'border-[#D9E7F5] bg-white'
                     }`}
                     aria-label={`${item.period}: ${item.title} — ${item.status}`}
                   >
                     {item.status !== 'upcoming' && (
                       <div
-                        className="absolute inset-1 bg-nox-cyan"
+                        className="absolute inset-1 rounded-full bg-[#1E3A8A]"
                         aria-hidden="true"
                       />
                     )}
                   </div>
                   <span
                     className={`text-[10px] font-semibold tracking-widest uppercase mb-2 ${
-                      item.status === 'upcoming' ? 'text-nox-text-dim' : 'text-nox-cyan'
+                      item.status === 'upcoming' ? 'text-[#627D98]' : 'text-[#1E3A8A]'
                     }`}
                   >
                     {item.period}
                   </span>
-                  <h3 className="text-sm font-semibold text-nox-text mb-2">{item.title}</h3>
-                  <p className="text-xs text-nox-text-dim leading-relaxed max-w-[180px]">
+                  <h3 className="text-sm font-semibold text-[#0A2540] mb-2">{item.title}</h3>
+                  <p className="text-xs text-[#334E68] leading-relaxed max-w-[180px]">
                     {item.description}
                   </p>
                 </motion.div>
@@ -609,7 +626,7 @@ export const Home: React.FC = () => {
 
       {/* ── VALUES ── */}
       <section
-        className="nox-section border-t border-nox-border relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] bg-white relative overflow-hidden"
         aria-label="Core values"
       >
         <div className="nox-container relative z-10">
@@ -618,7 +635,7 @@ export const Home: React.FC = () => {
             title="Core Operating Principles"
             className="mb-12"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-nox-border">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {values.map((v, i) => (
               <Card3D key={v.id} maxTilt={5} className="w-full h-full">
                 <motion.div
@@ -627,7 +644,7 @@ export const Home: React.FC = () => {
                   whileInView="visible"
                   viewport={{ once: true, margin: '-80px' }}
                   custom={i * 0.15}
-                  className="bg-nox-base p-8 md:p-10 h-full relative overflow-hidden group transition-all duration-300 hover:bg-nox-layer"
+                  className="bg-white border border-[#D9E7F5] hover:border-[#BBD3F2] rounded-2xl p-8 md:p-10 h-full relative overflow-hidden group transition-all duration-300 hover:bg-[#F8FAFC] shadow-[0_12px_30px_rgba(10,37,64,0.06)] hover:shadow-[0_20px_40px_rgba(10,37,64,0.1)]"
                 >
                   {/* Top-left light direction highlight */}
                   <div
@@ -635,27 +652,27 @@ export const Home: React.FC = () => {
                     aria-hidden="true"
                     style={{
                       background:
-                        'radial-gradient(circle at 0% 0%, rgba(0,240,255,0.04) 0%, transparent 70%)',
+                        'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.08) 0%, transparent 70%)',
                     }}
                   />
 
                   <div className="flex items-start justify-between mb-6">
                     <span
-                      className="text-2xl text-nox-cyan group-hover:scale-110 transition-transform duration-300 inline-block"
+                      className="text-2xl text-[#1E3A8A] group-hover:scale-110 transition-transform duration-300 inline-block"
                       aria-hidden="true"
                     >
                       {v.icon}
                     </span>
-                    <span className="text-[11px] font-semibold tracking-widest text-nox-text-dim">
+                    <span className="text-[11px] font-semibold tracking-widest text-[#627D98]">
                       {v.id}
                     </span>
                   </div>
-                  <h3 className="text-base font-semibold text-nox-text mb-3">{v.title}</h3>
-                  <p className="text-sm text-nox-text-muted leading-relaxed">{v.description}</p>
+                  <h3 className="text-base font-semibold text-[#0A2540] mb-3">{v.title}</h3>
+                  <p className="text-sm text-[#334E68] leading-relaxed">{v.description}</p>
 
                   {/* Bottom accent line */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-px bg-nox-cyan/0 group-hover:bg-nox-cyan/10 transition-colors duration-300"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#1E3A8A] transition-colors duration-300"
                     aria-hidden="true"
                   />
                 </motion.div>
@@ -667,7 +684,10 @@ export const Home: React.FC = () => {
 
       {/* ── FINAL CTA ── */}
       <section
-        className="nox-section border-t border-nox-border relative overflow-hidden"
+        className="nox-section border-t border-[#D9E7F5] relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #0A2540 0%, #1E3A8A 60%, #3B82F6 100%)',
+        }}
         aria-label="Call to action"
       >
         {/* Atmospheric glow behind CTA */}
@@ -679,7 +699,7 @@ export const Home: React.FC = () => {
           aria-hidden="true"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(0,240,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.025) 1px, transparent 1px)',
+              'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
             maskImage:
               'radial-gradient(ellipse 60% 80% at 50% 50%, black 20%, transparent 100%)',
@@ -694,8 +714,9 @@ export const Home: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-6"
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-6 flex items-center justify-center gap-2"
           >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#93C5FD]" aria-hidden="true" />
             LET'S BUILD
           </motion.p>
           <FoldText
@@ -703,7 +724,7 @@ export const Home: React.FC = () => {
             splitBy="word"
             hinge="top"
             trigger="scroll"
-            className="text-3xl md:text-5xl font-semibold leading-[1.1] tracking-[-0.03em] text-nox-text mb-6 max-w-2xl mx-auto"
+            className="text-3xl md:text-5xl font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6 max-w-2xl mx-auto"
           >
             Have an Idea Worth Engineering?
           </FoldText>
@@ -713,7 +734,7 @@ export const Home: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
             custom={1}
-            className="text-nox-text-muted text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed"
+            className="text-[#D9E7F5] text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed"
           >
             Let's transform ambitious ideas, research concepts, and real-world challenges into
             intelligent technology.
@@ -725,7 +746,13 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             custom={2}
           >
-            <Button to="/work-with-us" variant="primary" size="lg" id="home-final-cta" className="btn-depth-primary">
+            <Button
+              to="/work-with-us"
+              variant="primary"
+              size="lg"
+              id="home-final-cta"
+              className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] hover:!text-[#1E3A8A] font-bold shadow-[0_8px_24px_rgba(10,37,64,0.3)] btn-depth-primary"
+            >
               Work With Us
               <ArrowRight size={16} aria-hidden="true" />
             </Button>

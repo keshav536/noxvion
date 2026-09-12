@@ -128,7 +128,7 @@ const AppContent: React.FC = () => {
   return (
     <BrowserRouter>
       <AppLoader />
-      <div className="min-h-screen flex flex-col bg-nox-base">
+      <div className="min-h-screen flex flex-col bg-white text-[#0A2540]">
         <Navbar />
         <AnimatedRoutes />
         <Footer />

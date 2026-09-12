@@ -42,32 +42,32 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="relative py-20 md:py-28 grid-bg border-b border-nox-border overflow-hidden" aria-label="Solution Hero">
+      <section className="relative py-20 md:py-28 bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_60%,#3B82F6_100%)] text-white border-b border-[#D9E7F5]/20 overflow-hidden" aria-label="Solution Hero">
         <AmbientScene variant="hero" />
         <div className="nox-container relative z-10">
           <div className="flex items-center gap-3 mb-4">
-            <Link to="/solutions" className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-text-dim hover:text-nox-cyan transition-colors">
+            <Link to="/solutions" className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] hover:text-white transition-colors">
               SOLUTIONS
             </Link>
-            <span className="text-nox-text-dim text-xs">/</span>
-            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan">
+            <span className="text-[#93C5FD]/60 text-xs">/</span>
+            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white">
               {solution.id}
             </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-8">
-              <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-nox-text mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-white mb-6">
                 {solution.title}
               </h1>
-              <p className="text-nox-text-muted text-lg md:text-xl leading-relaxed max-w-3xl mb-8">
+              <p className="text-[#D9E7F5] text-lg md:text-xl leading-relaxed max-w-3xl mb-8">
                 {solution.description}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button to="/contact" variant="primary" size="md">
+                <Button to="/contact" variant="primary" size="md" className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] shadow-lg">
                   {solution.cta}
                 </Button>
-                <Button to="/solutions" variant="secondary" size="md">
+                <Button to="/solutions" variant="secondary" size="md" className="!border-white/40 !text-white hover:!bg-white/10">
                   View All Solutions
                 </Button>
               </div>
@@ -75,16 +75,16 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
 
             {/* Right Tech Card with 3D Depth */}
             <div className="lg:col-span-4">
-              <Card3D intensity="low" glowColor="rgba(0, 240, 255, 0.12)">
-                <div className="bg-nox-layer border border-nox-border p-6 shadow-card rounded-sm">
-                  <div className="flex items-center justify-between border-b border-nox-border/60 pb-3 mb-4">
+              <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.12)">
+                <div className="bg-white text-[#0A2540] border border-[#D9E7F5] p-6 shadow-2xl rounded-2xl">
+                  <div className="flex items-center justify-between border-b border-[#D9E7F5] pb-3 mb-4">
                     <div className="flex items-center gap-2">
-                      <Icon size={18} className="text-nox-cyan" />
-                      <span className="text-xs font-mono text-nox-text">{solution.id} SPEC</span>
+                      <Icon size={18} className="text-[#1E3A8A]" />
+                      <span className="text-xs font-mono font-bold text-[#0A2540]">{solution.id} SPEC</span>
                     </div>
                     <Badge variant="cyan">PRODUCTION</Badge>
                   </div>
-                  <p className="text-[10px] uppercase font-mono tracking-widest text-nox-text-dim mb-3">
+                  <p className="text-[10px] uppercase font-mono tracking-widest text-[#627D98] font-semibold mb-3">
                     INTEGRATED TOOLSET
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -100,7 +100,7 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
       </section>
 
       {/* ── CORE CAPABILITIES ── */}
-      <section className="nox-section border-b border-nox-border" aria-label="Core Capabilities">
+      <section className="nox-section border-b border-[#D9E7F5] bg-white" aria-label="Core Capabilities">
         <div className="nox-container">
           <SectionHeader
             eyebrow="CAPABILITY SPECIFICATION"
@@ -111,17 +111,17 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {solution.capabilities.map((cap, i) => (
-              <Card3D key={i} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
-                <div className="h-full bg-nox-layer border border-nox-border p-6 flex items-start gap-4 hover:border-nox-border-active transition-colors">
-                  <div className="p-2 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
-                    <CheckCircle2 size={16} />
+              <Card3D key={i} intensity="low" glowColor="rgba(59, 130, 246, 0.08)" className="h-full">
+                <div className="h-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-2xl p-6 flex items-start gap-4 hover:border-[#3B82F6] hover:shadow-lg transition-all duration-300">
+                  <div className="p-2.5 rounded-lg border border-[#BBD3F2] bg-[#EFF6FF] text-[#1E3A8A] shrink-0">
+                    <CheckCircle2 size={18} />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-mono text-nox-text-dim">CAP-{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-[10px] font-mono text-[#627D98] font-semibold">CAP-{String(i + 1).padStart(2, '0')}</span>
                     </div>
-                    <h3 className="text-base font-semibold text-nox-text mb-1">{cap}</h3>
-                    <p className="text-xs text-nox-text-muted leading-relaxed">
+                    <h3 className="text-base font-bold text-[#0A2540] mb-1">{cap}</h3>
+                    <p className="text-xs text-[#334E68] leading-relaxed">
                       Engineered according to rigorous validation benchmarks, failsafe redundancies, and clean modular APIs.
                     </p>
                   </div>
@@ -133,7 +133,7 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
       </section>
 
       {/* ── TECHNOLOGY MATRIX ── */}
-      <section className="nox-section border-b border-nox-border bg-nox-layer/20" aria-label="Technology Matrix">
+      <section className="nox-section border-b border-[#D9E7F5] bg-[#F8FAFC]" aria-label="Technology Matrix">
         <div className="nox-container">
           <SectionHeader
             eyebrow="STACK INTEGRATION"
@@ -145,11 +145,11 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
             {solution.tools.map((tool) => (
               <div
                 key={tool}
-                className="bg-nox-base border border-nox-border p-5 text-center flex flex-col items-center justify-center gap-2 hover:border-nox-cyan/40 transition-colors"
+                className="bg-white border border-[#D9E7F5] rounded-xl p-5 text-center flex flex-col items-center justify-center gap-2 hover:border-[#3B82F6] hover:shadow-md transition-all duration-200"
               >
-                <Terminal size={20} className="text-nox-cyan mb-1" />
-                <span className="text-sm font-semibold text-nox-text">{tool}</span>
-                <span className="text-[10px] font-mono text-nox-text-dim">STABLE</span>
+                <Terminal size={20} className="text-[#1E3A8A] mb-1" />
+                <span className="text-sm font-bold text-[#0A2540]">{tool}</span>
+                <span className="text-[10px] font-mono text-[#627D98] font-semibold">STABLE</span>
               </div>
             ))}
           </div>
@@ -157,18 +157,18 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
       </section>
 
       {/* ── INTEGRATION CTA ── */}
-      <section className="nox-section" aria-label="Solution CTA">
+      <section className="nox-section bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_100%)] text-white" aria-label="Solution CTA">
         <div className="nox-container text-center">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4">
+          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-4">
             INITIATE DEPLOYMENT
           </p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-nox-text mb-4 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-2xl mx-auto">
             Ready to integrate {solution.title}?
           </h2>
-          <p className="text-nox-text-muted text-base max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-[#D9E7F5] text-base max-w-xl mx-auto mb-8 leading-relaxed">
             Engage directly with our engineering syndicate to scope architecture, prototyping timeline, and integration milestones.
           </p>
-          <Button to="/contact" variant="primary" size="lg">
+          <Button to="/contact" variant="primary" size="lg" className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] shadow-lg">
             {solution.cta}
             <ArrowRight size={16} aria-hidden="true" />
           </Button>

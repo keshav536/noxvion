@@ -55,7 +55,7 @@ export const About: React.FC = () => {
     <PageContainer>
       {/* ── HERO ── */}
       <section
-        className="relative py-20 md:py-28 grid-bg overflow-hidden border-b border-nox-border"
+        className="relative py-20 md:py-28 overflow-hidden bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_60%,#3B82F6_100%)] text-white border-b border-[#D9E7F5]/20"
         aria-label="About hero"
       >
         <AmbientScene variant="hero" />
@@ -68,7 +68,7 @@ export const About: React.FC = () => {
                 initial="hidden"
                 animate="visible"
                 custom={0}
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4"
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-4"
               >
                 CORPORATE OVERVIEW
               </motion.p>
@@ -77,17 +77,17 @@ export const About: React.FC = () => {
                 splitBy="word"
                 hinge="top"
                 trigger="scroll"
-                className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-nox-text mb-6"
+                className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-white mb-6"
               >
                 Engineering the Future Through{' '}
-                <span className="text-nox-cyan">Intelligent Technology</span>
+                <span className="text-[#60A5FA]">Intelligent Technology</span>
               </FoldText>
               <motion.p
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
                 custom={2}
-                className="text-nox-text-muted text-base md:text-lg leading-relaxed max-w-2xl mb-8"
+                className="text-[#D9E7F5] text-base md:text-lg leading-relaxed max-w-2xl mb-8"
               >
                 NOXVION is an advanced engineering collective dedicated to solving complex,
                 multi-domain challenges through rigorous R&D, bespoke hardware solutions, and
@@ -100,10 +100,10 @@ export const About: React.FC = () => {
                 custom={3}
                 className="flex flex-wrap gap-4"
               >
-                <Button to="/contact" variant="primary" size="md" className="btn-depth-primary">
+                <Button to="/contact" variant="primary" size="md" className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] shadow-lg">
                   Initiate Dialogue
                 </Button>
-                <Button to="/solutions" variant="secondary" size="md" className="btn-depth-secondary">
+                <Button to="/solutions" variant="secondary" size="md" className="!border-white/40 !text-white hover:!bg-white/10">
                   Explore Solutions
                 </Button>
               </motion.div>
@@ -118,66 +118,63 @@ export const About: React.FC = () => {
               className="lg:col-span-5"
             >
               <div
-                className="border border-nox-border/80 bg-nox-layer relative overflow-hidden scan-line-container"
-                style={{
-                  boxShadow: 'var(--shadow-card)',
-                }}
+                className="border border-white/20 bg-white/95 text-[#0A2540] rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-md"
               >
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-nox-border/60 px-5 py-3 bg-nox-layer/80">
+                <div className="flex items-center justify-between border-b border-[#D9E7F5] px-5 py-3 bg-[#F8FAFC]">
                   <div className="flex items-center gap-2">
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-nox-cyan status-dot-active"
+                      className="w-2 h-2 rounded-full bg-[#1E3A8A] status-dot-active"
                       aria-hidden="true"
                     />
-                    <span className="text-[10px] font-semibold tracking-widest uppercase text-nox-cyan">
+                    <span className="text-[10px] font-semibold tracking-widest uppercase text-[#1E3A8A]">
                       SYS.OP.01 / NOX
                     </span>
                   </div>
-                  <span className="text-[10px] text-nox-text-dim font-mono">STATUS: NOMINAL</span>
+                  <span className="text-[10px] text-[#627D98] font-mono font-medium">STATUS: NOMINAL</span>
                 </div>
 
                 <div className="p-5 space-y-4">
                   {/* Foundation Architecture */}
                   <div
-                    className="bg-nox-base p-4 border border-nox-border/60 group hover:border-nox-border-active transition-colors duration-200"
+                    className="bg-[#EFF6FF] p-4 border border-[#BBD3F2] rounded-xl group transition-colors duration-200"
                   >
-                    <p className="text-[10px] tracking-widest uppercase text-nox-text-dim mb-1">
+                    <p className="text-[10px] tracking-widest uppercase text-[#627D98] font-semibold mb-1">
                       FOUNDATION ARCHITECTURE
                     </p>
-                    <p className="text-xs text-nox-text font-mono">CORE_ENGINEERING_SUITE_V2</p>
+                    <p className="text-xs text-[#0A2540] font-mono font-bold">CORE_ENGINEERING_SUITE_V2</p>
                   </div>
 
                   {/* Primary Domains */}
                   <div
-                    className="bg-nox-base p-4 border border-nox-border/60 group hover:border-nox-border-active transition-colors duration-200"
+                    className="bg-[#F8FAFC] p-4 border border-[#D9E7F5] rounded-xl group transition-colors duration-200"
                   >
-                    <p className="text-[10px] tracking-widest uppercase text-nox-text-dim mb-1">
+                    <p className="text-[10px] tracking-widest uppercase text-[#627D98] font-semibold mb-1">
                       PRIMARY DOMAINS
                     </p>
-                    <p className="text-xs text-nox-text-muted leading-relaxed">
+                    <p className="text-xs text-[#334E68] leading-relaxed font-medium">
                       AI Engine • Distributed Mesh • Hardware Sensors • Real-Time Telemetry
                     </p>
                   </div>
 
                   {/* Metrics row */}
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-nox-base p-3 border border-nox-border/60 text-center">
-                      <p className="text-nox-cyan text-lg font-semibold">5+</p>
-                      <p className="text-[10px] tracking-widest uppercase text-nox-text-dim mt-1">Domains</p>
+                    <div className="bg-white p-3 border border-[#D9E7F5] rounded-xl text-center shadow-sm">
+                      <p className="text-[#1E3A8A] text-lg font-bold">5+</p>
+                      <p className="text-[10px] tracking-widest uppercase text-[#627D98] font-semibold mt-1">Domains</p>
                     </div>
-                    <div className="bg-nox-base p-3 border border-nox-border/60 text-center">
-                      <p className="text-nox-cyan text-lg font-semibold">&lt;1.2ms</p>
-                      <p className="text-[10px] tracking-widest uppercase text-nox-text-dim mt-1">Latency</p>
+                    <div className="bg-white p-3 border border-[#D9E7F5] rounded-xl text-center shadow-sm">
+                      <p className="text-[#1E3A8A] text-lg font-bold">&lt;1.2ms</p>
+                      <p className="text-[10px] tracking-widest uppercase text-[#627D98] font-semibold mt-1">Latency</p>
                     </div>
                   </div>
 
                   {/* Status bar */}
-                  <div className="flex items-center justify-between text-[11px] text-nox-cyan pt-1">
+                  <div className="flex items-center justify-between text-[11px] text-[#1E3A8A] font-semibold pt-1">
                     <span>SECURITY BASELINE: STRICT</span>
                     <span className="flex items-center gap-1.5">
                       <span
-                        className="w-1 h-1 rounded-full bg-nox-cyan status-dot-active"
+                        className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A] status-dot-active"
                         aria-hidden="true"
                       />
                       ONLINE
@@ -192,7 +189,7 @@ export const About: React.FC = () => {
 
       {/* ── STRATEGIC FOUNDATION ── */}
       <section
-        className="nox-section border-b border-nox-border relative overflow-hidden"
+        className="nox-section border-b border-[#D9E7F5] bg-white relative overflow-hidden"
         aria-label="Strategic Foundation"
       >
         <AmbientScene variant="subtle" />
@@ -210,29 +207,29 @@ export const About: React.FC = () => {
               {/* Who We Are — Left */}
               <RevealItem className="lg:col-span-7">
                 <Card3D maxTilt={4} className="h-full">
-                  <div className="bg-nox-layer border border-nox-border p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-nox-border-active">
+                  <div className="bg-[#F8FAFC] border border-[#D9E7F5] rounded-2xl p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-[#3B82F6] shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
                     {/* Top-left lighting */}
                     <div
                       className="absolute top-0 left-0 w-32 h-32 pointer-events-none"
                       aria-hidden="true"
                       style={{
                         background:
-                          'radial-gradient(circle at 0% 0%, rgba(0,240,255,0.05) 0%, transparent 70%)',
+                          'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.08) 0%, transparent 70%)',
                       }}
                     />
 
                     <div>
                       <div className="flex items-center gap-3 mb-6">
-                        <div className="w-2 h-2 bg-nox-cyan" aria-hidden="true" />
-                        <h3 className="text-xl font-semibold text-nox-text">Who We Are</h3>
+                        <div className="w-2.5 h-2.5 rounded-sm bg-[#1E3A8A]" aria-hidden="true" />
+                        <h3 className="text-xl font-bold text-[#0A2540]">Who We Are</h3>
                       </div>
-                      <p className="text-nox-text-muted text-base leading-relaxed mb-6">
+                      <p className="text-[#334E68] text-base leading-relaxed mb-6">
                         Noxvion is an innovation-driven technology startup focused on transforming ideas
                         into practical technology solutions. We combine artificial intelligence, machine
                         learning, software engineering, IoT, hardware, automation, research, and product R&D
                         to build systems that address high-stake real-world challenges.
                       </p>
-                      <p className="text-nox-text-muted text-base leading-relaxed">
+                      <p className="text-[#334E68] text-base leading-relaxed">
                         We are a syndicate of engineers, researchers, and systems architects united by a
                         singular focus: absolute technical supremacy. Operating at the intersection of
                         hardware integration, secure communications, and autonomous systems, NOXVION builds
@@ -240,7 +237,7 @@ export const About: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-nox-border/60 flex flex-wrap gap-2">
+                    <div className="mt-8 pt-6 border-t border-[#D9E7F5] flex flex-wrap gap-2">
                       <Badge variant="cyan">RESEARCH</Badge>
                       <Badge variant="cyan">HARDWARE</Badge>
                       <Badge variant="cyan">SOFTWARE</Badge>
@@ -255,23 +252,23 @@ export const About: React.FC = () => {
               <div className="lg:col-span-5 flex flex-col gap-6">
                 <RevealItem delay={0.1}>
                   <Card3D maxTilt={5} className="w-full">
-                    <div className="bg-nox-layer border border-nox-border p-8 relative overflow-hidden group transition-all duration-300 hover:border-nox-border-active">
+                    <div className="bg-white border border-[#D9E7F5] rounded-2xl p-8 relative overflow-hidden group transition-all duration-300 hover:border-[#3B82F6] shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
                       <div
                         className="absolute top-0 right-0 w-24 h-24 pointer-events-none"
                         aria-hidden="true"
                         style={{
                           background:
-                            'radial-gradient(circle at 100% 0%, rgba(0,240,255,0.04) 0%, transparent 70%)',
+                            'radial-gradient(circle at 100% 0%, rgba(59,130,246,0.06) 0%, transparent 70%)',
                         }}
                       />
                       <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] font-semibold tracking-widest uppercase text-nox-cyan">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-[#1E3A8A]">
                           MISSION OBJECTIVE
                         </p>
-                        <span className="text-[10px] text-nox-text-dim">MSN-001</span>
+                        <span className="text-[10px] text-[#627D98] font-mono">MSN-001</span>
                       </div>
-                      <h3 className="text-base font-semibold text-nox-text mb-3">Our Mission</h3>
-                      <p className="text-sm text-nox-text-muted leading-relaxed">
+                      <h3 className="text-lg font-bold text-[#0A2540] mb-3">Our Mission</h3>
+                      <p className="text-sm text-[#334E68] leading-relaxed">
                         To build accessible, intelligent, and impactful technology that improves the way
                         people, organizations, and communities solve complex engineering and operational problems.
                       </p>
@@ -281,23 +278,23 @@ export const About: React.FC = () => {
 
                 <RevealItem delay={0.2}>
                   <Card3D maxTilt={5} className="w-full">
-                    <div className="bg-nox-layer border border-nox-border p-8 relative overflow-hidden group transition-all duration-300 hover:border-nox-border-active">
+                    <div className="bg-white border border-[#D9E7F5] rounded-2xl p-8 relative overflow-hidden group transition-all duration-300 hover:border-[#3B82F6] shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
                       <div
                         className="absolute bottom-0 right-0 w-24 h-24 pointer-events-none"
                         aria-hidden="true"
                         style={{
                           background:
-                            'radial-gradient(circle at 100% 100%, rgba(0,240,255,0.04) 0%, transparent 70%)',
+                            'radial-gradient(circle at 100% 100%, rgba(59,130,246,0.06) 0%, transparent 70%)',
                         }}
                       />
                       <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] font-semibold tracking-widest uppercase text-nox-cyan">
+                        <p className="text-[10px] font-semibold tracking-widest uppercase text-[#1E3A8A]">
                           LONG-TERM VISION
                         </p>
-                        <span className="text-[10px] text-nox-text-dim">VSN-X9</span>
+                        <span className="text-[10px] text-[#627D98] font-mono">VSN-X9</span>
                       </div>
-                      <h3 className="text-base font-semibold text-nox-text mb-3">Our Vision</h3>
-                      <p className="text-sm text-nox-text-muted leading-relaxed">
+                      <h3 className="text-lg font-bold text-[#0A2540] mb-3">Our Vision</h3>
+                      <p className="text-sm text-[#334E68] leading-relaxed">
                         To become a globally recognized technology company creating intelligent products that
                         seamlessly connect software, artificial intelligence, hardware, and human needs.
                       </p>
@@ -312,7 +309,7 @@ export const About: React.FC = () => {
 
       {/* ── PATH OF INNOVATION (Timeline) ── */}
       <section
-        className="nox-section border-b border-nox-border bg-nox-layer/20 relative overflow-hidden"
+        className="nox-section border-b border-[#D9E7F5] bg-[#F8FAFC] relative overflow-hidden"
         aria-label="Path of Innovation"
       >
         <AmbientScene variant="subtle" />
@@ -336,43 +333,39 @@ export const About: React.FC = () => {
               >
                 <Card3D maxTilt={5} className="w-full h-full">
                   <div
-                    className="bg-nox-base border border-nox-border p-6 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-nox-border-active"
-                    style={{ boxShadow: 'var(--shadow-card)' }}
+                    className="bg-white border border-[#D9E7F5] rounded-2xl p-6 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-[#3B82F6] shadow-[0_12px_30px_rgba(10,37,64,0.06)]"
                   >
                     {/* Top accent when active */}
                     <div
-                      className={`absolute top-0 left-0 right-0 h-px transition-opacity duration-300 ${
+                      className={`absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 ${
                         item.status === 'completed' || item.status === 'current'
-                          ? 'opacity-100'
+                          ? 'opacity-100 bg-[#3B82F6]'
                           : 'opacity-0'
                       }`}
                       aria-hidden="true"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(0,240,255,0.4), transparent)',
-                      }}
                     />
 
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-semibold tracking-widest text-nox-cyan">
+                        <span className="text-xs font-bold tracking-widest text-[#1E3A8A]">
                           {item.period}
                         </span>
-                        <span className="text-[10px] text-nox-text-dim">0{idx + 1}</span>
+                        <span className="text-[10px] text-[#627D98] font-mono">0{idx + 1}</span>
                       </div>
-                      <h3 className="text-base font-semibold text-nox-text mb-3">{item.title}</h3>
-                      <p className="text-sm text-nox-text-muted leading-relaxed">
+                      <h3 className="text-base font-bold text-[#0A2540] mb-3">{item.title}</h3>
+                      <p className="text-sm text-[#334E68] leading-relaxed">
                         {item.description}
                       </p>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-nox-border/60">
+                    <div className="mt-6 pt-4 border-t border-[#D9E7F5]">
                       <span
                         className={`text-[10px] tracking-widest uppercase font-semibold flex items-center gap-1.5 ${
-                          item.status === 'completed' ? 'text-nox-cyan' : 'text-nox-text-dim'
+                          item.status === 'completed' ? 'text-[#1E3A8A]' : 'text-[#627D98]'
                         }`}
                       >
                         {item.status === 'completed' && (
                           <span
-                            className="w-1 h-1 rounded-full bg-nox-cyan status-dot-active"
+                            className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A] status-dot-active"
                             aria-hidden="true"
                           />
                         )}
@@ -389,7 +382,7 @@ export const About: React.FC = () => {
 
       {/* ── CORE OPERATING PRINCIPLES ── */}
       <section
-        className="nox-section relative overflow-hidden"
+        className="nox-section bg-white relative overflow-hidden"
         aria-label="Core Operating Principles"
       >
         <div className="nox-container relative z-10">
@@ -399,7 +392,7 @@ export const About: React.FC = () => {
             className="mb-12"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-nox-border">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {principles.map((prn, idx) => (
               <Card3D key={prn.id} maxTilt={5} className="w-full h-full">
                 <motion.div
@@ -408,43 +401,43 @@ export const About: React.FC = () => {
                   whileInView="visible"
                   viewport={{ once: true }}
                   custom={idx * 0.1}
-                  className="bg-nox-base p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:bg-nox-layer"
+                  className="bg-white border border-[#D9E7F5] rounded-2xl p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-[#3B82F6] shadow-[0_12px_30px_rgba(10,37,64,0.06)] hover:shadow-xl"
                 >
                   {/* Ambient corner light */}
                   <div
-                    className="absolute top-0 left-0 w-20 h-20 pointer-events-none"
+                    className="absolute top-0 left-0 w-24 h-24 pointer-events-none"
                     aria-hidden="true"
                     style={{
                       background:
-                        'radial-gradient(circle at 0% 0%, rgba(0,240,255,0.04) 0%, transparent 70%)',
+                        'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.08) 0%, transparent 70%)',
                     }}
                   />
 
                   <div>
                     <div className="flex items-start justify-between mb-6">
                       <span
-                        className="text-2xl text-nox-cyan group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.4)] transition-all duration-300 inline-block"
+                        className="text-3xl text-[#1E3A8A] group-hover:scale-110 transition-transform duration-300 inline-block"
                         aria-hidden="true"
                       >
                         {prn.icon}
                       </span>
-                      <span className="text-[11px] font-semibold tracking-widest text-nox-text-dim">
+                      <span className="text-[11px] font-bold tracking-widest text-[#627D98]">
                         {prn.id}
                       </span>
                     </div>
-                    <h3 className="text-lg font-semibold text-nox-text mb-3">{prn.title}</h3>
-                    <p className="text-sm text-nox-text-muted leading-relaxed mb-6">
+                    <h3 className="text-lg font-bold text-[#0A2540] mb-3">{prn.title}</h3>
+                    <p className="text-sm text-[#334E68] leading-relaxed mb-6">
                       {prn.description}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-nox-border/60 flex items-center justify-between text-[11px] text-nox-text-dim">
+                  <div className="pt-4 border-t border-[#D9E7F5] flex items-center justify-between text-[11px] text-[#627D98] font-semibold">
                     <span>SYSTEM_STANDARD</span>
-                    <span className="text-nox-cyan">ENFORCED</span>
+                    <span className="text-[#1E3A8A] font-bold">ENFORCED</span>
                   </div>
 
-                  {/* Bottom glow on hover */}
+                  {/* Bottom line on hover */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-px bg-nox-cyan/0 group-hover:bg-nox-cyan/15 transition-colors duration-300"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-[#1E3A8A] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     aria-hidden="true"
                   />
                 </motion.div>

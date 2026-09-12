@@ -69,10 +69,10 @@ export const Projects: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="relative py-20 md:py-28 border-b border-nox-border grid-bg overflow-hidden" aria-label="Projects Hero">
+      <section className="relative py-20 md:py-28 bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_60%,#3B82F6_100%)] text-white border-b border-[#D9E7F5]/20 overflow-hidden" aria-label="Projects Hero">
         <AmbientScene variant="hero" />
         <div className="nox-container relative z-10">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4 font-mono">
+          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-4 font-mono">
             [SYS_LOG] / NOXVION / PROJECTS
           </p>
           <FoldText
@@ -80,12 +80,12 @@ export const Projects: React.FC = () => {
             splitBy="word"
             hinge="top"
             trigger="scroll"
-            className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-nox-text mb-6"
+            className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-6"
           >
             Engineering Ideas Into{' '}
-            <span className="text-nox-cyan">Reality.</span>
+            <span className="text-[#60A5FA]">Reality.</span>
           </FoldText>
-          <p className="text-nox-text-muted text-base md:text-xl leading-relaxed max-w-2xl">
+          <p className="text-[#D9E7F5] text-base md:text-xl leading-relaxed max-w-2xl">
             Explore projects spanning artificial intelligence, software, IoT, automation,
             hardware, and research. Precision engineering applied to complex technical challenges.
           </p>
@@ -100,7 +100,7 @@ export const Projects: React.FC = () => {
         that slides between whichever tab is currently active.
         The button's own text/color classes are untouched.
       */}
-      <section className="border-b border-nox-border bg-nox-base sticky top-16 md:top-[70px] z-30 overflow-x-auto" aria-label="Project category filter">
+      <section className="border-b border-[#D9E7F5] bg-white sticky top-16 md:top-[70px] z-30 overflow-x-auto shadow-sm" aria-label="Project category filter">
         <div className="nox-container">
           <div className="flex items-center gap-6 py-4 min-w-max" role="tablist" aria-label="Filter projects by category">
             {projectCategories.map((cat) => (
@@ -110,10 +110,10 @@ export const Projects: React.FC = () => {
                 role="tab"
                 aria-selected={activeCat === cat}
                 onClick={() => setActiveCat(cat)}
-                className={`relative text-xs font-semibold tracking-widest uppercase pb-1 transition-colors focus-visible:outline-2 focus-visible:outline-nox-cyan focus-visible:outline-offset-2 ${
+                className={`relative text-xs font-semibold tracking-widest uppercase pb-1 transition-colors focus-visible:outline-2 focus-visible:outline-[#3B82F6] focus-visible:outline-offset-2 ${
                   activeCat === cat
-                    ? 'text-nox-text'
-                    : 'text-nox-text-muted hover:text-nox-text'
+                    ? 'text-[#1E3A8A] font-bold'
+                    : 'text-[#627D98] hover:text-[#0A2540]'
                 }`}
               >
                 {cat}
@@ -121,7 +121,7 @@ export const Projects: React.FC = () => {
                 {activeCat === cat && (
                   <motion.span
                     layoutId="new-tab-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-nox-cyan"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#1E3A8A]"
                     style={{ borderRadius: 1 }}
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     aria-hidden="true"
@@ -134,23 +134,18 @@ export const Projects: React.FC = () => {
       </section>
 
       {/* ── PROJECT GRID ── */}
-      <section className="nox-section border-b border-nox-border" aria-label="Projects Grid">
+      <section className="nox-section border-b border-[#D9E7F5] bg-[#F8FAFC]" aria-label="Projects Grid">
         <div className="nox-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filtered.map((proj) => (
-              <Card3D key={proj.id} intensity="low" glowColor="rgba(0, 240, 255, 0.08)" className="h-full">
-                <div className="h-full bg-nox-layer border border-nox-border flex flex-col justify-between hover:border-nox-border-active transition-colors">
+              <Card3D key={proj.id} intensity="low" glowColor="rgba(59, 130, 246, 0.08)" className="h-full">
+                <div className="h-full bg-white border border-[#D9E7F5] rounded-2xl overflow-hidden flex flex-col justify-between hover:border-[#3B82F6] hover:shadow-xl transition-all duration-300 shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
                   {/* Tech Visual Placeholder */}
                   <div
-                    className="w-full aspect-[16/9] bg-nox-base border-b border-nox-border flex items-center justify-center p-6 relative overflow-hidden"
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px)',
-                      backgroundSize: '32px 32px',
-                    }}
+                    className="w-full aspect-[16/9] bg-[#EFF6FF] border-b border-[#D9E7F5] flex items-center justify-center p-6 relative overflow-hidden"
                   >
                     {/* NEW-05 — Empty placeholder breathe pulse. Protected existing effects must not be modified. */}
-                    <span className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim border border-nox-border/80 bg-nox-layer/60 px-4 py-2 new-placeholder-pulse" aria-label="Project image pending">
+                    <span className="text-[11px] font-mono tracking-widest uppercase text-[#1E3A8A] font-bold border border-[#BBD3F2] bg-white px-4 py-2 rounded-lg new-placeholder-pulse shadow-sm" aria-label="Project image pending">
                       [ IMG_SYS_AWAITING_DATA ]
                     </span>
                   </div>
@@ -159,14 +154,14 @@ export const Projects: React.FC = () => {
                   <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-4 font-mono text-[11px]">
-                        <span className="text-nox-cyan uppercase">{proj.id}</span>
-                        <span className="text-nox-text-dim">T-MINUS</span>
+                        <span className="text-[#1E3A8A] font-bold uppercase">{proj.id}</span>
+                        <span className="text-[#627D98] font-semibold">T-MINUS</span>
                       </div>
 
-                      <h2 className="text-xl font-semibold text-nox-text mb-3">
+                      <h2 className="text-xl font-bold text-[#0A2540] mb-3">
                         {proj.title}
                       </h2>
-                      <p className="text-sm text-nox-text-muted leading-relaxed mb-6">
+                      <p className="text-sm text-[#334E68] leading-relaxed mb-6">
                         {proj.description}
                       </p>
 
@@ -174,7 +169,7 @@ export const Projects: React.FC = () => {
                         {proj.tools.map((tool) => (
                           <span
                             key={tool}
-                            className="text-[10px] font-mono tracking-widest text-nox-text-dim uppercase border border-nox-border px-2.5 py-1 bg-nox-base"
+                            className="text-[10px] font-mono tracking-widest text-[#334E68] uppercase border border-[#D9E7F5] px-2.5 py-1 bg-[#F8FAFC] rounded"
                           >
                             {tool}
                           </span>
@@ -182,8 +177,8 @@ export const Projects: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="pt-4 border-t border-nox-border">
-                      <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-nox-cyan font-mono group-hover:text-nox-text transition-colors">
+                    <div className="pt-4 border-t border-[#D9E7F5]">
+                      <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#1E3A8A] font-mono hover:text-[#3B82F6] transition-colors">
                         VIEW CASE STUDY <ArrowRight size={14} />
                       </span>
                     </div>
@@ -196,13 +191,13 @@ export const Projects: React.FC = () => {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="nox-section bg-nox-layer/20" aria-label="Projects CTA">
+      <section className="nox-section bg-white" aria-label="Projects CTA">
         <div className="nox-container">
-          <div className="border border-nox-border bg-nox-layer p-12 text-center">
-            <h2 className="text-2xl md:text-4xl font-semibold text-nox-text mb-6">
+          <div className="border border-[#D9E7F5] bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_100%)] text-white rounded-2xl p-12 text-center shadow-xl">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
               Have a technical challenge worth solving?
             </h2>
-            <Button to="/work-with-us" variant="primary" size="md">
+            <Button to="/work-with-us" variant="primary" size="md" className="!bg-white !text-[#0A2540] hover:!bg-[#EFF6FF] shadow-lg">
               Work With Us
             </Button>
           </div>

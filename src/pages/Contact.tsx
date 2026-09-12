@@ -59,14 +59,14 @@ export const Contact: React.FC = () => {
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="py-20 md:py-28 border-b border-nox-border grid-bg relative overflow-hidden" aria-label="Contact Hero">
+      <section className="py-20 md:py-28 bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_60%,#3B82F6_100%)] text-white border-b border-[#D9E7F5]/20 relative overflow-hidden" aria-label="Contact Hero">
         <AmbientScene variant="subtle" />
         <div className="nox-container relative z-10">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-nox-cyan mb-4"
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-4"
           >
             NOXVION / CONTACT
           </motion.p>
@@ -75,16 +75,16 @@ export const Contact: React.FC = () => {
             splitBy="word"
             hinge="top"
             trigger="scroll"
-            className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-nox-text mb-6"
+            className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-6"
           >
             Let's Build Something<br />
-            <span className="text-nox-cyan">Intelligent.</span>
+            <span className="text-[#60A5FA]">Intelligent.</span>
           </FoldText>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-nox-text-muted text-base md:text-xl leading-relaxed max-w-2xl"
+            className="text-[#D9E7F5] text-base md:text-xl leading-relaxed max-w-2xl"
           >
             Have an idea, research concept, technical challenge, or collaboration opportunity? Let's start a conversation.
           </motion.p>
@@ -92,16 +92,16 @@ export const Contact: React.FC = () => {
       </section>
 
       {/* ── CONTACT INTERFACE ── */}
-      <section className="nox-section" aria-label="Contact Form and Information">
+      <section className="nox-section bg-[#F8FAFC]" aria-label="Contact Form and Information">
         <div className="nox-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Form Left Panel */}
-            <div className="lg:col-span-7 bg-nox-layer border border-nox-border p-8 md:p-10">
-              <div className="flex justify-between items-center mb-8 border-b border-nox-border/60 pb-3">
-                <span className="text-xs font-semibold tracking-widest uppercase text-nox-text">
+            <div className="lg:col-span-7 bg-white border border-[#D9E7F5] rounded-2xl p-8 md:p-10 shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
+              <div className="flex justify-between items-center mb-8 border-b border-[#D9E7F5] pb-3">
+                <span className="text-xs font-bold tracking-widest uppercase text-[#0A2540]">
                   TRANSMISSION CHANNEL
                 </span>
-                <span className="text-[10px] font-mono text-nox-text-dim">SYS-REQ-09</span>
+                <span className="text-[10px] font-mono text-[#627D98] font-semibold">SYS-REQ-09</span>
               </div>
 
               {isSuccess ? (
@@ -110,7 +110,7 @@ export const Contact: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 22, mass: 0.8 }}
-                  className="bg-nox-cyan/10 border border-nox-cyan/40 p-8 text-center my-8"
+                  className="bg-[#EFF6FF] border border-[#BBD3F2] rounded-2xl p-8 text-center my-8"
                 >
                   {/* NEW-03 — Success state spring entrance. Protected existing effects must not be modified. */}
                   <motion.div
@@ -119,10 +119,10 @@ export const Contact: React.FC = () => {
                     transition={{ type: 'spring', stiffness: 300, damping: 18, delay: 0.08 }}
                     className="inline-block mb-4"
                   >
-                    <CheckCircle2 size={32} className="text-nox-cyan" />
+                    <CheckCircle2 size={36} className="text-[#1E3A8A]" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold text-nox-text mb-2">Inquiry Transmitted</h3>
-                  <p className="text-sm text-nox-text-muted mb-6 leading-relaxed">
+                  <h3 className="text-xl font-bold text-[#0A2540] mb-2">Inquiry Transmitted</h3>
+                  <p className="text-sm text-[#334E68] mb-6 leading-relaxed max-w-md mx-auto">
                     Your request has been registered in the Noxvion intake pipeline. Our engineering syndicate will review and respond.
                   </p>
                   <Button onClick={() => setIsSuccess(false)} variant="secondary" size="sm">
@@ -134,13 +134,13 @@ export const Contact: React.FC = () => {
                   {/* Row 1: Full Name & Email */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-nox-text-dim mb-2">
+                      <label className="block text-[11px] font-bold tracking-widest uppercase text-[#334E68] mb-2">
                         FULL NAME *
                       </label>
                       <input
                         type="text"
                         {...register('fullName', { required: 'Full name is required' })}
-                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
+                         className="w-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-sm text-[#0A2540] placeholder:text-[#627D98] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 input-focus-glow transition-all"
                         placeholder="Dr. Jane Doe"
                       />
                       {/* NEW-02 — Error micro-shake entrance. Protected existing effects must not be modified. */}
@@ -150,7 +150,7 @@ export const Contact: React.FC = () => {
                           initial={{ opacity: 0, x: 0 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.35 }}
-                          className="text-red-400 text-xs mt-1 flex items-center gap-1 new-error-shake"
+                          className="text-red-600 text-xs mt-1 flex items-center gap-1 font-medium new-error-shake"
                           style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
                           role="alert"
                           aria-live="polite"
@@ -161,7 +161,7 @@ export const Contact: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-nox-text-dim mb-2">
+                      <label className="block text-[11px] font-bold tracking-widest uppercase text-[#334E68] mb-2">
                         EMAIL ADDRESS *
                       </label>
                       <input
@@ -173,7 +173,7 @@ export const Contact: React.FC = () => {
                             message: 'Invalid email address',
                           },
                         })}
-                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
+                         className="w-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-sm text-[#0A2540] placeholder:text-[#627D98] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 input-focus-glow transition-all"
                         placeholder="jane@organization.com"
                       />
                       {/* NEW-02 — Error micro-shake entrance. */}
@@ -183,7 +183,7 @@ export const Contact: React.FC = () => {
                           initial={{ opacity: 0, x: 0 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.35 }}
-                          className="text-red-400 text-xs mt-1 flex items-center gap-1"
+                          className="text-red-600 text-xs mt-1 flex items-center gap-1 font-medium"
                           style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
                           role="alert"
                           aria-live="polite"
@@ -197,27 +197,27 @@ export const Contact: React.FC = () => {
                   {/* Row 2: Organization & Project Type */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-nox-text-dim mb-2">
+                      <label className="block text-[11px] font-bold tracking-widest uppercase text-[#334E68] mb-2">
                         ORGANIZATION / COMPANY
                       </label>
                       <input
                         type="text"
                         {...register('organization')}
-                         className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow"
+                         className="w-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-sm text-[#0A2540] placeholder:text-[#627D98] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 input-focus-glow transition-all"
                         placeholder="Enterprise / Lab / University"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-nox-text-dim mb-2">
+                      <label className="block text-[11px] font-bold tracking-widest uppercase text-[#334E68] mb-2">
                         PROJECT TYPE *
                       </label>
                       <select
                         {...register('projectType', { required: 'Please select a project type' })}
-                        className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow cursor-pointer"
+                        className="w-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-sm text-[#0A2540] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 input-focus-glow cursor-pointer transition-all"
                       >
                         {projectTypeOptions.map((opt) => (
-                          <option key={opt} value={opt} className="bg-nox-base text-nox-text">
+                          <option key={opt} value={opt} className="bg-white text-[#0A2540]">
                             {opt}
                           </option>
                         ))}
@@ -227,13 +227,13 @@ export const Contact: React.FC = () => {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-[11px] font-semibold tracking-widest uppercase text-nox-text-dim mb-2">
+                    <label className="block text-[11px] font-bold tracking-widest uppercase text-[#334E68] mb-2">
                       MESSAGE / TECHNICAL SPECIFICATION *
                     </label>
                     <textarea
                       rows={5}
                       {...register('message', { required: 'Message details are required' })}
-                      className="w-full bg-nox-base border border-nox-border px-4 py-3 text-sm text-nox-text input-focus-glow resize-none"
+                      className="w-full bg-[#F8FAFC] border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-sm text-[#0A2540] placeholder:text-[#627D98] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 input-focus-glow resize-none transition-all"
                       placeholder="Detail your engineering challenges, research objectives, or deployment timeline..."
                     />
                     {/* NEW-02 — Error micro-shake entrance. */}
@@ -243,7 +243,7 @@ export const Contact: React.FC = () => {
                         initial={{ opacity: 0, x: 0 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.35 }}
-                        className="text-red-400 text-xs mt-1 flex items-center gap-1"
+                        className="text-red-600 text-xs mt-1 flex items-center gap-1 font-medium"
                         style={{ animation: 'newErrorShake 0.35s ease-out forwards' }}
                         role="alert"
                         aria-live="polite"
@@ -273,50 +273,50 @@ export const Contact: React.FC = () => {
             {/* Info Right Panel */}
             <div className="lg:col-span-5 space-y-6">
               {/* Coordinates Info */}
-              <div className="bg-nox-layer border border-nox-border p-8 space-y-6">
+              <div className="bg-white border border-[#D9E7F5] rounded-2xl p-8 space-y-6 shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
+                  <div className="p-3 rounded-xl border border-[#BBD3F2] bg-[#EFF6FF] text-[#1E3A8A] shrink-0">
                     <Mail size={18} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-mono tracking-widest uppercase text-nox-text-dim mb-1">
+                    <p className="text-[10px] font-mono tracking-widest uppercase text-[#627D98] font-bold mb-1">
                       DIRECT COMM
                     </p>
-                    <p className="text-sm font-semibold text-nox-text">[Official Contact Email — To Be Supplied]</p>
+                    <p className="text-sm font-bold text-[#0A2540]">[Official Contact Email — To Be Supplied]</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
+                  <div className="p-3 rounded-xl border border-[#BBD3F2] bg-[#EFF6FF] text-[#1E3A8A] shrink-0">
                     <Phone size={18} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-mono tracking-widest uppercase text-nox-text-dim mb-1">
+                    <p className="text-[10px] font-mono tracking-widest uppercase text-[#627D98] font-bold mb-1">
                       VOICE PROTOCOL
                     </p>
-                    <p className="text-sm font-semibold text-nox-text">[Phone Number — To Be Supplied]</p>
+                    <p className="text-sm font-bold text-[#0A2540]">[Phone Number — To Be Supplied]</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 border border-nox-border bg-nox-base text-nox-cyan shrink-0">
+                  <div className="p-3 rounded-xl border border-[#BBD3F2] bg-[#EFF6FF] text-[#1E3A8A] shrink-0">
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-mono tracking-widest uppercase text-nox-text-dim mb-1">
+                    <p className="text-[10px] font-mono tracking-widest uppercase text-[#627D98] font-bold mb-1">
                       HQ COORDINATES
                     </p>
-                    <p className="text-sm font-semibold text-nox-text">[Office Location — To Be Supplied]</p>
+                    <p className="text-sm font-bold text-[#0A2540]">[Office Location — To Be Supplied]</p>
                   </div>
                 </div>
               </div>
 
               {/* Technical diagram placeholder matching Stitch */}
-              <div className="border border-dashed border-nox-border bg-nox-base p-8 text-center flex flex-col items-center justify-center min-h-[160px]">
-                <div className="w-6 h-6 border border-nox-cyan text-nox-cyan flex items-center justify-center text-[10px] font-mono mb-3">
+              <div className="border border-dashed border-[#D9E7F5] bg-white rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[160px] shadow-sm">
+                <div className="w-8 h-8 rounded-lg border border-[#BBD3F2] bg-[#EFF6FF] text-[#1E3A8A] flex items-center justify-center text-xs font-mono font-bold mb-3">
                   ⬡
                 </div>
-                <p className="text-[11px] font-mono tracking-widest uppercase text-nox-text-dim">
+                <p className="text-[11px] font-mono tracking-widest uppercase text-[#627D98] font-semibold">
                   DIAGRAM_RENDER_PENDING
                 </p>
               </div>
