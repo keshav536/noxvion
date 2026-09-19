@@ -31,14 +31,14 @@ export const MotionToggle: React.FC = () => {
     >
       <button
         onClick={toggle}
-        className="group flex items-center gap-2 px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#D9E7F5] shadow-[0_4px_16px_rgba(10,37,64,0.08)] hover:border-[#BBD3F2] hover:shadow-[0_6px_20px_rgba(10,37,64,0.12)] rounded-[10px] transition-all duration-200 text-[10px] font-semibold tracking-widest uppercase text-[#334E68] hover:text-[#1E3A8A]"
+        className="group flex items-center gap-2 px-3.5 py-2 bg-[#0e0e12]/90 backdrop-blur-md border border-white/15 shadow-[0_8px_24px_rgba(0,0,0,0.6)] hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-lg transition-all duration-200 text-[10px] font-semibold tracking-widest uppercase text-zinc-400 hover:text-white font-mono"
         aria-label={isReduced ? 'Enable motion effects' : 'Reduce motion effects'}
         title={isReduced ? 'Enable motion effects' : 'Reduce motion effects'}
         id="motion-toggle"
       >
         {/* Icon */}
         <span
-          className="w-3 h-3 relative flex items-center justify-center"
+          className="w-3 h-3 relative flex items-center justify-center text-blue-400"
           aria-hidden="true"
         >
           {isReduced ? (
@@ -51,7 +51,7 @@ export const MotionToggle: React.FC = () => {
             // Motion icon — motion on
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <circle cx="6" cy="6" r="2" fill="currentColor" />
-              <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="0.8" opacity="0.5" />
+              <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="0.8" opacity="0.6" />
             </svg>
           )}
         </span>

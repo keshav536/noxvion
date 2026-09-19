@@ -3,6 +3,8 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.png';
+import { MagneticButton } from '../effects/MagneticButton';
+import { SocialLinks } from '../ui/SocialLinks';
 
 const solutionsDropdown = [
   { label: 'AI & Machine Learning', to: '/solutions/ai-machine-learning' },
@@ -19,6 +21,7 @@ const navLinks = [
   { label: 'Research & Build', to: '/research-build' },
   { label: 'Projects', to: '/projects' },
   { label: 'Innovation Hub', to: '/innovation-hub' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 export const Navbar: React.FC = () => {
@@ -69,66 +72,61 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b border-[#D9E7F5]'
-          : 'bg-white/85 backdrop-blur-md'
+          ? 'bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.8)]'
+          : 'bg-black/40 backdrop-blur-md border-b border-white/[0.06]'
       }`}
       role="banner"
-      style={{
-        boxShadow: scrolled
-          ? '0 4px 20px rgba(10, 37, 64, 0.05), 0 1px 3px rgba(10, 37, 64, 0.04)'
-          : 'none',
-      }}
     >
-      {/* Subtle top accent line when scrolled */}
+      {/* Subtle top accent laser line when scrolled */}
       {scrolled && (
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none"
           aria-hidden="true"
           style={{
             background:
-              'linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.2) 20%, rgba(30,58,138,0.4) 50%, rgba(59,130,246,0.2) 80%, transparent 100%)',
+              'linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.3) 20%, rgba(96,165,250,0.6) 50%, rgba(59,130,246,0.3) 80%, transparent 100%)',
           }}
         />
       )}
 
       <div className="nox-container">
         <nav
-          className="flex items-center justify-between h-16 md:h-[70px]"
+          className="flex items-center justify-between h-16 md:h-[72px]"
           aria-label="Main navigation"
         >
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]"
+            className="flex items-center gap-3 shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
             aria-label="NOXVION — Home"
             id="nav-logo"
           >
             <img
               src={logo}
               alt="NOXVION logo"
-              className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]"
+              className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] filter invert"
               width={32}
               height={32}
             />
-            <span className="text-[#0A2540] font-semibold tracking-[0.08em] uppercase text-base md:text-lg select-none transition-all duration-300 group-hover:text-[#1E3A8A]">
+            <span className="text-white font-semibold tracking-[0.1em] uppercase text-base md:text-lg select-none transition-all duration-300 group-hover:text-blue-400">
               NOXVION
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8" role="list">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7" role="list">
             {navLinks.map((link) =>
               link.dropdown ? (
                 <div key={link.to} className="relative" ref={dropdownRef} role="listitem">
                   <button
                     id="nav-solutions"
                     onClick={() => setSolutionsOpen((v) => !v)}
-                    className={`nav-link-sweep flex items-center gap-1 text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] ${
+                    className={`nav-link-sweep flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
                       isActive(link.to)
-                        ? 'text-[#1E3A8A] font-semibold active'
-                        : 'text-[#334E68] hover:text-[#1E3A8A]'
+                        ? 'text-white font-semibold active'
+                        : 'text-zinc-400 hover:text-white'
                     }`}
                     aria-expanded={solutionsOpen}
                     aria-haspopup="true"
@@ -136,7 +134,7 @@ export const Navbar: React.FC = () => {
                     {link.label}
                     <ChevronDown
                       size={14}
-                      className={`transition-transform duration-200 ${solutionsOpen ? 'rotate-180 text-[#1E3A8A]' : 'text-[#627D98]'}`}
+                      className={`transition-transform duration-200 ${solutionsOpen ? 'rotate-180 text-blue-400' : 'text-zinc-500'}`}
                       aria-hidden="true"
                     />
                   </button>
@@ -148,10 +146,7 @@ export const Navbar: React.FC = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -4, scale: 0.97 }}
                         transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="absolute top-full left-0 mt-3 w-64 bg-white/98 backdrop-blur-xl border border-[#D9E7F5] rounded-xl py-2 z-50"
-                        style={{
-                          boxShadow: '0 12px 36px rgba(10,37,64,0.12), 0 0 0 1px rgba(217,231,245,0.8)',
-                        }}
+                        className="absolute top-full left-0 mt-3 w-64 bg-[#0e0e10]/95 backdrop-blur-2xl border border-white/10 rounded-xl py-2 z-50 shadow-[0_16px_40px_rgba(0,0,0,0.85)]"
                         role="menu"
                         aria-label="Solutions submenu"
                       >
@@ -160,10 +155,10 @@ export const Navbar: React.FC = () => {
                             key={item.to}
                             to={item.to}
                             role="menuitem"
-                            className="flex items-center px-5 py-3 text-sm text-[#334E68] hover:text-[#1E3A8A] hover:bg-[#EFF6FF] transition-colors duration-150 group"
+                            className="flex items-center px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-white/[0.08] transition-colors duration-150 group rounded-lg mx-1.5"
                           >
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+                              className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
                               aria-hidden="true"
                             />
                             {item.label}
@@ -181,10 +176,10 @@ export const Navbar: React.FC = () => {
                   end={link.to === '/'}
                   id={`nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                   className={({ isActive: active }) =>
-                    `nav-link-sweep text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] ${
+                    `nav-link-sweep text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
                       active
-                        ? 'text-[#1E3A8A] font-semibold active'
-                        : 'text-[#334E68] hover:text-[#1E3A8A]'
+                        ? 'text-white font-semibold active'
+                        : 'text-zinc-400 hover:text-white'
                     }`
                   }
                 >
@@ -196,17 +191,19 @@ export const Navbar: React.FC = () => {
 
           {/* CTA + Hamburger */}
           <div className="flex items-center gap-4">
-            <Link
-              to="/work-with-us"
-              id="nav-cta-work-with-us"
-              className="hidden lg:inline-flex items-center px-5 py-2.5 text-xs font-semibold tracking-widest uppercase bg-[#1E3A8A] text-white hover:bg-[#3B82F6] border border-[#1E3A8A] hover:border-[#3B82F6] rounded-[10px] shadow-[0_4px_14px_rgba(30,58,138,0.2)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] btn-depth-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6] focus-visible:ring-offset-2"
-              aria-label="Work With Us"
-            >
-              Work With Us
-            </Link>
+            <MagneticButton strength={8}>
+              <Link
+                to="/work-with-us"
+                id="nav-cta-work-with-us"
+                className="hidden lg:inline-flex items-center px-4.5 py-2 text-xs font-semibold tracking-widest uppercase bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50 hover:border-blue-400 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] transition-all duration-200 btn-depth-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                aria-label="Work With Us"
+              >
+                Work With Us
+              </Link>
+            </MagneticButton>
             <button
               id="nav-mobile-toggle"
-              className="lg:hidden p-2 text-[#334E68] hover:text-[#1E3A8A] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]"
+              className="lg:hidden p-2 text-zinc-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
               onClick={() => setMobileOpen((v) => !v)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
@@ -249,21 +246,11 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
-            className="lg:hidden fixed inset-0 top-16 bg-white/98 backdrop-blur-xl z-40 overflow-y-auto"
+            className="lg:hidden fixed inset-0 top-16 bg-[#09090b]/98 backdrop-blur-2xl z-40 overflow-y-auto border-t border-white/10"
             role="dialog"
             aria-label="Mobile navigation"
             aria-modal="true"
           >
-            {/* Subtle border at top */}
-            <div
-              className="absolute top-0 left-0 right-0 h-px"
-              aria-hidden="true"
-              style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)',
-              }}
-            />
-
             <div className="nox-container py-8 flex flex-col gap-1">
               {navLinks.map((link, idx) => (
                 <React.Fragment key={link.to}>
@@ -275,8 +262,8 @@ export const Navbar: React.FC = () => {
                     <Link
                       to={link.to}
                       id={`mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`block py-3.5 text-lg font-medium border-b border-[#D9E7F5] transition-colors duration-200 ${
-                        isActive(link.to) ? 'text-[#1E3A8A] font-semibold' : 'text-[#334E68] hover:text-[#1E3A8A]'
+                      className={`block py-3.5 text-lg font-medium border-b border-white/[0.08] transition-colors duration-200 ${
+                        isActive(link.to) ? 'text-blue-400 font-semibold' : 'text-zinc-300 hover:text-white'
                       }`}
                     >
                       {link.label}
@@ -294,9 +281,9 @@ export const Navbar: React.FC = () => {
                           <Link
                             to={item.to}
                             id={`mobile-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="flex items-center gap-2 py-2 text-sm text-[#627D98] hover:text-[#1E3A8A] transition-colors duration-200"
+                            className="flex items-center gap-2.5 py-2.5 text-sm text-zinc-400 hover:text-white transition-colors duration-200"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" aria-hidden="true" />
                             {item.label}
                           </Link>
                         </motion.div>
@@ -314,10 +301,22 @@ export const Navbar: React.FC = () => {
                 <Link
                   to="/work-with-us"
                   id="mobile-nav-work-with-us"
-                  className="inline-flex items-center w-full justify-center px-6 py-4 text-xs font-semibold tracking-widest uppercase bg-[#1E3A8A] text-white hover:bg-[#3B82F6] rounded-[10px] shadow-[0_4px_14px_rgba(30,58,138,0.2)] transition-colors duration-200"
+                  className="inline-flex items-center w-full justify-center px-6 py-3.5 text-xs font-semibold tracking-widest uppercase bg-blue-600 text-white hover:bg-blue-500 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-colors duration-200"
                 >
                   Work With Us
                 </Link>
+              </motion.div>
+
+              <motion.div
+                className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: navLinks.length * 0.04 + 0.1, duration: 0.25 }}
+              >
+                <span className="text-[11px] font-mono tracking-wider text-zinc-500 uppercase">
+                  Direct Channels
+                </span>
+                <SocialLinks size={16} />
               </motion.div>
             </div>
           </motion.div>

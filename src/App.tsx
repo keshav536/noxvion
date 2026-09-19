@@ -17,6 +17,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AppLoader } from './components/effects/AppLoader';
 import { RouteTransition } from './components/layout/RouteTransition';
+import { Depth3DBackground } from './components/effects/Depth3DBackground';
 
 const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -128,7 +129,9 @@ const AppContent: React.FC = () => {
   return (
     <BrowserRouter>
       <AppLoader />
-      <div className="min-h-screen flex flex-col bg-white text-[#0A2540]">
+      {/* Global fixed 3D depth background — sits behind everything */}
+      <Depth3DBackground />
+      <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0A2540] selection:bg-blue-500/25 selection:text-[#0A2540]">
         <Navbar />
         <AnimatedRoutes />
         <Footer />

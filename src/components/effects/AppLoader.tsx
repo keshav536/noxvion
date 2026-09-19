@@ -81,14 +81,14 @@ export const AppLoader: React.FC<AppLoaderProps> = ({
           aria-busy={!isReady}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.22, ease: [0.25, 0.1, 0.25, 1.0] } }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0A2540] select-none pointer-events-auto"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-black select-none pointer-events-auto"
         >
           {/* Subtle Ambient Radial Glow */}
           <div
             className="absolute w-[400px] h-[400px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%)',
-              filter: 'blur(50px)',
+              background: 'radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)',
+              filter: 'blur(60px)',
             }}
             aria-hidden="true"
           />
@@ -104,18 +104,18 @@ export const AppLoader: React.FC<AppLoaderProps> = ({
               <img
                 src={logo}
                 alt="NOXVION"
-                className="w-20 md:w-24 h-auto object-contain drop-shadow-[0_0_25px_rgba(59,130,246,0.3)]"
+                className="w-20 md:w-24 h-auto object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.5)] filter invert"
               />
             </motion.div>
 
             {/* Monospace Telemetry Status */}
-            <div className="flex items-center gap-2 mb-3 font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-[#93C5FD] uppercase">
-              <span className="w-1.5 h-1.5 bg-[#3B82F6] rounded-full animate-pulse" />
+            <div className="flex items-center gap-2 mb-3 font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-blue-400 uppercase">
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(59,130,246,1)]" />
               <span>NOXVION // INITIALIZING</span>
             </div>
 
             {/* Laser Progress Track */}
-            <div className="w-40 h-[2px] bg-white/20 overflow-hidden relative rounded-full">
+            <div className="w-40 h-[2px] bg-white/10 overflow-hidden relative rounded-full">
               <div
                 className="app-loader-laser h-full bg-gradient-to-r from-transparent via-[#3B82F6] to-white"
                 style={{ width: '100%' }}

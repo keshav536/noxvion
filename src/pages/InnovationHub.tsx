@@ -9,14 +9,18 @@ import { Card3D } from '../components/effects/Card3D';
 import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import { articleCategories } from '../data/articles';
+import { contactConfig, isConfigured } from '../config/contact';
 
 interface NewsletterFormValues {
   email: string;
 }
 
+type NewsletterStatus = 'idle' | 'success' | 'client_launched' | 'config_notice' | 'error';
+
 export const InnovationHub: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [subscribed, setSubscribed] = useState(false);
+  const [status, setStatus] = useState<NewsletterStatus>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const {
     register,
@@ -31,19 +35,63 @@ export const InnovationHub: React.FC = () => {
       'Explore technology insights, research notes, engineering developments, and breakthroughs emerging from the Noxvion ecosystem.',
   });
 
-  const onSubmit = async (_data: NewsletterFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setSubscribed(true);
-    reset();
+  const onSubmit = async (data: NewsletterFormValues) => {
+    // 1. If backend newsletter endpoint configured
+    if (isConfigured(contactConfig.newsletterEndpoint)) {
+      try {
+        const res = await fetch(contactConfig.newsletterEndpoint!, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          setStatus('success');
+          setStatusMessage('Subscribed to Noxvion Lab Telemetry.');
+          reset();
+          return;
+        } else {
+          setStatus('error');
+          setStatusMessage(`Subscription service error (Status ${res.status}).`);
+          return;
+        }
+      } catch {
+        setStatus('error');
+        setStatusMessage('Network connectivity error. Please try again later.');
+        return;
+      }
+    }
+
+    // 2. If client email configured, dispatch via mailto
+    if (isConfigured(contactConfig.email)) {
+      const subject = 'NOXVION Lab Telemetry Subscription';
+      const body = `Please register ${data.email} to receive NOXVION lab telemetry and research publications.`;
+      window.location.href = `mailto:${contactConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setStatus('client_launched');
+      setStatusMessage(`Email client launched to confirm subscription with ${contactConfig.email}.`);
+      return;
+    }
+
+    // 3. If neither endpoint nor email configured
+    setStatus('config_notice');
+    setStatusMessage('Subscription staged. Distribution endpoint (VITE_NEWSLETTER_ENDPOINT) is pending configuration.');
   };
 
   return (
     <PageContainer>
       {/* ── HERO ── */}
-      <section className="relative py-20 md:py-28 bg-[linear-gradient(135deg,#0A2540_0%,#1E3A8A_60%,#3B82F6_100%)] text-white border-b border-[#D9E7F5]/20 overflow-hidden" aria-label="Innovation Hub Hero">
+      <section className="relative py-20 md:py-28 bg-black text-white border-b border-white/10 overflow-hidden" aria-label="Innovation Hub Hero">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none -z-0"
+          style={{
+            background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
+          }}
+          aria-hidden="true"
+        />
+
         <AmbientScene variant="hero" />
         <div className="nox-container relative z-10">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#93C5FD] mb-4">
+          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4 font-mono flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
             NOXVION / INNOVATION HUB
           </p>
           <FoldText
@@ -54,9 +102,9 @@ export const InnovationHub: React.FC = () => {
             className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-6"
           >
             Ideas. Research.<br />
-            <span className="text-[#60A5FA]">Technology.</span> Progress.
+            <span className="text-blue-400">Technology.</span> Progress.
           </FoldText>
-          <p className="text-[#D9E7F5] text-base md:text-xl leading-relaxed max-w-2xl">
+          <p className="text-zinc-400 text-base md:text-xl leading-relaxed max-w-2xl">
             Explore technology insights, research notes, engineering developments, and breakthroughs
             emerging from the Noxvion ecosystem.
           </p>
@@ -64,17 +112,17 @@ export const InnovationHub: React.FC = () => {
       </section>
 
       {/* ── CATEGORY BAR ── */}
-      <section className="border-b border-[#D9E7F5] bg-white sticky top-16 md:top-[70px] z-30 overflow-x-auto shadow-sm">
+      <section className="border-b border-white/10 bg-black/90 backdrop-blur-xl sticky top-16 md:top-[72px] z-30 overflow-x-auto shadow-md">
         <div className="nox-container">
-          <div className="flex items-center gap-6 py-4 min-w-max">
+          <div className="flex items-center gap-6 py-4 min-w-max font-mono">
             {articleCategories.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
                 className={`text-xs font-semibold tracking-widest uppercase pb-1 transition-colors relative ${
                   activeCategory === cat.slug
-                    ? 'text-[#1E3A8A] font-bold border-b-2 border-[#1E3A8A]'
-                    : 'text-[#627D98] hover:text-[#0A2540]'
+                    ? 'text-blue-400 font-bold border-b-2 border-blue-500'
+                    : 'text-zinc-500 hover:text-white'
                 }`}
               >
                 {cat.label}
@@ -85,51 +133,51 @@ export const InnovationHub: React.FC = () => {
       </section>
 
       {/* ── FEATURED INSIGHT CARD (Coming Soon) ── */}
-      <section className="nox-section border-b border-[#D9E7F5] bg-white" aria-label="Featured Insight">
+      <section className="nox-section border-b border-white/10 bg-[#070709]" aria-label="Featured Insight">
         <div className="nox-container">
-          <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.1)">
-            <div className="border border-[#D9E7F5] bg-[#F8FAFC] rounded-2xl grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
-            <div
-              className="lg:col-span-6 bg-[#EFF6FF] p-8 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-[#D9E7F5] relative min-h-[260px]"
-            >
-              <div className="text-center">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#1E3A8A] inline-block mb-3 animate-pulse" />
-                <p className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#1E3A8A]">
-                  LABORATORY BENCHMARK IN PROGRESS
-                </p>
+          <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.15)">
+            <div className="border border-white/10 bg-[#0e0e12] rounded-2xl grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.8)]">
+              <div
+                className="lg:col-span-6 bg-[#0a0a0d] p-8 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-white/10 relative min-h-[260px]"
+              >
+                <div className="text-center">
+                  <span className="w-3.5 h-3.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.9)] inline-block mb-3 animate-pulse" />
+                  <p className="text-[11px] font-mono font-bold tracking-widest uppercase text-blue-400">
+                    LABORATORY BENCHMARK IN PROGRESS
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-white">
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <Badge variant="cyan">FEATURED INSIGHT</Badge>
-                  <span className="text-[10px] font-mono text-[#627D98] font-semibold">ID: FEAT-01</span>
+              <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-[#0e0e12]">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <Badge variant="cyan">FEATURED INSIGHT</Badge>
+                    <span className="text-[10px] font-mono text-zinc-500 font-semibold">ID: FEAT-01</span>
+                  </div>
+
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    Coming Soon
+                  </h2>
+                  <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-8">
+                    A major technological insight is currently undergoing final validation in our labs.
+                    Stay tuned for detailed research notes and engineering updates.
+                  </p>
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-[#0A2540] mb-4">
-                  Coming Soon
-                </h2>
-                <p className="text-sm md:text-base text-[#334E68] leading-relaxed mb-8">
-                  A major technological insight is currently undergoing final validation in our labs.
-                  Stay tuned for detailed research notes and engineering updates.
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-6 border-t border-[#D9E7F5] text-xs text-[#627D98] font-mono">
-                <span>DATE: TBD</span>
-                <span className="text-[#1E3A8A] font-bold flex items-center gap-1">
-                  PUBLICATION PENDING <ArrowRight size={14} />
-                </span>
+                <div className="flex items-center justify-between pt-6 border-t border-white/10 text-xs text-zinc-500 font-mono">
+                  <span>DATE: TBD</span>
+                  <span className="text-blue-400 font-bold flex items-center gap-1">
+                    PUBLICATION PENDING <ArrowRight size={14} />
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
           </Card3D>
         </div>
       </section>
 
       {/* ── LATEST FROM THE LAB ── */}
-      <section className="nox-section border-b border-[#D9E7F5] bg-[#F8FAFC]" aria-label="Latest Publications">
+      <section className="nox-section border-b border-white/10 bg-black" aria-label="Latest Publications">
         <div className="nox-container">
           <SectionHeader
             eyebrow="REPOSITORY"
@@ -161,23 +209,23 @@ export const InnovationHub: React.FC = () => {
                 date: '2024.09.28',
               },
             ].map((article) => (
-              <Card3D key={article.id} intensity="low" glowColor="rgba(59, 130, 246, 0.08)" className="h-full">
-                <div className="h-full bg-white border border-[#D9E7F5] rounded-2xl p-6 flex flex-col justify-between hover:border-[#3B82F6] hover:shadow-xl transition-all duration-300 shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
+              <Card3D key={article.id} intensity="low" glowColor="rgba(59, 130, 246, 0.12)" className="h-full">
+                <div className="h-full bg-[#0e0e12] border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-blue-500/40 hover:shadow-[0_16px_36px_rgba(59,130,246,0.12)] transition-all duration-300 shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
                   <div>
                     <div className="flex items-center justify-between mb-4 text-[10px] font-mono">
-                      <span className="text-[#1E3A8A] font-bold uppercase">{article.category}</span>
-                      <span className="text-[#627D98] font-semibold">{article.id}</span>
+                      <span className="text-blue-400 font-bold uppercase">{article.category}</span>
+                      <span className="text-zinc-500 font-semibold">{article.id}</span>
                     </div>
-                    <h3 className="text-base font-bold text-[#0A2540] mb-3 leading-snug">
+                    <h3 className="text-base font-bold text-white mb-3 leading-snug">
                       {article.title}
                     </h3>
-                    <p className="text-xs text-[#334E68] leading-relaxed mb-6">
+                    <p className="text-xs text-zinc-400 leading-relaxed mb-6">
                       {article.desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-[#D9E7F5] flex items-center justify-between text-[10px] font-mono text-[#627D98]">
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500">
                     <span>{article.date}</span>
-                    <span className="text-[#1E3A8A] font-bold">ARCHIVED REPORT</span>
+                    <span className="text-blue-400 font-bold">ARCHIVED REPORT</span>
                   </div>
                 </div>
               </Card3D>
@@ -187,30 +235,53 @@ export const InnovationHub: React.FC = () => {
       </section>
 
       {/* ── NEWSLETTER SECTION (Stay Connected) ── */}
-      <section className="nox-section bg-white" aria-label="Stay Connected Newsletter">
+      <section className="nox-section bg-[#070709]" aria-label="Stay Connected Newsletter">
         <div className="nox-container">
-          <div className="bg-[#F8FAFC] border border-[#D9E7F5] rounded-2xl p-8 md:p-12 shadow-[0_12px_30px_rgba(10,37,64,0.06)]">
+          <div className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#0A2540] mb-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
                   Stay Connected
                 </h2>
-                <p className="text-sm text-[#334E68] leading-relaxed">
+                <p className="text-sm text-zinc-400 leading-relaxed">
                   Subscribe to receive latest insights and technology breakthroughs from our labs.
                 </p>
               </div>
 
               <div className="lg:col-span-6">
-                {subscribed ? (
-                  <div className="bg-[#EFF6FF] border border-[#BBD3F2] rounded-xl p-4 text-[#1E3A8A] flex items-center gap-3">
-                    <CheckCircle2 size={18} />
-                    <span className="text-xs font-semibold tracking-widest uppercase">
-                      Subscribed to Noxvion Lab Telemetry.
-                    </span>
+                {status !== 'idle' ? (
+                  <div
+                    className={`rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border ${
+                      status === 'success' || status === 'client_launched'
+                        ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
+                        : status === 'config_notice'
+                        ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                        : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+                    }`}
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <div className="flex items-center gap-3">
+                      {status === 'success' || status === 'client_launched' ? (
+                        <CheckCircle2 size={18} className="shrink-0" />
+                      ) : (
+                        <AlertCircle size={18} className="shrink-0" />
+                      )}
+                      <span className="text-xs font-semibold tracking-wide font-mono">
+                        {statusMessage}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setStatus('idle')}
+                      className="text-[10px] font-mono tracking-widest uppercase underline hover:text-white transition-colors self-end sm:self-auto shrink-0"
+                    >
+                      Subscribe Another
+                    </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-                    <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2.5">
                       <input
                         type="email"
                         placeholder="ENTER EMAIL ADDRESS"
@@ -221,22 +292,22 @@ export const InnovationHub: React.FC = () => {
                             message: 'Invalid email address',
                           },
                         })}
-                        className="flex-1 bg-white border border-[#D9E7F5] rounded-[10px] px-4 py-3 text-xs text-[#0A2540] placeholder:text-[#627D98] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 transition-all shadow-sm"
+                        className="flex-1 bg-black/60 border border-white/15 rounded-lg px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-mono"
                       />
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-[#1E3A8A] hover:bg-[#3B82F6] text-white font-bold px-6 py-3 text-xs tracking-widest uppercase rounded-[10px] transition-colors shrink-0 disabled:opacity-50 shadow-md"
+                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 text-xs tracking-widest uppercase rounded-lg transition-colors shrink-0 disabled:opacity-50 shadow-[0_0_20px_rgba(59,130,246,0.3)] font-mono"
                       >
                         {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                       </button>
                     </div>
                     {errors.email && (
-                      <p className="text-red-600 text-xs flex items-center gap-1 font-medium mt-1">
+                      <p className="text-rose-400 text-xs flex items-center gap-1 font-medium mt-1 font-mono">
                         <AlertCircle size={12} /> {errors.email.message}
                       </p>
                     )}
-                    <p className="text-[10px] text-[#627D98] mt-1">
+                    <p className="text-[10px] text-zinc-500 mt-1 font-mono">
                       By subscribing, you agree to our telemetry and communication policies.
                     </p>
                   </form>

@@ -8,14 +8,14 @@ interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className = '' }) => {
   const variantClasses = {
-    default: 'bg-[#EFF6FF] border border-[#BBD3F2] text-[#1E3A8A]',
-    cyan: 'bg-[#EFF6FF] border border-[#3B82F6] text-[#1E3A8A]',
-    dim: 'bg-[#F8FAFC] border border-[#D9E7F5] text-[#627D98]',
+    default: 'bg-blue-500/10 border border-blue-500/30 text-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.15)]',
+    cyan: 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.15)]',
+    dim: 'bg-white/[0.05] border border-white/10 text-zinc-400',
   };
 
   return (
     <span
-      className={`inline-flex items-center rounded-md px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] uppercase ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center rounded-md px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] uppercase font-mono ${variantClasses[variant]} ${className}`}
     >
       {children}
     </span>
@@ -30,13 +30,13 @@ interface TechBadgeProps {
 export const TechBadge: React.FC<TechBadgeProps> = ({ label, accent = false }) => {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase border ${
+      className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase font-mono border ${
         accent
-          ? 'bg-[#EFF6FF] border-[#3B82F6] text-[#1E3A8A]'
-          : 'bg-[#F8FAFC] border-[#D9E7F5] text-[#334E68]'
+          ? 'bg-blue-500/10 border-blue-500/30 text-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.15)]'
+          : 'bg-white/[0.04] border-white/10 text-zinc-400'
       }`}
     >
-      {accent && <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] block" aria-hidden="true" />}
+      {accent && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_6px_rgba(59,130,246,0.8)] block" aria-hidden="true" />}
       {label}
     </span>
   );
