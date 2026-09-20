@@ -32,7 +32,7 @@ const env = import.meta.env;
 
 export const contactConfig: ContactConfig = {
   // Direct Communication
-  email: env.VITE_CONTACT_EMAIL || 'REPLACE_WITH_APPROVED_EMAIL',
+  email: env.VITE_CONTACT_EMAIL || 'noxvion.official@gmail.com',
   phone: env.VITE_CONTACT_PHONE || 'REPLACE_WITH_APPROVED_PHONE',
   phoneDisplay: env.VITE_CONTACT_PHONE_DISPLAY || 'REPLACE_WITH_APPROVED_PHONE',
   whatsappNumber: env.VITE_CONTACT_WHATSAPP || 'REPLACE_WITH_APPROVED_WHATSAPP_NUMBER',
@@ -45,10 +45,10 @@ export const contactConfig: ContactConfig = {
 
   // Social Media Profiles
   social: {
-    linkedin: env.VITE_SOCIAL_LINKEDIN || 'REPLACE_WITH_APPROVED_LINKEDIN_URL',
-    github: env.VITE_SOCIAL_GITHUB || 'REPLACE_WITH_APPROVED_GITHUB_URL',
+    linkedin: env.VITE_SOCIAL_LINKEDIN || 'https://www.linkedin.com/company/noxvion/',
+    github: env.VITE_SOCIAL_GITHUB || 'https://github.com/noxvionofficial-dev',
     x: env.VITE_SOCIAL_X || 'REPLACE_WITH_APPROVED_X_URL',
-    instagram: env.VITE_SOCIAL_INSTAGRAM || 'REPLACE_WITH_APPROVED_INSTAGRAM_URL',
+    instagram: env.VITE_SOCIAL_INSTAGRAM || 'https://www.instagram.com/noxvion.official',
     facebook: env.VITE_SOCIAL_FACEBOOK || 'REPLACE_WITH_APPROVED_FACEBOOK_URL',
     youtube: env.VITE_SOCIAL_YOUTUBE || 'REPLACE_WITH_APPROVED_YOUTUBE_URL',
   },

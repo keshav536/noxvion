@@ -184,3 +184,58 @@
     transform: none; /* hover not reliable on touch devices */
   }
 }
+
+/* ── NEW — Hero Earth Background & Readability Layer ─────────
+   Responsive background positioning and dark gradient overlay
+   for the futuristic cyan/blue Earth hero environment.
+   - Desktop (>=1024px): Earth is on the right, dark space on the left
+   - Tablet (768px-1023px): Earth is positioned towards the bottom-right,
+     leaving the upper-left dark space for text readability.
+   - Mobile (<768px): Earth is positioned in the lower portion so it does
+     not sit directly behind the hero heading and CTA buttons.
+   ─────────────────────────────────────────────────────────── */
+.hero-earth-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 52% center;
+}
+
+@media (min-width: 640px) {
+  .hero-earth-bg {
+    background-position: 55% center;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-earth-bg {
+    background-position: 58% center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-earth-bg {
+    background-position: right center;
+  }
+}
+
+.hero-readability-overlay {
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.85) 100%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.8) 55%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+@media (min-width: 768px) {
+  .hero-readability-overlay {
+    background: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.75) 45%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.04) 88%, rgba(0, 0, 0, 0.2) 100%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, transparent 18%, transparent 75%, #000000 100%);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-readability-overlay {
+    background: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.68) 40%, rgba(0, 0, 0, 0.1) 72%, transparent 88%),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 18%, transparent 78%, #000000 100%);
+  }
+}

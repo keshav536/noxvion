@@ -18,6 +18,7 @@ import { NewSvgPathDraw } from '../components/effects/NewSvgPathDraw';
 import { MagneticButton } from '../components/effects/MagneticButton';
 import { AccentHalo } from '../components/effects/AccentHalo';
 import { ParallaxLayer } from '../components/effects/ParallaxLayer';
+import heroEarthImage from '../assets/hero-earth.png';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -84,9 +85,36 @@ export const Home: React.FC = () => {
         className="relative min-h-[calc(100vh-72px)] flex items-center overflow-hidden bg-black"
         aria-label="Hero"
       >
+        {/* Background Earth Image Layer with subtle integrated parallax */}
+        <div
+          className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <ParallaxLayer
+            speed={0.02}
+            maxOffset={14}
+            pointerFactor={6}
+            scaleDepth={0.015}
+            className="absolute -inset-[4%] w-[108%] h-[108%]"
+          >
+            <div
+              className="w-full h-full hero-earth-bg"
+              style={{
+                backgroundImage: `url(${heroEarthImage})`,
+              }}
+            />
+          </ParallaxLayer>
+        </div>
+
+        {/* Subtle dark gradient/overlay to ensure crisp hero text readability while keeping cyan Earth glow intact */}
+        <div
+          className="absolute inset-0 pointer-events-none z-[1] hero-readability-overlay"
+          aria-hidden="true"
+        />
+
         {/* Top radial ambient glow */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none -z-0"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none z-[2]"
           style={{
             background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
           }}
@@ -94,11 +122,11 @@ export const Home: React.FC = () => {
         />
 
         {/* Layered ambient background */}
-        <AmbientScene variant="hero" />
+        <AmbientScene variant="hero" className="z-[2]" />
 
         {/* Perspective depth grid */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-[2]"
           aria-hidden="true"
           style={{
             backgroundImage:
