@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const springConfig = { stiffness: 55, damping: 28, mass: 1.2 };
