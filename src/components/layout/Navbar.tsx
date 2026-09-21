@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/noxvion-logo.png';
 import { MagneticButton } from '../effects/MagneticButton';
 import { SocialLinks } from '../ui/SocialLinks';
 
@@ -99,14 +99,14 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
+            className="cursor-target flex items-center gap-3 shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
             aria-label="NOXVION — Home"
             id="nav-logo"
           >
             <img
               src={logo}
-              alt="NOXVION logo"
-              className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] filter invert"
+              alt="NOXVION"
+              className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)]"
               width={32}
               height={32}
             />
@@ -123,7 +123,7 @@ export const Navbar: React.FC = () => {
                   <button
                     id="nav-solutions"
                     onClick={() => setSolutionsOpen((v) => !v)}
-                    className={`nav-link-sweep flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
+                    className={`cursor-target nav-link-sweep flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
                       isActive(link.to)
                         ? 'text-white font-semibold active'
                         : 'text-zinc-400 hover:text-white'
@@ -155,7 +155,7 @@ export const Navbar: React.FC = () => {
                             key={item.to}
                             to={item.to}
                             role="menuitem"
-                            className="flex items-center px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-white/[0.08] transition-colors duration-150 group rounded-lg mx-1.5"
+                            className="cursor-target flex items-center px-4 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-white/[0.08] transition-colors duration-150 group rounded-lg mx-1.5"
                           >
                             <span
                               className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
@@ -176,7 +176,7 @@ export const Navbar: React.FC = () => {
                   end={link.to === '/'}
                   id={`nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                   className={({ isActive: active }) =>
-                    `nav-link-sweep text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
+                    `cursor-target nav-link-sweep text-sm font-medium transition-colors duration-200 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded ${
                       active
                         ? 'text-white font-semibold active'
                         : 'text-zinc-400 hover:text-white'
@@ -195,7 +195,7 @@ export const Navbar: React.FC = () => {
               <Link
                 to="/work-with-us"
                 id="nav-cta-work-with-us"
-                className="hidden lg:inline-flex items-center px-4.5 py-2 text-xs font-semibold tracking-widest uppercase bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50 hover:border-blue-400 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] transition-all duration-200 btn-depth-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="cursor-target hidden lg:inline-flex items-center px-4.5 py-2 text-xs font-semibold tracking-widest uppercase bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50 hover:border-blue-400 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_28px_rgba(59,130,246,0.5)] transition-all duration-200 btn-depth-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 aria-label="Work With Us"
               >
                 Work With Us
@@ -203,7 +203,7 @@ export const Navbar: React.FC = () => {
             </MagneticButton>
             <button
               id="nav-mobile-toggle"
-              className="lg:hidden p-2 text-zinc-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              className="cursor-target lg:hidden p-2 text-zinc-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
               onClick={() => setMobileOpen((v) => !v)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"

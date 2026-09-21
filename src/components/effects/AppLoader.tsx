@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/noxvion-logo.png';
 
 interface AppLoaderProps {
   /** Minimum display duration in ms for first-time session visit (default: 350ms) */
@@ -104,7 +104,7 @@ export const AppLoader: React.FC<AppLoaderProps> = ({
               <img
                 src={logo}
                 alt="NOXVION"
-                className="w-20 md:w-24 h-auto object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.5)] filter invert"
+                className="w-20 md:w-24 h-auto object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]"
               />
             </motion.div>
 

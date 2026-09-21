@@ -18,6 +18,7 @@ import { Footer } from './components/layout/Footer';
 import { AppLoader } from './components/effects/AppLoader';
 import { RouteTransition } from './components/layout/RouteTransition';
 import { Depth3DBackground } from './components/effects/Depth3DBackground';
+import { TargetCursor } from './components/effects/TargetCursor';
 
 const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -128,6 +129,14 @@ const AppContent: React.FC = () => {
   useMotionPreference();
   return (
     <BrowserRouter>
+      <TargetCursor
+        spinDuration={2}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+        hoverDuration={0.2}
+        cursorColor="#ffffff"
+        cursorColorOnTarget="#2196ff"
+      />
       <AppLoader />
       {/* Global fixed 3D depth background — sits behind everything */}
       <Depth3DBackground />

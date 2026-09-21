@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle, ExternalLink } from 'lucide-react';
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
@@ -119,7 +119,7 @@ export const InnovationHub: React.FC = () => {
               <button
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
-                className={`text-xs font-semibold tracking-widest uppercase pb-1 transition-colors relative ${
+                className={`cursor-target text-xs font-semibold tracking-widest uppercase pb-1 transition-colors relative ${
                   activeCategory === cat.slug
                     ? 'text-blue-400 font-bold border-b-2 border-blue-500'
                     : 'text-zinc-500 hover:text-white'
@@ -132,47 +132,164 @@ export const InnovationHub: React.FC = () => {
         </div>
       </section>
 
-      {/* ── FEATURED INSIGHT CARD (Coming Soon) ── */}
-      <section className="nox-section border-b border-white/10 bg-[#070709]" aria-label="Featured Insight">
+      {/* ── FEATURED INNOVATION CARD (Varuna X) ── */}
+      <section className="nox-section border-b border-white/10 bg-[#070709]" aria-label="Featured Innovation">
         <div className="nox-container">
-          <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.15)">
-            <div className="border border-white/10 bg-[#0e0e12] rounded-2xl grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.8)]">
-              <div
-                className="lg:col-span-6 bg-[#0a0a0d] p-8 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-white/10 relative min-h-[260px]"
-              >
-                <div className="text-center">
-                  <span className="w-3.5 h-3.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.9)] inline-block mb-3 animate-pulse" />
-                  <p className="text-[11px] font-mono font-bold tracking-widest uppercase text-blue-400">
-                    LABORATORY BENCHMARK IN PROGRESS
-                  </p>
-                </div>
-              </div>
+          <div className="flex items-center justify-between mb-8">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 font-mono flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
+              [ SYS_MODULE ] / INNOVATION SPOTLIGHT
+            </p>
+            <span className="text-[10px] font-mono text-zinc-500 font-semibold uppercase hidden sm:inline-block">
+              FLAGSHIP R&amp;D INITIATIVE
+            </span>
+          </div>
 
-              <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-[#0e0e12]">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <Badge variant="cyan">FEATURED INSIGHT</Badge>
-                    <span className="text-[10px] font-mono text-zinc-500 font-semibold">ID: FEAT-01</span>
+          <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.2)">
+            <a
+              href="https://varuna-x-22174.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Explore Varuna X — AI Flood Intelligence &amp; Drainage Response System"
+              className="cursor-target block rounded-2xl focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
+            >
+              <div className="border border-white/10 bg-[#0e0e12] rounded-2xl grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-blue-500/50 hover:shadow-[0_24px_60px_rgba(59,130,246,0.18)] transition-all duration-300 group">
+                
+                {/* Visual side */}
+                <div className="lg:col-span-6 bg-[#09090c] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 flex items-center justify-center min-h-[300px] md:min-h-[360px]">
+                  <img
+                    src="/projects/varuna-x/varuna-dashboard.png"
+                    alt="Varuna X AI Flood Intelligence &amp; Drainage Response System"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Subtle overlay */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-blue-500/10 opacity-70 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  {/* Scanning line animation */}
+                  <div
+                    className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
+                    aria-hidden="true"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.8), transparent)',
+                      animation: 'scanLine 4s ease-in-out infinite',
+                    }}
+                  />
+                  {/* High-tech HUD telemetry badge */}
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-lg text-[10px] font-mono text-blue-400">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
+                    <span>LIVE TELEMETRY // ACTIVE</span>
+                  </div>
+                  <div className="absolute bottom-4 right-4 z-10 hidden sm:flex items-center gap-1.5 bg-black/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-lg text-[10px] font-mono text-zinc-300">
+                    <ExternalLink size={12} className="text-blue-400" />
+                    <span>EXTERNAL DEPLOYMENT</span>
+                  </div>
+                </div>
+
+                {/* Info side */}
+                <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-[#0e0e12]">
+                  <div>
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                      <Badge variant="cyan">FEATURED PROJECT</Badge>
+                      <span className="text-[11px] font-mono text-emerald-400 font-semibold flex items-center gap-1.5 border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 rounded-md">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
+                        PROJECT ACTIVE
+                      </span>
+                    </div>
+
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                      Varuna X
+                    </h2>
+                    <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-4">
+                      AI Flood Intelligence &amp; Drainage Response System
+                    </p>
+                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6">
+                      An AI-powered flood intelligence system combining IoT drain sensors, AI/ML prediction, GIS mapping, and digital-twin technology to help predict and respond to urban flooding.
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {['LSTM / RF', 'ESP32 IOT', 'GIS MAPPING', 'DIGITAL TWIN'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono tracking-widest text-zinc-300 uppercase border border-white/10 px-2.5 py-1 bg-white/[0.04] rounded"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Coming Soon
-                  </h2>
-                  <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-8">
-                    A major technological insight is currently undergoing final validation in our labs.
-                    Stay tuned for detailed research notes and engineering updates.
-                  </p>
+                  <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-xs font-mono text-zinc-500 uppercase">
+                      ID: PRJ_01 // AI &amp; IOT
+                    </span>
+                    <span className="inline-flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 group-hover:translate-x-1 transition-all duration-200">
+                      EXPLORE VARUNA X <ArrowRight size={14} />
+                    </span>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-6 border-t border-white/10 text-xs text-zinc-500 font-mono">
-                  <span>DATE: TBD</span>
-                  <span className="text-blue-400 font-bold flex items-center gap-1">
-                    PUBLICATION PENDING <ArrowRight size={14} />
-                  </span>
-                </div>
               </div>
-            </div>
+            </a>
           </Card3D>
+
+          {/* ── INNOVATION ROADMAP ── */}
+          <div className="mt-10 pt-8 border-t border-white/10">
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 font-mono flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]" aria-hidden="true" />
+                INNOVATION ROADMAP
+              </p>
+              <span className="text-[10px] font-mono text-blue-400 font-semibold uppercase">
+                STAGE 05 // RELEASED &amp; OPERATIONAL
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+              {[
+                { step: '01', title: 'RESEARCH', desc: 'System Formulation', status: 'completed' },
+                { step: '02', title: 'PROTOTYPE', desc: 'Sensor & ML Testbed', status: 'completed' },
+                { step: '03', title: 'TESTING', desc: 'Drain Telemetry Simulation', status: 'completed' },
+                { step: '04', title: 'VALIDATION', desc: 'Urban GIS Calibration', status: 'completed' },
+                { step: '05', title: 'RELEASE', desc: 'Active Live Deployment', status: 'active' },
+              ].map((stage, idx) => (
+                <div
+                  key={stage.step}
+                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                    stage.status === 'active'
+                      ? 'bg-blue-950/30 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.15)]'
+                      : 'bg-[#0e0e12] border-white/10 hover:border-white/20'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500">
+                      PHASE_{stage.step}
+                    </span>
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        stage.status === 'active'
+                          ? 'bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.9)] animate-pulse'
+                          : 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]'
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h4 className="text-xs font-bold font-mono tracking-wider text-white uppercase mb-1 flex items-center gap-1.5">
+                    {stage.title}
+                    {idx < 4 && (
+                      <span className="text-zinc-600 hidden lg:inline ml-auto">→</span>
+                    )}
+                  </h4>
+                  <p className="text-[11px] text-zinc-400 leading-snug">
+                    {stage.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 

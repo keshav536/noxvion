@@ -7,7 +7,6 @@ import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { FoldText } from '../components/effects/FoldText';
-import { HeroCanvas } from '../components/effects/HeroCanvas';
 import { Card3D } from '../components/effects/Card3D';
 import { AmbientScene } from '../components/effects/AmbientOrb';
 import { RevealSection, RevealItem } from '../components/effects/RevealSection';
@@ -139,148 +138,99 @@ export const Home: React.FC = () => {
           }}
         />
 
-        <div className="nox-container relative py-24 md:py-32 z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left */}
-            <div>
-              <motion.p
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={0}
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6 flex items-center gap-2 font-mono"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
-                NOXVION / TECHNOLOGY & INNOVATION
-              </motion.p>
-              <FoldText
-                as="h1"
-                splitBy="word"
-                hinge="top"
-                trigger="scroll"
-                duration={0.65}
-                stagger={0.045}
-                ease="power3.out"
-                perspective={700}
-                creaseShading={0.35}
-                className="text-4xl md:text-5xl lg:text-[56px] font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6"
-              >
-                Building Intelligent{' '}
-                <span className="text-blue-400">Technology</span> for a
-                Smarter Future.
-              </FoldText>
-              <motion.p
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={2}
-                className="text-zinc-400 text-base md:text-lg leading-relaxed mb-10 max-w-lg"
-              >
-                Noxvion transforms ideas, research, and emerging technologies
-                into practical software, AI, hardware, IoT, and automation
-                solutions.
-              </motion.p>
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={3}
-                className="flex flex-wrap items-center gap-4"
-              >
-                <MagneticButton strength={10}>
-                  <AccentHalo intensity="normal">
-                    <Button
-                      to="/solutions"
-                      variant="primary"
-                      size="md"
-                      id="hero-cta-solutions"
-                      className="btn-depth-primary"
-                    >
-                      Explore Our Solutions
-                      <ArrowRight size={14} aria-hidden="true" />
-                    </Button>
-                  </AccentHalo>
-                </MagneticButton>
-
-                <Button
-                  to="/work-with-us"
-                  variant="secondary"
-                  size="md"
-                  id="hero-cta-work"
-                  className="btn-depth-secondary"
-                >
-                  Work With Us
-                  <ChevronRight size={14} aria-hidden="true" />
-                </Button>
-              </motion.div>
-
-              {/* Floating stat pills */}
-              <ParallaxLayer speed={0.06} maxOffset={18} pointerFactor={-8}>
-                <motion.div
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  custom={4.5}
-                  className="flex flex-wrap items-center gap-3 mt-10"
-                >
-                  {['AI Engine', 'IoT Layer', 'R&D Core'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase border border-white/10 text-zinc-300 bg-white/[0.04] rounded-full backdrop-blur-sm font-mono"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.8)]" aria-hidden="true" />
-                      {tag}
-                    </span>
-                  ))}
-                </motion.div>
-              </ParallaxLayer>
-            </div>
-
-            {/* Right — Canvas Network Visualization with Multi-Layer Parallax */}
+        <div className="nox-container relative py-24 md:py-32 lg:py-36 z-10">
+          <div className="max-w-3xl">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6 flex items-center gap-2 font-mono"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
+              NOXVION / TECHNOLOGY & INNOVATION
+            </motion.p>
+            <FoldText
+              as="h1"
+              splitBy="word"
+              hinge="top"
+              trigger="scroll"
+              duration={0.65}
+              stagger={0.045}
+              ease="power3.out"
+              perspective={700}
+              creaseShading={0.35}
+              className="text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6"
+            >
+              Building Intelligent{' '}
+              <span className="text-blue-400">Technology</span> for a
+              Smarter Future.
+            </FoldText>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              className="text-zinc-400 text-base md:text-lg leading-relaxed mb-10 max-w-2xl"
+            >
+              Noxvion transforms ideas, research, and emerging technologies
+              into practical software, AI, hardware, IoT, and automation
+              solutions.
+            </motion.p>
             <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={4}
-              className="hidden lg:block"
+              custom={3}
+              className="flex flex-wrap items-center gap-4"
             >
-              <ParallaxLayer speed={-0.08} maxOffset={36} pointerFactor={14} scaleDepth={0.03}>
-                <div
-                  className="hero-canvas-container scan-line-container rounded-2xl border border-white/10 bg-[#0d0d10]/80 backdrop-blur-xl overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(59,130,246,0.1)]"
-                >
-                  {/* Header bar */}
-                  <div className="relative z-20 flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/60 backdrop-blur-sm">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,1)]"
-                        aria-hidden="true"
-                      />
-                      <span className="text-[10px] font-semibold tracking-widest uppercase text-blue-400 font-mono">
-                        SYS.ARCH.v2 / LIVE
-                      </span>
-                    </div>
-                    <span className="text-[10px] text-zinc-400 font-mono">
-                      NODES: ACTIVE
-                    </span>
-                  </div>
+              <MagneticButton strength={10}>
+                <AccentHalo intensity="normal">
+                  <Button
+                    to="/solutions"
+                    variant="primary"
+                    size="md"
+                    id="hero-cta-solutions"
+                    className="btn-depth-primary"
+                  >
+                    Explore Our Solutions
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </Button>
+                </AccentHalo>
+              </MagneticButton>
 
-                  {/* Canvas */}
-                  <div className="w-full aspect-[4/3] relative z-10">
-                    <HeroCanvas className="absolute inset-0" />
-
-                    {/* Overlay labels */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none z-20">
-                      <span className="text-[10px] font-mono text-zinc-500">
-                        NOX_MESH_NET / v4.2
-                      </span>
-                      <span className="text-[10px] font-mono text-blue-400">
-                        {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </ParallaxLayer>
+              <Button
+                to="/work-with-us"
+                variant="secondary"
+                size="md"
+                id="hero-cta-work"
+                className="btn-depth-secondary"
+              >
+                Work With Us
+                <ChevronRight size={14} aria-hidden="true" />
+              </Button>
             </motion.div>
+
+            {/* Floating stat pills */}
+            <ParallaxLayer speed={0.06} maxOffset={18} pointerFactor={-8}>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                custom={4.5}
+                className="flex flex-wrap items-center gap-3 mt-10"
+              >
+                {['AI Engine', 'IoT Layer', 'R&D Core'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase border border-white/10 text-zinc-300 bg-white/[0.04] rounded-full backdrop-blur-sm font-mono"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.8)]" aria-hidden="true" />
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
+            </ParallaxLayer>
           </div>
         </div>
       </section>
@@ -537,57 +487,203 @@ export const Home: React.FC = () => {
               View All
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[0, 1].map((idx) => (
-              <Card3D key={idx} maxTilt={4} className="w-full h-full">
-                <div
-                  className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
-                >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* ── CARD 0: VARUNA-X (FEATURED PROJECT) ── */}
+            <Card3D maxTilt={4} className="w-full h-full">
+              <a
+                href="https://varuna-x-22174.web.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open VARUNA-X — AI Flood Intelligence &amp; Drainage Response System"
+                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
+              >
+                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] flex flex-col justify-between h-full">
                   <div
-                    className="w-full aspect-video bg-[#09090c] flex items-center justify-center border-b border-white/10 relative overflow-hidden"
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-                      backgroundSize: '32px 32px',
-                    }}
-                    aria-label="Project image coming soon"
+                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
                   >
+                    <img
+                      src="/projects/varuna-x/varuna-dashboard.png"
+                      alt="VARUNA-X AI flood intelligence and drainage response system"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Subtle cyan/blue overlay on hover */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
+                      aria-hidden="true"
+                    />
                     {/* Scanning line */}
                     <div
-                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none"
+                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
                       aria-hidden="true"
                       style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.5), transparent)',
-                        animation: `scanLine ${4 + idx * 1.5}s ease-in-out infinite`,
-                        animationDelay: `${idx * 1.2}s`,
+                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
+                        animation: 'scanLine 4s ease-in-out infinite',
                       }}
                     />
-                    <div className="text-center">
-                      <div
-                        className="w-10 h-10 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center mx-auto mb-3 text-blue-400"
-                        aria-hidden="true"
-                      >
-                        <span className="text-sm">⬡</span>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="default">Active Project</Badge>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
+                          PRJ_01 // AI &amp; IOT
+                        </span>
                       </div>
-                      <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
-                        [ IMG_SYS_AWAITING_DATA ]
+                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
+                        VARUNA-X
+                      </h3>
+                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
+                        AI Flood Intelligence &amp; Drainage Response System
+                      </p>
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        An AI-powered flood intelligence system combining IoT drain sensors, AI/ML prediction, GIS mapping, and digital-twin technology to help predict and respond to urban flooding.
+                      </p>
+                    </div>
+                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
+                        STATUS // OPERATIONAL
+                      </span>
+                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
+                        View Project →
                       </span>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge variant="dim">Coming Soon</Badge>
+                </div>
+              </a>
+            </Card3D>
+
+            {/* ── CARD 1: UR NOTED ── */}
+            <Card3D maxTilt={4} className="w-full h-full">
+              <a
+                href="https://urnoted.syasans.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open UR Noted — Training Attendance Management System"
+                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
+              >
+                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] flex flex-col justify-between h-full">
+                  <div
+                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
+                  >
+                    <img
+                      src="/projects/ur-noted/urnoted-dashboard.jpg"
+                      alt="UR Noted training attendance management system dashboard"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Subtle cyan/blue overlay on hover */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
+                      aria-hidden="true"
+                    />
+                    {/* Scanning line */}
+                    <div
+                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
+                      aria-hidden="true"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
+                        animation: 'scanLine 4.8s ease-in-out infinite',
+                        animationDelay: '0.6s',
+                      }}
+                    />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="default">Active Project</Badge>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
+                          PRJ_02 // SOFTWARE
+                        </span>
+                      </div>
+                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
+                        UR NOTED
+                      </h3>
+                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
+                        Training Attendance Management System
+                      </p>
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        An enterprise-grade attendance platform with automated late-registration logic, role-based access control (RBAC), and one-click Excel &amp; PDF export for training session records.
+                      </p>
                     </div>
-                    <h3 className="text-base font-semibold text-white mb-2">
-                      Project Title — Coming Soon
-                    </h3>
-                    <p className="text-sm text-zinc-400">
-                      Project details will be published upon completion.
-                    </p>
+                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
+                        STATUS // OPERATIONAL
+                      </span>
+                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
+                        View Project →
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </Card3D>
-            ))}
+              </a>
+            </Card3D>
+
+            {/* ── CARD 2: SKILLCETAMOL ── */}
+            <Card3D maxTilt={4} className="w-full h-full">
+              <a
+                href="https://skillcetamol.online/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open SkillCetamol — Enterprise Exam Portal"
+                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
+              >
+                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] flex flex-col justify-between h-full">
+                  <div
+                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
+                  >
+                    <img
+                      src="/projects/skillcetamol/skillcetamol-dashboard.jpg"
+                      alt="SkillCetamol enterprise exam portal dashboard"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Subtle cyan/blue overlay on hover */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
+                      aria-hidden="true"
+                    />
+                    {/* Scanning line */}
+                    <div
+                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
+                      aria-hidden="true"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
+                        animation: 'scanLine 5.2s ease-in-out infinite',
+                        animationDelay: '1.1s',
+                      }}
+                    />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="default">Active Project</Badge>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
+                          PRJ_03 // SOFTWARE
+                        </span>
+                      </div>
+                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
+                        SKILLCETAMOL
+                      </h3>
+                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
+                        Enterprise Exam Portal
+                      </p>
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        A secure, multi-role online exam platform with real-time countdowns, score analytics, student rank indexing, and separate dashboards for administrators, proctors, and students.
+                      </p>
+                    </div>
+                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
+                        STATUS // OPERATIONAL
+                      </span>
+                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
+                        View Project →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </Card3D>
           </div>
         </div>
       </section>

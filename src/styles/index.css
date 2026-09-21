@@ -404,23 +404,6 @@
     @apply w-8 h-px bg-[#3B82F6];
   }
 
-  /* ── Scan line effect (PROTECTED — color updated only) ──── */
-  .scan-line-container {
-    position: relative;
-    overflow: hidden;
-  }
-  .scan-line-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.7), transparent);
-    animation: scanLine 4s ease-in-out infinite;
-    pointer-events: none;
-  }
-
   /* ── Nav link hover sweep (dark) ────────────────────────── */
   .nav-link-sweep {
     position: relative;
@@ -618,27 +601,6 @@
     );
   }
 
-  /* ── Hero canvas container (light) ──────────────────────── */
-  .hero-canvas-container {
-    position: relative;
-    border: 1px solid rgba(10, 37, 64, 0.12);
-    background: #F0F6FF;
-    overflow: hidden;
-    box-shadow: 0 12px 40px rgba(10, 37, 64, 0.10), 0 0 30px rgba(59, 130, 246, 0.08);
-  }
-  .hero-canvas-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse 80% 60% at 30% 30%,
-      rgba(59, 130, 246, 0.06) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-
   /* ── Footer gradient top (navy) ─────────────────────────── */
   .footer-top-glow {
     position: relative;
@@ -766,7 +728,6 @@
     scroll-behavior: auto !important;
   }
 
-  .scan-line-container::after { display: none; }
   .ambient-orb { animation: none !important; }
   .float-element { animation: none !important; }
   .status-dot-active { animation: none !important; }
@@ -809,7 +770,6 @@
   transition-duration: 0.05ms !important;
 }
 
-[data-reduced-motion='true'] .scan-line-container::after { display: none; }
 [data-reduced-motion='true'] .ambient-orb { opacity: 0.3 !important; }
 [data-reduced-motion='true'] .btn-depth-primary:hover { transform: none; }
 [data-reduced-motion='true'] .btn-depth-secondary:hover { transform: none; }

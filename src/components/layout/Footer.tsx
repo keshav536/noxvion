@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/noxvion-logo.png';
 import {
   contactConfig,
   getEmailHref,
@@ -72,8 +72,8 @@ export const Footer: React.FC = () => {
             >
               <img
                 src={logo}
-                alt="NOXVION logo"
-                className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] filter invert"
+                alt="NOXVION"
+                className="h-8 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)]"
                 width={32}
                 height={32}
               />

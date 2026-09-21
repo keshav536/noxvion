@@ -9,7 +9,7 @@ import { AmbientScene } from '../components/effects/AmbientOrb';
 import { MagneticButton } from '../components/effects/MagneticButton';
 import { AccentHalo } from '../components/effects/AccentHalo';
 import { useSEO } from '../hooks/useSEO';
-import logo from '../assets/logo.png';
+import logo from '../assets/noxvion-logo.png';
 
 const collaborationVectors = [
   {
@@ -116,8 +116,8 @@ export const WorkWithUs: React.FC = () => {
                   <div className="flex items-center justify-center p-6 bg-black/50 border border-white/10 rounded-xl">
                     <img
                       src={logo}
-                      alt="NOXVION emblem"
-                      className="w-32 h-auto object-contain filter invert drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+                      alt="NOXVION"
+                      className="w-32 h-auto object-contain drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]"
                     />
                   </div>
                   <div className="mt-4 text-center">
