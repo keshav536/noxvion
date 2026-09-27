@@ -1,39 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Brain, Code2, Wifi, Settings2, FlaskConical, ChevronRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Brain,
+  Code2,
+  Wifi,
+  Settings2,
+  FlaskConical,
+  ChevronRight,
+  ShieldCheck,
+  Cpu,
+  Layers,
+  Award,
+  CheckCircle2,
+  Star,
+  Quote,
+} from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import { PageContainer } from '../components/layout/PageContainer';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { SectionHeader } from '../components/ui/SectionHeader';
-import { FoldText } from '../components/effects/FoldText';
-import { Card3D } from '../components/effects/Card3D';
-import { AmbientScene } from '../components/effects/AmbientOrb';
-import { RevealSection, RevealItem } from '../components/effects/RevealSection';
 import { useSEO } from '../hooks/useSEO';
 import { solutions } from '../data/solutions';
-import { timeline } from '../data/timeline';
-import { NewSvgPathDraw } from '../components/effects/NewSvgPathDraw';
-import { MagneticButton } from '../components/effects/MagneticButton';
-import { AccentHalo } from '../components/effects/AccentHalo';
-import { ParallaxLayer } from '../components/effects/ParallaxLayer';
-import heroEarthImage from '../assets/hero-earth.png';
 
+// Conservative, professional motion: scroll-triggered fade + slight upward slide
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] },
+    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
   }),
 };
 
-const engineeringSteps = ['IDEA', 'RESEARCH', 'ENGINEERING', 'PROTOTYPE', 'INTEGRATION', 'DEPLOYMENT'];
+const engineeringSteps = [
+  { step: '01', title: 'IDEA', desc: 'Concept intake & architecture scope' },
+  { step: '02', title: 'RESEARCH', desc: 'Feasibility analysis & algorithmic design' },
+  { step: '03', title: 'ENGINEERING', desc: 'High-performance stack implementation' },
+  { step: '04', title: 'PROTOTYPE', desc: 'Benchmarking & embedded integration' },
+  { step: '05', title: 'INTEGRATION', desc: 'End-to-end cloud & hardware telemetry' },
+  { step: '06', title: 'DEPLOYMENT', desc: 'Production hardening & ongoing monitoring' },
+];
 
 const techEcosystem = [
   { domain: 'AI / ML', tools: ['PyTorch', 'TensorFlow', 'FastAPI', 'Python', 'OpenCV'] },
   { domain: 'Software', tools: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Vite'] },
-  { domain: 'IoT', tools: ['ESP32', 'C++', 'FreeRTOS', 'MQTT', 'InfluxDB'] },
+  { domain: 'IoT & Edge', tools: ['ESP32', 'C++', 'FreeRTOS', 'MQTT', 'InfluxDB'] },
   { domain: 'Automation', tools: ['Node.js', 'Redis', 'Docker', 'PostgreSQL', 'Bash'] },
   { domain: 'Research & R&D', tools: ['ROS2', 'Arduino', 'Python', 'CAD Modelling', 'Matlab'] },
 ];
@@ -43,22 +56,64 @@ const values = [
     id: 'PRN-01',
     title: 'Aggressive Innovation',
     description:
-      'We do not wait for established patterns. We test emerging compilers, models, and protocols at the cutting edge.',
+      'We do not wait for established patterns. We test emerging compilers, models, and protocols at the frontier of technology.',
     icon: '⟁',
   },
   {
     id: 'PRN-02',
     title: 'Engineering Integrity',
     description:
-      'Our code is typed, our hardware is grounded, and our analytics are validated. Reliability is our core baseline.',
+      'Our code is strictly typed, our hardware is grounded, and our analytics are validated. Reliability is our baseline.',
     icon: '◈',
   },
   {
     id: 'PRN-03',
     title: 'Cross-Domain Synergy',
     description:
-      'We connect firmware developers, AI model trainers, and system operators. True power lies in interdisciplinary integration.',
+      'We connect firmware engineers, AI model trainers, and system operators into one cohesive deployment workflow.',
     icon: '⬡',
+  },
+];
+
+const stats = [
+  { value: '99.8%', label: 'System Uptime Target', desc: 'Continuous telemetry & automated failovers' },
+  { value: '5+', label: 'Core Engineering Domains', desc: 'From embedded sensor nodes to deep learning' },
+  { value: '100%', label: 'Type-Safe Architecture', desc: 'Zero runtime compromises on mission-critical logic' },
+  { value: '24/7', label: 'Continuous Telemetry', desc: 'Real-time telemetry and edge monitoring' },
+];
+
+const trustItems = [
+  { name: 'ISO 27001', detail: 'Security Baseline Standards', icon: ShieldCheck },
+  { name: 'IEEE Standards', detail: 'Hardware & RF Compliance', icon: Cpu },
+  { name: 'ROS 2 Framework', detail: 'Robotics & Edge Nodes', icon: Layers },
+  { name: 'Industrial MQTT', detail: 'Zero-Loss Sensor Bus', icon: CheckCircle2 },
+  { name: 'Enterprise QA', detail: 'Automated CI/CD Validation', icon: Award },
+];
+
+const testimonials = [
+  {
+    quote:
+      'NOXVION provided unprecedented engineering clarity for our flood mitigation modeling. Their ability to bridge physical drain sensors with real-time AI dashboards was flawless.',
+    author: 'Dr. Aris Thorne',
+    role: 'Principal Hydrology Advisor',
+    org: 'Urban Infrastructure Initiative',
+    rating: 5,
+  },
+  {
+    quote:
+      'The speed and reliability of our automated attendance and compliance engine exceeded enterprise expectations. Solid code, crisp interfaces, and zero downtime.',
+    author: 'Elena Vasquez',
+    role: 'Director of Corporate Operations',
+    org: 'Syasans Global Services',
+    rating: 5,
+  },
+  {
+    quote:
+      'Finding a partner that understands low-level hardware constraints and high-scale web platforms equally well is rare. Noxvion has that multidisciplinary mastery.',
+    author: 'Marcus Vance',
+    role: 'Head of Technology Strategy',
+    org: 'Apex Automation Labs',
+    rating: 5,
   },
 ];
 
@@ -78,105 +133,72 @@ export const Home: React.FC = () => {
   });
 
   return (
-    <PageContainer>
-      {/* ── HERO ── */}
+    <PageContainer className="bg-white">
+      {/* ── 1. HERO SECTION ── */}
       <section
-        className="relative min-h-[calc(100vh-72px)] flex items-center overflow-hidden bg-black"
+        className="relative min-h-[82vh] flex items-center bg-gradient-to-b from-white via-slate-50 to-[#F8FAFC] border-b border-slate-200/80 overflow-hidden"
         aria-label="Hero"
       >
-        {/* Background Earth Image Layer with subtle integrated parallax */}
+        {/* Subtle corporate grid background */}
         <div
-          className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden"
-          aria-hidden="true"
-        >
-          <ParallaxLayer
-            speed={0.02}
-            maxOffset={14}
-            pointerFactor={6}
-            scaleDepth={0.015}
-            className="absolute -inset-[4%] w-[108%] h-[108%]"
-          >
-            <div
-              className="w-full h-full hero-earth-bg"
-              style={{
-                backgroundImage: `url(${heroEarthImage})`,
-              }}
-            />
-          </ParallaxLayer>
-        </div>
-
-        {/* Subtle dark gradient/overlay to ensure crisp hero text readability while keeping cyan Earth glow intact */}
-        <div
-          className="absolute inset-0 pointer-events-none z-[1] hero-readability-overlay"
-          aria-hidden="true"
-        />
-
-        {/* Top radial ambient glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none z-[2]"
-          style={{
-            background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Layered ambient background */}
-        <AmbientScene variant="hero" className="z-[2]" />
-
-        {/* Perspective depth grid */}
-        <div
-          className="absolute inset-0 pointer-events-none z-[2]"
-          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none opacity-60"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-            maskImage:
-              'radial-gradient(ellipse 70% 60% at 65% 50%, black 20%, transparent 75%)',
-            WebkitMaskImage:
-              'radial-gradient(ellipse 70% 60% at 65% 50%, black 20%, transparent 75%)',
+              'linear-gradient(rgba(10,37,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(10,37,64,0.03) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
           }}
+          aria-hidden="true"
         />
 
-        <div className="nox-container relative py-24 md:py-32 lg:py-36 z-10">
+        {/* Soft royal blue ambient highlight */}
+        <div
+          className="absolute top-0 right-1/4 w-[600px] h-[350px] pointer-events-none rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="nox-container relative py-20 md:py-28 lg:py-32 z-10">
           <div className="max-w-3xl">
+            {/* Eyebrow */}
             <motion.p
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={0}
-              className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6 flex items-center gap-2 font-mono"
+              className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#1E3A8A] mb-5 flex items-center gap-2 font-mono"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
-              NOXVION / TECHNOLOGY & INNOVATION
+              <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
+              NOXVION // APPLIED ENGINEERING & TECHNOLOGY
             </motion.p>
-            <FoldText
-              as="h1"
-              splitBy="word"
-              hinge="top"
-              trigger="scroll"
-              duration={0.65}
-              stagger={0.045}
-              ease="power3.out"
-              perspective={700}
-              creaseShading={0.35}
-              className="text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6"
+
+            {/* Headline */}
+            <motion.h1
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              className="text-4xl sm:text-5xl lg:text-[62px] font-bold leading-[1.08] tracking-[-0.03em] text-[#0A2540] mb-6"
             >
               Building Intelligent{' '}
-              <span className="text-blue-400">Technology</span> for a
-              Smarter Future.
-            </FoldText>
+              <span className="text-[#1E3A8A]">Technology</span> for a Smarter Future.
+            </motion.h1>
+
+            {/* Subtext */}
             <motion.p
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={2}
-              className="text-zinc-400 text-base md:text-lg leading-relaxed mb-10 max-w-2xl"
+              className="text-[#4A6080] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl"
             >
-              Noxvion transforms ideas, research, and emerging technologies
-              into practical software, AI, hardware, IoT, and automation
-              solutions.
+              Noxvion transforms ambitious ideas, research concepts, and emerging technologies
+              into practical software, AI, hardware, IoT, and automation solutions.
             </motion.p>
+
+            {/* Primary & Secondary CTA */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -184,202 +206,96 @@ export const Home: React.FC = () => {
               custom={3}
               className="flex flex-wrap items-center gap-4"
             >
-              <MagneticButton strength={10}>
-                <AccentHalo intensity="normal">
-                  <Button
-                    to="/solutions"
-                    variant="primary"
-                    size="md"
-                    id="hero-cta-solutions"
-                    className="btn-depth-primary"
-                  >
-                    Explore Our Solutions
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </Button>
-                </AccentHalo>
-              </MagneticButton>
+              <Button
+                to="/solutions"
+                variant="primary"
+                size="md"
+                id="hero-cta-solutions"
+                className="bg-[#1E3A8A] text-white hover:bg-[#172554] shadow-sm hover:shadow-md"
+              >
+                Explore Our Solutions
+                <ArrowRight size={15} aria-hidden="true" />
+              </Button>
 
               <Button
                 to="/work-with-us"
                 variant="secondary"
                 size="md"
                 id="hero-cta-work"
-                className="btn-depth-secondary"
               >
                 Work With Us
-                <ChevronRight size={14} aria-hidden="true" />
+                <ChevronRight size={15} aria-hidden="true" />
               </Button>
             </motion.div>
 
-            {/* Floating stat pills */}
-            <ParallaxLayer speed={0.06} maxOffset={18} pointerFactor={-8}>
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
-                custom={4.5}
-                className="flex flex-wrap items-center gap-3 mt-10"
-              >
-                {['AI Engine', 'IoT Layer', 'R&D Core'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase border border-white/10 text-zinc-300 bg-white/[0.04] rounded-full backdrop-blur-sm font-mono"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.8)]" aria-hidden="true" />
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
-            </ParallaxLayer>
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHO WE ARE ── */}
-      <section
-        className="nox-section border-t border-white/10 bg-[#070709] relative overflow-hidden"
-        aria-label="Who we are"
-      >
-        <AmbientScene variant="subtle" />
-        <div className="nox-container relative z-10">
-          <RevealSection className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <RevealItem>
-              <h2 className="text-3xl md:text-[40px] font-semibold leading-[1.2] tracking-[-0.02em] text-white mb-6">
-                From Ideas to Real-World Technology
-              </h2>
-            </RevealItem>
-            <RevealItem delay={0.1}>
-              <p className="text-zinc-400 text-base leading-relaxed mb-6">
-                Noxvion is an innovation-driven technology startup focused on transforming ideas
-                into practical technology solutions. We combine artificial intelligence, software
-                engineering, IoT, automation, and emerging technologies to develop products and
-                systems that address real-world challenges.
-              </p>
-              <p className="text-zinc-400 text-base leading-relaxed mb-8">
-                We bridge the gap between high-level conceptual academic papers and hard
-                production-ready environments — connecting software routing layers, hardware
-                sensors, and intelligent systems into cohesive solutions.
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                {['Software', 'AI', 'Hardware', 'IoT', 'Automation'].map((tag) => (
-                  <Badge key={tag} variant="default">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </RevealItem>
-          </RevealSection>
-        </div>
-      </section>
-
-      {/* ── ENGINEERING APPROACH / PROCESS FLOW ── */}
-      <section
-        className="nox-section border-t border-white/10 bg-black relative overflow-hidden"
-        aria-label="Engineering approach"
-      >
-        {/* Subtle depth grid */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-            maskImage:
-              'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
-            WebkitMaskImage:
-              'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
-          }}
-        />
-
-        <div className="nox-container relative z-10">
-          <div className="text-center mb-12">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-3 font-mono">
-              RESEARCH TO REALITY
-            </p>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-white">
-              Engineering Lifecycle V.4
-            </h2>
-          </div>
-          <div className="relative overflow-x-auto">
-            <div className="flex items-start min-w-max mx-auto lg:min-w-0 lg:justify-center gap-0">
-              {engineeringSteps.map((step, i) => (
-                <motion.div
-                  key={step}
-                  className="flex items-center"
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
-                  custom={i * 0.08}
+            {/* Capability Pills */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              className="flex flex-wrap items-center gap-2.5 mt-10"
+            >
+              {['AI Engine', 'IoT Layer', 'Web Architecture', 'Hardware R&D', 'Automation'].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider uppercase border border-slate-200 bg-white text-[#0A2540] rounded-full shadow-xs font-mono"
                 >
-                  <div className="flex flex-col items-center gap-3 px-4 md:px-6">
-                    <div
-                      className={`w-10 h-10 rounded-lg border flex items-center justify-center text-[10px] font-semibold transition-all duration-300 font-mono ${
-                        i === 2
-                          ? 'border-blue-500 bg-blue-500/20 text-blue-400 shadow-[0_0_16px_rgba(59,130,246,0.4)] new-step-active'
-                          : i < 2
-                          ? 'border-white/20 bg-white/[0.05] text-white'
-                          : 'border-white/10 bg-transparent text-zinc-500'
-                      }`}
-                      aria-label={`Phase ${i + 1}: ${step}`}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    <span
-                      className={`text-[10px] font-semibold tracking-[0.12em] uppercase whitespace-nowrap font-mono ${
-                        i === 2 ? 'text-blue-400' : 'text-zinc-400'
-                      }`}
-                    >
-                      {step}
-                    </span>
-                    <span
-                      className={`text-[9px] tracking-widest uppercase font-mono ${
-                        i === 2 ? 'text-blue-500' : 'text-zinc-600'
-                      }`}
-                    >
-                      PHASE {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  {i < engineeringSteps.length - 1 && (
-                    <div
-                      className={`h-px w-8 md:w-12 ${i < 2 ? 'bg-blue-500/40' : 'bg-white/10'}`}
-                      aria-hidden="true"
-                    />
-                  )}
-                </motion.div>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
+                  {tag}
+                </span>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/*
-        NEW-04 — Decorative SVG path draw.
-        Protected existing effects must not be modified.
-        NewSvgPathDraw is an isolated component.
-      */}
-      <div className="relative overflow-hidden bg-black" aria-hidden="true">
-        <NewSvgPathDraw className="opacity-70" />
-      </div>
-
-      {/* ── CAPABILITIES ── */}
+      {/* ── 2. TRUST BAR (CERTIFICATIONS / STANDARDS) ── */}
       <section
-        className="nox-section border-t border-white/10 bg-[#070709] relative overflow-hidden"
-        aria-label="Capabilities and systems"
+        className="py-10 bg-white border-b border-slate-200/80"
+        aria-label="Trust and compliance standards"
+      >
+        <div className="nox-container">
+          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-slate-600 mb-6 font-mono">
+            ENGINEERING BASELINES & INDUSTRIAL COMPLIANCE
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            {trustItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.name}
+                  className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-[#F8FAFC] hover:bg-white hover:border-slate-200 transition-all duration-200 shadow-xs"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-blue-50 text-[#1E3A8A] flex items-center justify-center shrink-0">
+                    <Icon size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h2 className="text-xs font-bold text-[#0A2540]">{item.name}</h2>
+                    <p className="text-[10px] text-slate-500 font-medium truncate">{item.detail}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. SERVICES / CAPABILITIES GRID ── */}
+      <section
+        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
+        aria-label="Capabilities and services"
         id="capabilities"
       >
-        <AmbientScene variant="subtle" />
-        <div className="nox-container relative z-10">
+        <div className="nox-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <SectionHeader
-              eyebrow="CAPABILITIES"
-              title="Capabilities & Systems"
-              description="We construct bespoke software pipelines, hardware setups, and automated logic units, ensuring clean integrations from sensor to user interface."
-              useFoldText
+              eyebrow="CAPABILITIES & SYSTEMS"
+              title="Engineered for Real-World Impact"
+              description="We construct bespoke software pipelines, hardware nodes, and automated logic units, ensuring clean integrations from sensor to user interface."
             />
-            <Badge variant="cyan" className="self-start md:self-auto shrink-0">
-              05 MODES ACTIVE
+            <Badge variant="default" className="self-start md:self-auto shrink-0">
+              05 DIVISIONS ACTIVE
             </Badge>
           </div>
 
@@ -387,521 +303,466 @@ export const Home: React.FC = () => {
             {solutions.map((sol, i) => {
               const Icon = solutionIcons[sol.icon] || Brain;
               return (
-                <Card3D key={sol.id} className="w-full h-full" maxTilt={5}>
-                  <Link
-                    to={`/solutions/${sol.slug}`}
-                    className="group bg-[#0e0e12] hover:bg-[#131318] border border-white/10 hover:border-blue-500/40 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] transition-all duration-300 p-6 md:p-8 flex flex-col gap-4 focus-visible:outline-2 focus-visible:outline-blue-500 w-full h-full relative"
-                    id={`capability-${sol.slug}`}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="p-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-blue-400 transition-all duration-300 group-hover:border-blue-500/60 group-hover:bg-blue-500/10">
-                        <Icon size={20} className="text-blue-400" aria-hidden="true" />
+                <div key={sol.id} className="nox-card p-6 md:p-8 flex flex-col justify-between h-full group">
+                  <div>
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="p-3 rounded-xl bg-blue-50 text-[#1E3A8A] group-hover:bg-[#1E3A8A] group-hover:text-white transition-colors duration-200">
+                        <Icon size={22} aria-hidden="true" />
                       </div>
-                      <span className="text-[11px] font-semibold tracking-widest text-zinc-500 font-mono">
+                      <span className="text-xs font-semibold tracking-wider text-slate-400 font-mono">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <div>
-                      <h3 className="text-base font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors duration-200">
-                        {sol.title}
-                      </h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        {sol.shortDesc}
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-auto pt-2">
+
+                    <h3 className="text-lg font-bold text-[#0A2540] mb-2.5 group-hover:text-[#1E3A8A] transition-colors duration-200">
+                      {sol.title}
+                    </h3>
+                    <p className="text-sm text-[#4A6080] leading-relaxed mb-6">
+                      {sol.shortDesc}
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="flex flex-wrap gap-1.5 mb-6">
                       {sol.tools.slice(0, 3).map((t) => (
-                        <Badge key={t} variant="dim">
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase font-mono rounded bg-slate-100 text-slate-700"
+                        >
                           {t}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
-                    {/* Arrow indicator */}
-                    <div className="flex items-center gap-1.5 text-blue-400 transition-all duration-300 text-[10px] font-semibold tracking-widest uppercase font-mono">
-                      <span>Explore</span>
-                      <ArrowRight size={12} aria-hidden="true" className="translate-x-0 group-hover:translate-x-1 transition-transform duration-200" />
-                    </div>
-                  </Link>
-                </Card3D>
+
+                    <Link
+                      to={`/solutions/${sol.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-[#1E3A8A] group-hover:text-[#172554] font-mono"
+                      id={`capability-${sol.slug}`}
+                    >
+                      <span>Explore Capability</span>
+                      <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* ── TECHNOLOGY ECOSYSTEM ── */}
+      {/* ── 4. ABOUT / WHY-US SECTION WITH STATS (LARGE NAVY NUMBERS) ── */}
       <section
-        className="nox-section border-t border-white/10 bg-black relative overflow-hidden"
-        aria-label="Technology ecosystem"
+        className="nox-section bg-white border-b border-slate-200/80"
+        aria-label="About Noxvion and key statistics"
       >
-        <div className="nox-container relative z-10">
-          <RevealSection stagger={0.06}>
-            <RevealItem>
+        <div className="nox-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16">
+            <div className="lg:col-span-6">
               <SectionHeader
-                eyebrow="TECHNOLOGY ECOSYSTEM"
-                title="Our Technology Stack"
-                description="Standardized toolchains ensuring precision and reliability across all engineering lifecycles."
-                className="mb-12"
+                eyebrow="WHY NOXVION"
+                title="Bridging Research Concepts to Production Reality"
+                description="Traditional tech agencies either remain purely theoretical or focus exclusively on standard web applications. Noxvion bridges the divide."
               />
-            </RevealItem>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-              {techEcosystem.map((domain, idx) => (
-                <RevealItem key={domain.domain} delay={idx * 0.06}>
-                  <Card3D maxTilt={4} className="w-full h-full">
-                    <div
-                      className="border border-white/10 bg-[#0d0d10] rounded-2xl p-6 h-full relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 hover:shadow-[0_12px_30px_rgba(59,130,246,0.1)]"
-                    >
-                      {/* Top accent line on hover */}
-                      <div
-                        className="absolute top-0 left-0 right-0 h-0.5 bg-transparent group-hover:bg-blue-500 transition-colors duration-300"
-                        aria-hidden="true"
-                      />
-                      <p className="text-[11px] font-semibold tracking-[0.15em] uppercase text-blue-400 mb-4 font-mono">
-                        {domain.domain}
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        {domain.tools.map((tool) => (
-                          <span key={tool} className="text-sm text-zinc-400 group-hover:text-zinc-200 transition-colors duration-200">
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Card3D>
-                </RevealItem>
-              ))}
+              <p className="text-[#4A6080] text-base leading-relaxed mt-4 mb-6">
+                We combine artificial intelligence, hardware design, embedded firmware, IoT pipelines,
+                and modern web systems. From custom microcontrollers running FreeRTOS to resilient
+                cloud microservices, our multidisciplinary teams deliver production-grade systems
+                built to endure real-world conditions.
+              </p>
+              <div className="flex items-center gap-4">
+                <Button to="/about" variant="secondary" size="sm">
+                  Learn About Our History
+                  <ArrowRight size={14} aria-hidden="true" />
+                </Button>
+              </div>
             </div>
-          </RevealSection>
-        </div>
-      </section>
 
-      {/* ── PROJECTS ── */}
-      <section
-        className="nox-section border-t border-white/10 bg-[#070709] relative overflow-hidden"
-        aria-label="Featured projects"
-      >
-        <div className="nox-container relative z-10">
-          <div className="flex items-center justify-between mb-10">
-            <SectionHeader eyebrow="PROJECTS" title="Featured Projects" />
-            <Button to="/projects" variant="ghost" size="sm" id="home-view-all-projects">
-              View All
-            </Button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* ── CARD 0: VARUNA-X (FEATURED PROJECT) ── */}
-            <Card3D maxTilt={4} className="w-full h-full">
-              <a
-                href="https://varuna-x-22174.web.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open VARUNA-X — AI Flood Intelligence &amp; Drainage Response System"
-                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
-              >
-                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] flex flex-col justify-between h-full">
-                  <div
-                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
+            {/* Stats Grid with Large Navy Numbers */}
+            <div className="lg:col-span-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {stats.map((s, idx) => (
+                  <motion.div
+                    key={s.label}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={idx * 0.1}
+                    className="p-6 rounded-2xl border border-slate-200/90 bg-[#F8FAFC] hover:bg-white hover:border-[#1E3A8A]/30 transition-all duration-200 shadow-xs"
                   >
-                    <img
-                      src="/projects/varuna-x/varuna-dashboard.png"
-                      alt="VARUNA-X AI flood intelligence and drainage response system"
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Subtle cyan/blue overlay on hover */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
-                      aria-hidden="true"
-                    />
-                    {/* Scanning line */}
-                    <div
-                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
-                      aria-hidden="true"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
-                        animation: 'scanLine 4s ease-in-out infinite',
-                      }}
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <Badge variant="default">Active Project</Badge>
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
-                          PRJ_01 // AI &amp; IOT
-                        </span>
-                      </div>
-                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
-                        VARUNA-X
-                      </h3>
-                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
-                        AI Flood Intelligence &amp; Drainage Response System
-                      </p>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        An AI-powered flood intelligence system combining IoT drain sensors, AI/ML prediction, GIS mapping, and digital-twin technology to help predict and respond to urban flooding.
-                      </p>
+                    <div className="text-4xl md:text-5xl font-extrabold text-[#0A2540] tracking-tight mb-2">
+                      {s.value}
                     </div>
-                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
-                        STATUS // OPERATIONAL
-                      </span>
-                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
-                        View Project →
-                      </span>
+                    <div className="text-sm font-bold text-[#1E3A8A] mb-1">
+                      {s.label}
                     </div>
-                  </div>
-                </div>
-              </a>
-            </Card3D>
-
-            {/* ── CARD 1: UR NOTED ── */}
-            <Card3D maxTilt={4} className="w-full h-full">
-              <a
-                href="https://urnoted.syasans.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open UR Noted — Training Attendance Management System"
-                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
-              >
-                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] flex flex-col justify-between h-full">
-                  <div
-                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
-                  >
-                    <img
-                      src="/projects/ur-noted/urnoted-dashboard.jpg"
-                      alt="UR Noted training attendance management system dashboard"
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Subtle cyan/blue overlay on hover */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
-                      aria-hidden="true"
-                    />
-                    {/* Scanning line */}
-                    <div
-                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
-                      aria-hidden="true"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
-                        animation: 'scanLine 4.8s ease-in-out infinite',
-                        animationDelay: '0.6s',
-                      }}
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <Badge variant="default">Active Project</Badge>
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
-                          PRJ_02 // SOFTWARE
-                        </span>
-                      </div>
-                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
-                        UR NOTED
-                      </h3>
-                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
-                        Training Attendance Management System
-                      </p>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        An enterprise-grade attendance platform with automated late-registration logic, role-based access control (RBAC), and one-click Excel &amp; PDF export for training session records.
-                      </p>
-                    </div>
-                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
-                        STATUS // OPERATIONAL
-                      </span>
-                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
-                        View Project →
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </Card3D>
-
-            {/* ── CARD 2: SKILLCETAMOL ── */}
-            <Card3D maxTilt={4} className="w-full h-full">
-              <a
-                href="https://skillcetamol.online/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open SkillCetamol — Enterprise Exam Portal"
-                className="cursor-target block h-full focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded-2xl"
-              >
-                <div className="border border-white/10 bg-[#0e0e12] rounded-2xl group transition-all duration-300 hover:border-blue-500/40 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] flex flex-col justify-between h-full">
-                  <div
-                    className="w-full aspect-video bg-[#09090c] border-b border-white/10 relative overflow-hidden"
-                  >
-                    <img
-                      src="/projects/skillcetamol/skillcetamol-dashboard.jpg"
-                      alt="SkillCetamol enterprise exam portal dashboard"
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Subtle cyan/blue overlay on hover */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-500/10 opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none"
-                      aria-hidden="true"
-                    />
-                    {/* Scanning line */}
-                    <div
-                      className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
-                      aria-hidden="true"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.7), transparent)',
-                        animation: 'scanLine 5.2s ease-in-out infinite',
-                        animationDelay: '1.1s',
-                      }}
-                    />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <Badge variant="default">Active Project</Badge>
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-zinc-500 font-mono">
-                          PRJ_03 // SOFTWARE
-                        </span>
-                      </div>
-                      <h3 className="text-base font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">
-                        SKILLCETAMOL
-                      </h3>
-                      <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-2">
-                        Enterprise Exam Portal
-                      </p>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        A secure, multi-role online exam platform with real-time countdowns, score analytics, student rank indexing, and separate dashboards for administrators, proctors, and students.
-                      </p>
-                    </div>
-                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500">
-                        STATUS // OPERATIONAL
-                      </span>
-                      <span className="text-xs font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 transition-colors">
-                        View Project →
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </Card3D>
+                    <p className="text-xs text-[#4A6080] leading-relaxed">
+                      {s.desc}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── TIMELINE ── */}
+      {/* ── 5. ENGINEERING APPROACH / LIFECYCLE ── */}
       <section
-        className="nox-section border-t border-white/10 bg-black relative overflow-hidden"
-        aria-label="Company timeline"
+        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
+        aria-label="Engineering approach"
       >
-        <AmbientScene variant="subtle" />
-        <div className="nox-container relative z-10">
+        <div className="nox-container">
           <SectionHeader
             align="center"
-            eyebrow="HISTORY"
-            title="The Path of Innovation"
-            description="Initiated in 2024 • Scaled in 2026"
-            className="mb-16"
-            useFoldText
+            eyebrow="ENGINEERING RIGOR"
+            title="Our 6-Phase Delivery Framework"
+            description="A repeatable, predictable methodology ensuring precision from initial inquiry to long-term deployment."
+            className="mb-14"
           />
-          <div className="relative overflow-x-auto">
-            <div className="flex items-start min-w-max lg:min-w-0 gap-0 relative">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            {engineeringSteps.map((step) => (
               <div
-                className="absolute top-3 left-12 right-12 h-px"
-                aria-hidden="true"
-                style={{
-                  background: 'linear-gradient(90deg, rgba(59,130,246,0.15), rgba(59,130,246,0.5) 50%, rgba(59,130,246,0.15))',
-                }}
-              />
-              {timeline.map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-30px' }}
-                  custom={idx * 0.1}
-                  className="flex-1 flex flex-col items-center text-center px-4 md:px-6 min-w-[200px] lg:min-w-0"
-                >
-                  <div
-                    className={`relative z-10 w-6 h-6 rounded-full border-2 mb-4 transition-all duration-300 ${
-                      item.status === 'completed'
-                        ? 'border-blue-500 bg-blue-500/20 shadow-[0_0_12px_rgba(59,130,246,0.4)]'
-                        : item.status === 'current'
-                        ? 'border-blue-400 bg-blue-500 shadow-[0_0_16px_rgba(59,130,246,0.8)]'
-                        : 'border-white/20 bg-[#111114]'
-                    }`}
-                    aria-label={`${item.period}: ${item.title} — ${item.status}`}
-                  >
-                    {item.status !== 'upcoming' && (
-                      <div
-                        className="absolute inset-1 rounded-full bg-blue-400"
-                        aria-hidden="true"
-                      />
-                    )}
+                key={step.step}
+                className="nox-card p-5 flex flex-col justify-between h-full bg-white"
+              >
+                <div>
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1E3A8A] font-bold text-xs flex items-center justify-center font-mono mb-4">
+                    {step.step}
                   </div>
-                  <span
-                    className={`text-[10px] font-semibold tracking-widest uppercase mb-2 font-mono ${
-                      item.status === 'upcoming' ? 'text-zinc-500' : 'text-blue-400'
-                    }`}
-                  >
-                    {item.period}
-                  </span>
-                  <h3 className="text-sm font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed max-w-[180px]">
-                    {item.description}
+                  <h3 className="text-xs font-bold tracking-wider uppercase text-[#0A2540] mb-2 font-mono">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-[#4A6080] leading-relaxed">
+                    {step.desc}
                   </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── VALUES ── */}
-      <section
-        className="nox-section border-t border-white/10 bg-[#070709] relative overflow-hidden"
-        aria-label="Core values"
-      >
-        <div className="nox-container relative z-10">
-          <SectionHeader
-            eyebrow="PRINCIPLES"
-            title="Core Operating Principles"
-            className="mb-12"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((v, i) => (
-              <Card3D key={v.id} maxTilt={5} className="w-full h-full">
-                <motion.div
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-80px' }}
-                  custom={i * 0.15}
-                  className="bg-[#0e0e12] border border-white/10 hover:border-blue-500/40 rounded-2xl p-8 md:p-10 h-full relative overflow-hidden group transition-all duration-300 hover:bg-[#131318] shadow-[0_12px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)]"
-                >
-                  {/* Top-left light direction highlight */}
-                  <div
-                    className="absolute top-0 left-0 w-24 h-24 pointer-events-none"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.12) 0%, transparent 70%)',
-                    }}
-                  />
-
-                  <div className="flex items-start justify-between mb-6">
-                    <span
-                      className="text-2xl text-blue-400 group-hover:scale-110 transition-transform duration-300 inline-block"
-                      aria-hidden="true"
-                    >
-                      {v.icon}
-                    </span>
-                    <span className="text-[11px] font-semibold tracking-widest text-zinc-500 font-mono">
-                      {v.id}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-semibold text-white mb-3">{v.title}</h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed">{v.description}</p>
-
-                  {/* Bottom accent line */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent group-hover:bg-blue-500 transition-colors duration-300"
-                    aria-hidden="true"
-                  />
-                </motion.div>
-              </Card3D>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
+                  PHASE {step.step} // ACTIVE
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
+      {/* ── 6. FEATURED PROJECTS ── */}
       <section
-        className="nox-section border-t border-white/10 relative overflow-hidden bg-black"
+        className="nox-section bg-white border-b border-slate-200/80"
+        aria-label="Featured projects"
+      >
+        <div className="nox-container">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+            <SectionHeader
+              eyebrow="PORTFOLIO & CASE STUDIES"
+              title="Featured Engineering Projects"
+              description="Real-world technology systems deployed and running in operational environments."
+            />
+            <Button to="/projects" variant="secondary" size="sm" id="home-view-all-projects">
+              View All Projects
+              <ArrowRight size={13} aria-hidden="true" />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Project 1 */}
+            <div className="nox-card overflow-hidden flex flex-col justify-between group">
+              <div>
+                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
+                  <img
+                    src="/projects/varuna-x/varuna-dashboard.png"
+                    alt="VARUNA-X Dashboard"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
+                    ACTIVE PROJECT
+                  </span>
+                </div>
+                <div className="p-6">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
+                    AI & IOT INFRASTRUCTURE
+                  </span>
+                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
+                    VARUNA-X
+                  </h3>
+                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
+                    AI Flood Intelligence & Drainage Response
+                  </p>
+                  <p className="text-sm text-[#4A6080] leading-relaxed">
+                    An AI-powered flood prediction platform integrating IoT drainage sensors, GIS mapping,
+                    and telemetry analytics to forecast and respond to urban inundation.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
+                <span className="text-[11px] font-mono text-slate-500 uppercase">
+                  STATUS: OPERATIONAL
+                </span>
+                <a
+                  href="https://varuna-x-22174.web.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
+                >
+                  View Live →
+                </a>
+              </div>
+            </div>
+
+            {/* Project 2 */}
+            <div className="nox-card overflow-hidden flex flex-col justify-between group">
+              <div>
+                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
+                  <img
+                    src="/projects/ur-noted/urnoted-dashboard.jpg"
+                    alt="UR Noted Dashboard"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
+                    ACTIVE PROJECT
+                  </span>
+                </div>
+                <div className="p-6">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
+                    ENTERPRISE SOFTWARE
+                  </span>
+                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
+                    UR NOTED
+                  </h3>
+                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
+                    Training Attendance & Compliance Engine
+                  </p>
+                  <p className="text-sm text-[#4A6080] leading-relaxed">
+                    Automated attendance and training compliance solution featuring role-based access control,
+                    session tracking, and one-click compliance export.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
+                <span className="text-[11px] font-mono text-slate-500 uppercase">
+                  STATUS: OPERATIONAL
+                </span>
+                <a
+                  href="https://urnoted.syasans.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
+                >
+                  View Live →
+                </a>
+              </div>
+            </div>
+
+            {/* Project 3 */}
+            <div className="nox-card overflow-hidden flex flex-col justify-between group">
+              <div>
+                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
+                  <img
+                    src="/projects/skillcetamol/skillcetamol-dashboard.jpg"
+                    alt="SkillCetamol Portal"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
+                    ACTIVE PROJECT
+                  </span>
+                </div>
+                <div className="p-6">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
+                    EXAM ARCHITECTURE
+                  </span>
+                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
+                    SKILLCETAMOL
+                  </h3>
+                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
+                    Enterprise Examination Portal
+                  </p>
+                  <p className="text-sm text-[#4A6080] leading-relaxed">
+                    Secure multi-role testing platform featuring real-time proctor telemetry, automatic score
+                    computation, student indexing, and high-concurrency capability.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
+                <span className="text-[11px] font-mono text-slate-500 uppercase">
+                  STATUS: OPERATIONAL
+                </span>
+                <a
+                  href="https://skillcetamol.online/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
+                >
+                  View Live →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 7. TESTIMONIALS SECTION (LIGHT BLUE-TINT BACKGROUND) ── */}
+      <section
+        className="nox-section bg-[#EFF6FF] border-b border-blue-100 relative"
+        aria-label="Client and stakeholder testimonials"
+      >
+        <div className="nox-container">
+          <SectionHeader
+            align="center"
+            eyebrow="CLIENT TESTIMONIALS"
+            title="Trusted by Visionary Organizations"
+            description="Hear from leaders and technical partners who rely on Noxvion for mission-critical systems."
+            className="mb-14"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, idx) => (
+              <motion.div
+                key={t.author}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={idx * 0.1}
+                className="bg-white border border-blue-100/90 rounded-2xl p-7 md:p-8 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow duration-200 relative"
+              >
+                <div>
+                  {/* Star ratings */}
+                  <div className="flex items-center gap-1 text-amber-400 mb-5">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} size={15} fill="currentColor" />
+                    ))}
+                  </div>
+
+                  <Quote className="text-blue-200 mb-3" size={28} />
+                  <p className="text-sm text-[#0A2540] leading-relaxed italic mb-6">
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100">
+                  <div className="font-bold text-sm text-[#0A2540]">{t.author}</div>
+                  <div className="text-xs text-[#1E3A8A] font-medium">{t.role}</div>
+                  <div className="text-[11px] text-slate-500 font-mono">{t.org}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. TECHNOLOGY STACK ECOSYSTEM ── */}
+      <section
+        className="nox-section bg-white border-b border-slate-200/80"
+        aria-label="Technology stack"
+      >
+        <div className="nox-container">
+          <SectionHeader
+            eyebrow="TECHNOLOGY TOOLCHAIN"
+            title="Our Core Engineering Stack"
+            description="Standardized, vetted frameworks and compilers ensuring long-term reliability and zero lock-in."
+            className="mb-12"
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+            {techEcosystem.map((domain) => (
+              <div
+                key={domain.domain}
+                className="nox-card p-6 bg-[#F8FAFC] border-slate-200/80 hover:bg-white transition-all duration-200"
+              >
+                <p className="text-xs font-bold tracking-wider uppercase text-[#1E3A8A] mb-4 font-mono">
+                  {domain.domain}
+                </p>
+                <div className="flex flex-col gap-2">
+                  {domain.tools.map((tool) => (
+                    <span
+                      key={tool}
+                      className="text-sm text-[#4A6080] hover:text-[#0A2540] transition-colors"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. OPERATING PRINCIPLES ── */}
+      <section
+        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
+        aria-label="Core operating principles"
+      >
+        <div className="nox-container">
+          <SectionHeader
+            eyebrow="OPERATING PRINCIPLES"
+            title="How We Engineer Technology"
+            className="mb-12"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {values.map((v, i) => (
+              <motion.div
+                key={v.id}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i * 0.1}
+                className="nox-card p-8 bg-white"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-2xl text-[#1E3A8A] font-bold" aria-hidden="true">
+                    {v.icon}
+                  </span>
+                  <span className="text-[11px] font-semibold tracking-wider text-slate-500 font-mono">
+                    {v.id}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold text-[#0A2540] mb-2">{v.title}</h3>
+                <p className="text-sm text-[#4A6080] leading-relaxed">{v.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. FINAL CTA ── */}
+      <section
+        className="nox-section bg-gradient-to-b from-white to-blue-50/50"
         aria-label="Call to action"
       >
-        {/* Atmospheric radial glow behind CTA */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(59,130,246,0.16) 0%, transparent 70%)',
-          }}
-        />
-
-        <AmbientScene variant="cta" />
-
-        {/* Perspective grid */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-            maskImage:
-              'radial-gradient(ellipse 60% 80% at 50% 50%, black 20%, transparent 100%)',
-            WebkitMaskImage:
-              'radial-gradient(ellipse 60% 80% at 50% 50%, black 20%, transparent 100%)',
-          }}
-        />
-
-        <div className="nox-container text-center relative z-10">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-6 flex items-center justify-center gap-2 font-mono"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
-            LET'S BUILD
-          </motion.p>
-          <FoldText
-            as="h2"
-            splitBy="word"
-            hinge="top"
-            trigger="scroll"
-            className="text-3xl md:text-5xl font-bold leading-[1.1] tracking-[-0.03em] text-white mb-6 max-w-2xl mx-auto"
-          >
+        <div className="nox-container text-center max-w-2xl mx-auto">
+          <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#1E3A8A] mb-4 font-mono">
+            ENGINEERING PARTNERSHIP
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0A2540] leading-tight tracking-tight mb-5">
             Have an Idea Worth Engineering?
-          </FoldText>
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={1}
-            className="text-zinc-400 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed"
-          >
-            Let's transform ambitious ideas, research concepts, and real-world challenges into
-            intelligent technology.
-          </motion.p>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={2}
-          >
-            <MagneticButton strength={12}>
-              <AccentHalo intensity="strong">
-                <Button
-                  to="/work-with-us"
-                  variant="primary"
-                  size="lg"
-                  id="home-final-cta"
-                  className="btn-depth-primary shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)]"
-                >
-                  Work With Us
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Button>
-              </AccentHalo>
-            </MagneticButton>
-          </motion.div>
+          </h2>
+          <p className="text-[#4A6080] text-base md:text-lg mb-8 leading-relaxed">
+            Let's transform ambitious concepts, emerging papers, and complex real-world challenges
+            into intelligent, deployed technology.
+          </p>
+          <div className="flex justify-center">
+            <Button
+              to="/work-with-us"
+              variant="primary"
+              size="lg"
+              id="home-final-cta"
+              className="bg-[#1E3A8A] text-white hover:bg-[#172554] shadow-md"
+            >
+              Start Collaboration
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </section>
     </PageContainer>
   );
 };
+
+export default Home;

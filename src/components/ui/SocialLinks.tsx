@@ -13,6 +13,7 @@ interface SocialLinksProps {
   iconSize?: number;
   size?: number;
   showLabels?: boolean;
+  theme?: 'light' | 'dark';
 }
 
 interface SocialItem {
@@ -24,10 +25,11 @@ interface SocialItem {
 }
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({
-  className = 'flex items-center gap-3',
+  className = 'flex items-center gap-2.5',
   iconSize,
-  size = 18,
+  size = 16,
   showLabels = false,
+  theme = 'light',
 }) => {
   const resolvedSize = iconSize ?? size;
   const items: SocialItem[] = [
@@ -68,6 +70,16 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     },
   ];
 
+  const activeStyles =
+    theme === 'dark'
+      ? 'border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:border-blue-400 hover:bg-white/10'
+      : 'border border-slate-200 bg-[#F8FAFC] text-slate-600 hover:text-[#1E3A8A] hover:border-[#1E3A8A] hover:bg-blue-50/50 shadow-xs';
+
+  const disabledStyles =
+    theme === 'dark'
+      ? 'border border-white/5 bg-white/[0.02] text-slate-600'
+      : 'border border-slate-100 bg-slate-50 text-slate-400';
+
   return (
     <div className={className} role="list" aria-label="Social media profiles">
       {items.map((item) => {
@@ -83,7 +95,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
               rel="noopener noreferrer"
               aria-label={item.ariaLabel}
               role="listitem"
-              className="p-2 rounded-lg border border-white/10 bg-white/[0.03] text-zinc-400 hover:text-white hover:border-blue-500/40 hover:bg-blue-500/10 hover:shadow-[0_0_12px_rgba(59,130,246,0.3)] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black inline-flex items-center gap-2 text-xs font-mono"
+              className={`p-2 rounded-lg transition-all duration-150 inline-flex items-center gap-2 text-xs font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] ${activeStyles}`}
             >
               <IconComponent size={resolvedSize} />
               {showLabels && <span>{item.name}</span>}
@@ -91,14 +103,13 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           );
         }
 
-        // Render disabled / pending configuration state safely without broken navigation
         return (
           <span
             key={item.id}
             role="listitem"
             title={`${item.name} channel pending configuration`}
             aria-label={`${item.name} channel pending configuration`}
-            className="p-2 rounded-lg border border-white/[0.05] bg-white/[0.01] text-zinc-600 cursor-not-allowed inline-flex items-center gap-2 text-xs font-mono select-none"
+            className={`p-2 rounded-lg cursor-not-allowed inline-flex items-center gap-2 text-xs font-mono select-none ${disabledStyles}`}
           >
             <IconComponent size={resolvedSize} />
             {showLabels && <span className="opacity-50">{item.name}</span>}

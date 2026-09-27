@@ -21,17 +21,17 @@ interface ButtonProps {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-blue-600 text-white font-medium border border-blue-500/60 hover:bg-blue-500 hover:border-blue-400 shadow-[0_0_24px_rgba(59,130,246,0.3)] hover:shadow-[0_0_32px_rgba(59,130,246,0.5)] active:scale-[0.98]',
+    'bg-[#1E3A8A] text-white font-semibold hover:bg-[#172554] shadow-sm hover:shadow transition-all duration-200 active:scale-[0.99]',
   secondary:
-    'bg-white/[0.04] text-white border border-white/15 hover:bg-white/[0.08] hover:border-blue-500/50 hover:text-white shadow-[0_4px_16px_rgba(0,0,0,0.4)] active:scale-[0.98]',
+    'bg-white text-[#0A2540] border border-slate-200 hover:border-[#1E3A8A] hover:bg-slate-50 hover:text-[#1E3A8A] shadow-sm transition-all duration-200 active:scale-[0.99]',
   ghost:
-    'bg-transparent text-zinc-400 border border-transparent hover:text-white hover:bg-white/[0.06] active:scale-[0.98]',
+    'bg-transparent text-[#0A2540] hover:text-[#1E3A8A] hover:bg-blue-50/60 transition-colors duration-200 active:scale-[0.99]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-xs tracking-widest uppercase',
-  md: 'px-6 py-3 text-xs tracking-widest uppercase',
-  lg: 'px-8 py-4 text-sm tracking-widest uppercase',
+  sm: 'px-3.5 py-1.5 text-xs tracking-wider uppercase',
+  md: 'px-5 py-2.5 text-xs tracking-wider uppercase',
+  lg: 'px-7 py-3.5 text-sm tracking-wider uppercase',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -49,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
   'aria-label': ariaLabel,
 }) => {
   const base =
-    'cursor-target inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black';
+    'cursor-target inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2';
   const classes = `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   if (to) {

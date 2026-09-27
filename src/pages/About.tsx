@@ -4,21 +4,16 @@ import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
-import { FoldText } from '../components/effects/FoldText';
-import { Card3D } from '../components/effects/Card3D';
-import { AmbientScene } from '../components/effects/AmbientOrb';
-import { RevealSection, RevealItem } from '../components/effects/RevealSection';
-import { MagneticButton } from '../components/effects/MagneticButton';
-import { AccentHalo } from '../components/effects/AccentHalo';
 import { useSEO } from '../hooks/useSEO';
 import { timeline } from '../data/timeline';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] },
+    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
   }),
 };
 
@@ -27,21 +22,21 @@ const principles = [
     id: 'PRN-01',
     title: 'Aggressive Innovation',
     description:
-      'We do not iterate; we leap. We pursue unconventional solutions to bypass traditional technical constraints.',
+      'We do not wait for established patterns. We test emerging compilers, models, and protocols at the cutting edge to solve hard problems.',
     icon: '⟁',
   },
   {
     id: 'PRN-02',
     title: 'Engineering Integrity',
     description:
-      'Zero compromises on security, stability, or structural design. Every system is built to withstand extreme operational stress.',
+      'Zero compromises on security, stability, or structural design. Every system is built to withstand rigorous operational requirements.',
     icon: '◈',
   },
   {
     id: 'PRN-03',
     title: 'Cross-Domain Synergy',
     description:
-      'True breakthroughs occur at intersections. We dissolve silos between software, hardware, and physical engineering.',
+      'True breakthroughs occur at intersections. We dissolve silos between software architecture, hardware engineering, and autonomous systems.',
     icon: '⬡',
   },
 ];
@@ -50,26 +45,16 @@ export const About: React.FC = () => {
   useSEO({
     title: 'About Us — Engineering the Future Through Intelligent Technology',
     description:
-      'NOXVION is an advanced engineering collective dedicated to solving complex, multi-domain challenges through rigorous R&D, bespoke hardware solutions, and mission-critical software architecture.',
+      'NOXVION is an advanced technology engineering collective dedicated to solving complex, multi-domain challenges through applied R&D, bespoke hardware solutions, and mission-critical software.',
   });
 
   return (
-    <PageContainer>
+    <PageContainer className="bg-white">
       {/* ── HERO ── */}
       <section
-        className="relative py-20 md:py-28 overflow-hidden bg-black text-white border-b border-white/10"
+        className="relative py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-[#F8FAFC] border-b border-slate-200/80 overflow-hidden"
         aria-label="About hero"
       >
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none -z-0"
-          style={{
-            background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <AmbientScene variant="hero" />
-
         <div className="nox-container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7">
@@ -78,31 +63,31 @@ export const About: React.FC = () => {
                 initial="hidden"
                 animate="visible"
                 custom={0}
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4 font-mono flex items-center gap-2"
+                className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#1E3A8A] mb-4 font-mono flex items-center gap-2"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
                 CORPORATE OVERVIEW
               </motion.p>
-              <FoldText
-                as="h1"
-                splitBy="word"
-                hinge="top"
-                trigger="scroll"
-                className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-white mb-6"
+              <motion.h1
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                custom={1}
+                className="text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0A2540] mb-6"
               >
                 Engineering the Future Through{' '}
-                <span className="text-blue-400">Intelligent Technology</span>
-              </FoldText>
+                <span className="text-[#1E3A8A]">Intelligent Technology</span>
+              </motion.h1>
               <motion.p
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
                 custom={2}
-                className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl mb-8"
+                className="text-[#4A6080] text-base md:text-lg leading-relaxed max-w-2xl mb-8"
               >
-                NOXVION is an advanced engineering collective dedicated to solving complex,
-                multi-domain challenges through rigorous R&D, bespoke hardware solutions, and
-                mission-critical software architecture.
+                NOXVION is an applied engineering collective dedicated to solving complex,
+                multi-domain challenges through rigorous R&D, bespoke hardware-software solutions,
+                and enterprise-grade architecture.
               </motion.p>
               <motion.div
                 variants={fadeUp}
@@ -111,20 +96,17 @@ export const About: React.FC = () => {
                 custom={3}
                 className="flex flex-wrap items-center gap-4"
               >
-                <MagneticButton strength={8}>
-                  <AccentHalo intensity="normal">
-                    <Button to="/contact" variant="primary" size="md">
-                      Initiate Dialogue
-                    </Button>
-                  </AccentHalo>
-                </MagneticButton>
+                <Button to="/contact" variant="primary" size="md">
+                  Initiate Dialogue
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Button>
                 <Button to="/solutions" variant="secondary" size="md">
                   Explore Solutions
                 </Button>
               </motion.div>
             </div>
 
-            {/* Right — Enhanced system panel */}
+            {/* Right — System Overview Panel */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -132,68 +114,52 @@ export const About: React.FC = () => {
               custom={4}
               className="lg:col-span-5"
             >
-              <div
-                className="border border-white/10 bg-[#0d0d10]/90 text-white rounded-2xl relative overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.8)] backdrop-blur-md"
-              >
-                {/* Header */}
-                <div className="flex items-center justify-between border-b border-white/10 px-5 py-3 bg-white/[0.02]">
+              <div className="nox-card p-6 md:p-8 bg-white border border-slate-200">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                   <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
-                      aria-hidden="true"
-                    />
-                    <span className="text-[10px] font-semibold tracking-widest uppercase text-blue-400 font-mono">
-                      SYS.OP.01 / NOX
+                    <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
+                    <span className="text-xs font-bold tracking-wider uppercase text-[#0A2540] font-mono">
+                      NOXVION ARCHITECTURE
                     </span>
                   </div>
-                  <span className="text-[10px] text-zinc-400 font-mono font-medium">STATUS: NOMINAL</span>
+                  <span className="text-[11px] font-mono font-semibold text-emerald-600 flex items-center gap-1">
+                    <CheckCircle2 size={13} />
+                    ACTIVE
+                  </span>
                 </div>
 
-                <div className="p-5 space-y-4">
-                  {/* Foundation Architecture */}
-                  <div
-                    className="bg-white/[0.04] p-4 border border-white/10 rounded-xl group transition-colors duration-200"
-                  >
-                    <p className="text-[10px] tracking-widest uppercase text-zinc-400 font-semibold mb-1 font-mono">
-                      FOUNDATION ARCHITECTURE
+                <div className="space-y-4">
+                  <div className="bg-[#F8FAFC] p-4 rounded-xl border border-slate-100">
+                    <p className="text-[10px] tracking-wider uppercase text-slate-500 font-semibold mb-1 font-mono">
+                      CORE CAPABILITIES
                     </p>
-                    <p className="text-xs text-white font-mono font-bold">CORE_ENGINEERING_SUITE_V2</p>
-                  </div>
-
-                  {/* Primary Domains */}
-                  <div
-                    className="bg-white/[0.03] p-4 border border-white/10 rounded-xl group transition-colors duration-200"
-                  >
-                    <p className="text-[10px] tracking-widest uppercase text-zinc-400 font-semibold mb-1 font-mono">
-                      PRIMARY DOMAINS
-                    </p>
-                    <p className="text-xs text-zinc-300 leading-relaxed font-medium">
-                      AI Engine • Distributed Mesh • Hardware Sensors • Real-Time Telemetry
+                    <p className="text-xs text-[#0A2540] font-mono font-bold">
+                      AI ENGINE • IOT SENSORS • REAL-TIME APIS
                     </p>
                   </div>
 
-                  {/* Metrics row */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/[0.04] p-3 border border-white/10 rounded-xl text-center">
-                      <p className="text-blue-400 text-lg font-bold font-mono">5+</p>
-                      <p className="text-[10px] tracking-widest uppercase text-zinc-400 font-semibold mt-1 font-mono">Domains</p>
+                  <div className="bg-[#F8FAFC] p-4 rounded-xl border border-slate-100">
+                    <p className="text-[10px] tracking-wider uppercase text-slate-500 font-semibold mb-1 font-mono">
+                      DELIVERY STANDARDS
+                    </p>
+                    <p className="text-xs text-[#4A6080] leading-relaxed">
+                      Rigorous static typing, zero-trust telemetry, and multi-domain hardware integration.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 pt-1">
+                    <div className="bg-blue-50/70 p-3.5 rounded-xl text-center border border-blue-100">
+                      <p className="text-[#1E3A8A] text-2xl font-bold font-mono">5+</p>
+                      <p className="text-[10px] tracking-wider uppercase text-slate-600 font-semibold mt-0.5 font-mono">
+                        Domains
+                      </p>
                     </div>
-                    <div className="bg-white/[0.04] p-3 border border-white/10 rounded-xl text-center">
-                      <p className="text-blue-400 text-lg font-bold font-mono">&lt;1.2ms</p>
-                      <p className="text-[10px] tracking-widest uppercase text-zinc-400 font-semibold mt-1 font-mono">Latency</p>
+                    <div className="bg-blue-50/70 p-3.5 rounded-xl text-center border border-blue-100">
+                      <p className="text-[#1E3A8A] text-2xl font-bold font-mono">99.8%</p>
+                      <p className="text-[10px] tracking-wider uppercase text-slate-600 font-semibold mt-0.5 font-mono">
+                        Reliability
+                      </p>
                     </div>
-                  </div>
-
-                  {/* Status bar */}
-                  <div className="flex items-center justify-between text-[11px] text-blue-400 font-semibold pt-1 font-mono">
-                    <span>SECURITY BASELINE: STRICT</span>
-                    <span className="flex items-center gap-1.5">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
-                        aria-hidden="true"
-                      />
-                      ONLINE
-                    </span>
                   </div>
                 </div>
               </div>
@@ -204,191 +170,112 @@ export const About: React.FC = () => {
 
       {/* ── STRATEGIC FOUNDATION ── */}
       <section
-        className="nox-section border-b border-white/10 bg-[#070709] relative overflow-hidden"
+        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
         aria-label="Strategic Foundation"
       >
-        <AmbientScene variant="subtle" />
-        <div className="nox-container relative z-10">
-          <RevealSection>
-            <RevealItem>
-              <SectionHeader
-                eyebrow="STRATEGIC FOUNDATION"
-                title="Purpose & Trajectory"
-                className="mb-12"
-              />
-            </RevealItem>
+        <div className="nox-container">
+          <SectionHeader
+            eyebrow="STRATEGIC FOUNDATION"
+            title="Purpose & Trajectory"
+            description="Our origin, values, and commitments to enterprise innovation."
+            className="mb-12"
+          />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Who We Are — Left */}
-              <RevealItem className="lg:col-span-7">
-                <Card3D maxTilt={4} className="h-full">
-                  <div className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
-                    <div
-                      className="absolute top-0 left-0 w-32 h-32 pointer-events-none"
-                      aria-hidden="true"
-                      style={{
-                        background:
-                          'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.12) 0%, transparent 70%)',
-                      }}
-                    />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Who We Are */}
+            <div className="lg:col-span-7">
+              <div className="nox-card p-8 md:p-10 flex flex-col justify-between h-full bg-white">
+                <div>
+                  <h3 className="text-xl font-bold text-[#0A2540] mb-4">Who We Are</h3>
+                  <p className="text-[#4A6080] text-base leading-relaxed mb-5">
+                    Noxvion is an innovation-driven technology startup focused on transforming ideas
+                    into practical technology solutions. We combine artificial intelligence, machine
+                    learning, software engineering, IoT, hardware, automation, and applied product R&D
+                    to build systems that address real-world challenges.
+                  </p>
+                  <p className="text-[#4A6080] text-base leading-relaxed">
+                    We are engineers, researchers, and systems architects united by a singular focus:
+                    disciplined technical execution. Operating at the intersection of embedded hardware,
+                    secure data pipelines, and intelligent interfaces, NOXVION builds scalable solutions
+                    for forward-thinking organizations.
+                  </p>
+                </div>
 
-                    <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-2.5 h-2.5 rounded-sm bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
-                        <h3 className="text-xl font-bold text-white">Who We Are</h3>
-                      </div>
-                      <p className="text-zinc-400 text-base leading-relaxed mb-6">
-                        Noxvion is an innovation-driven technology startup focused on transforming ideas
-                        into practical technology solutions. We combine artificial intelligence, machine
-                        learning, software engineering, IoT, hardware, automation, research, and product R&D
-                        to build systems that address high-stake real-world challenges.
-                      </p>
-                      <p className="text-zinc-400 text-base leading-relaxed">
-                        We are a syndicate of engineers, researchers, and systems architects united by a
-                        singular focus: absolute technical supremacy. Operating at the intersection of
-                        hardware integration, secure communications, and autonomous systems, NOXVION builds
-                        the infrastructure for the next paradigm of enterprise intelligence.
-                      </p>
-                    </div>
-
-                    <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-2">
-                      <Badge variant="cyan">RESEARCH</Badge>
-                      <Badge variant="cyan">HARDWARE</Badge>
-                      <Badge variant="cyan">SOFTWARE</Badge>
-                      <Badge variant="cyan">AI</Badge>
-                      <Badge variant="cyan">AUTOMATION</Badge>
-                    </div>
-                  </div>
-                </Card3D>
-              </RevealItem>
-
-              {/* Mission & Vision — Right */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
-                <RevealItem delay={0.1}>
-                  <Card3D maxTilt={5} className="w-full">
-                    <div className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
-                      <div
-                        className="absolute top-0 right-0 w-24 h-24 pointer-events-none"
-                        aria-hidden="true"
-                        style={{
-                          background:
-                            'radial-gradient(circle at 100% 0%, rgba(59,130,246,0.12) 0%, transparent 70%)',
-                        }}
-                      />
-                      <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] font-semibold tracking-widest uppercase text-blue-400 font-mono">
-                          MISSION OBJECTIVE
-                        </p>
-                        <span className="text-[10px] text-zinc-500 font-mono">MSN-001</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-white mb-3">Our Mission</h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        To build accessible, intelligent, and impactful technology that improves the way
-                        people, organizations, and communities solve complex engineering and operational problems.
-                      </p>
-                    </div>
-                  </Card3D>
-                </RevealItem>
-
-                <RevealItem delay={0.2}>
-                  <Card3D maxTilt={5} className="w-full">
-                    <div className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
-                      <div
-                        className="absolute bottom-0 right-0 w-24 h-24 pointer-events-none"
-                        aria-hidden="true"
-                        style={{
-                          background:
-                            'radial-gradient(circle at 100% 100%, rgba(59,130,246,0.12) 0%, transparent 70%)',
-                        }}
-                      />
-                      <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] font-semibold tracking-widest uppercase text-blue-400 font-mono">
-                          LONG-TERM VISION
-                        </p>
-                        <span className="text-[10px] text-zinc-500 font-mono">VSN-X9</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-white mb-3">Our Vision</h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        To become a globally recognized technology company creating intelligent products that
-                        seamlessly connect software, artificial intelligence, hardware, and human needs.
-                      </p>
-                    </div>
-                  </Card3D>
-                </RevealItem>
+                <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                  <Badge variant="default">RESEARCH</Badge>
+                  <Badge variant="default">HARDWARE</Badge>
+                  <Badge variant="default">SOFTWARE</Badge>
+                  <Badge variant="default">AI & ML</Badge>
+                  <Badge variant="default">AUTOMATION</Badge>
+                </div>
               </div>
             </div>
-          </RevealSection>
+
+            {/* Mission & Vision */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <div className="nox-card p-8 bg-white">
+                <p className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono mb-2">
+                  MISSION
+                </p>
+                <h3 className="text-lg font-bold text-[#0A2540] mb-2">Our Mission</h3>
+                <p className="text-sm text-[#4A6080] leading-relaxed">
+                  To build accessible, intelligent, and impactful technology that empowers organizations
+                  and communities to solve complex engineering and operational problems.
+                </p>
+              </div>
+
+              <div className="nox-card p-8 bg-white">
+                <p className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono mb-2">
+                  VISION
+                </p>
+                <h3 className="text-lg font-bold text-[#0A2540] mb-2">Our Vision</h3>
+                <p className="text-sm text-[#4A6080] leading-relaxed">
+                  To become a recognized technology company creating products that seamlessly connect
+                  software, artificial intelligence, physical hardware, and human needs.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── PATH OF INNOVATION (Timeline) ── */}
+      {/* ── PATH OF INNOVATION (TIMELINE) ── */}
       <section
-        className="nox-section border-b border-white/10 bg-black relative overflow-hidden"
+        className="nox-section bg-white border-b border-slate-200/80"
         aria-label="Path of Innovation"
       >
-        <AmbientScene variant="subtle" />
-        <div className="nox-container relative z-10">
+        <div className="nox-container">
           <SectionHeader
             eyebrow="CHRONOLOGY"
             title="Path of Innovation"
-            description="Verified historical milestones and foundational progression."
+            description="Verified milestones and evolutionary progression."
             className="mb-14"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {timeline.map((item, idx) => (
-              <motion.div
+              <div
                 key={item.id}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-60px' }}
-                custom={idx * 0.1}
+                className="nox-card p-6 flex flex-col justify-between h-full bg-[#F8FAFC] hover:bg-white transition-all duration-200"
               >
-                <Card3D maxTilt={5} className="w-full h-full">
-                  <div
-                    className="bg-[#0e0e12] border border-white/10 rounded-2xl p-6 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
-                  >
-                    {/* Top accent when active */}
-                    <div
-                      className={`absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 ${
-                        item.status === 'completed' || item.status === 'current'
-                          ? 'opacity-100 bg-blue-500'
-                          : 'opacity-0'
-                      }`}
-                      aria-hidden="true"
-                    />
-
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-bold tracking-widest text-blue-400 font-mono">
-                          {item.period}
-                        </span>
-                        <span className="text-[10px] text-zinc-500 font-mono">0{idx + 1}</span>
-                      </div>
-                      <h3 className="text-base font-bold text-white mb-3">{item.title}</h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="mt-6 pt-4 border-t border-white/10">
-                      <span
-                        className={`text-[10px] tracking-widest uppercase font-semibold flex items-center gap-1.5 font-mono ${
-                          item.status === 'completed' ? 'text-blue-400' : 'text-zinc-500'
-                        }`}
-                      >
-                        {item.status === 'completed' && (
-                          <span
-                            className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
-                            aria-hidden="true"
-                          />
-                        )}
-                        STATUS: {item.status.toUpperCase()}
-                      </span>
-                    </div>
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-bold tracking-widest text-[#1E3A8A] font-mono">
+                      {item.period}
+                    </span>
+                    <span className="text-xs font-bold text-slate-400 font-mono">0{idx + 1}</span>
                   </div>
-                </Card3D>
-              </motion.div>
+                  <h3 className="text-base font-bold text-[#0A2540] mb-2">{item.title}</h3>
+                  <p className="text-sm text-[#4A6080] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-200/70">
+                  <span className="text-[10px] tracking-wider uppercase font-semibold text-[#1E3A8A] font-mono">
+                    STATUS: {item.status.toUpperCase()}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -396,64 +283,42 @@ export const About: React.FC = () => {
 
       {/* ── CORE OPERATING PRINCIPLES ── */}
       <section
-        className="nox-section bg-[#070709] relative overflow-hidden"
+        className="nox-section bg-[#F8FAFC]"
         aria-label="Core Operating Principles"
       >
-        <div className="nox-container relative z-10">
+        <div className="nox-container">
           <SectionHeader
             eyebrow="VALUES & PROTOCOLS"
             title="Core Operating Principles"
+            description="The foundational engineering tenets that govern every project we undertake."
             className="mb-12"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {principles.map((prn, idx) => (
-              <Card3D key={prn.id} maxTilt={5} className="w-full h-full">
-                <motion.div
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  custom={idx * 0.1}
-                  className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col justify-between h-full relative overflow-hidden group transition-all duration-300 hover:border-blue-500/40 shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
-                >
-                  <div
-                    className="absolute top-0 left-0 w-24 h-24 pointer-events-none"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        'radial-gradient(circle at 0% 0%, rgba(59,130,246,0.12) 0%, transparent 70%)',
-                    }}
-                  />
-
-                  <div>
-                    <div className="flex items-start justify-between mb-6">
-                      <span
-                        className="text-3xl text-blue-400 group-hover:scale-110 transition-transform duration-300 inline-block"
-                        aria-hidden="true"
-                      >
-                        {prn.icon}
-                      </span>
-                      <span className="text-[11px] font-bold tracking-widest text-zinc-500 font-mono">
-                        {prn.id}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-3">{prn.title}</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                      {prn.description}
-                    </p>
+            {principles.map((prn) => (
+              <div
+                key={prn.id}
+                className="nox-card p-8 bg-white flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="flex items-start justify-between mb-6">
+                    <span className="text-3xl text-[#1E3A8A] font-bold" aria-hidden="true">
+                      {prn.icon}
+                    </span>
+                    <span className="text-[11px] font-bold tracking-widest text-slate-500 font-mono">
+                      {prn.id}
+                    </span>
                   </div>
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-zinc-500 font-semibold font-mono">
-                    <span>SYSTEM_STANDARD</span>
-                    <span className="text-blue-400 font-bold">ENFORCED</span>
-                  </div>
-
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    aria-hidden="true"
-                  />
-                </motion.div>
-              </Card3D>
+                  <h3 className="text-lg font-bold text-[#0A2540] mb-2">{prn.title}</h3>
+                  <p className="text-sm text-[#4A6080] leading-relaxed mb-6">
+                    {prn.description}
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono">
+                  <span className="text-slate-500 font-semibold">STANDARD</span>
+                  <span className="text-[#1E3A8A] font-bold">VERIFIED</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -461,3 +326,5 @@ export const About: React.FC = () => {
     </PageContainer>
   );
 };
+
+export default About;

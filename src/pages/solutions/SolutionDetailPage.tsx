@@ -5,10 +5,6 @@ import { PageContainer } from '../../components/layout/PageContainer';
 import { SectionHeader } from '../../components/ui/SectionHeader';
 import { Badge, TechBadge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
-import { Card3D } from '../../components/effects/Card3D';
-import { AmbientScene } from '../../components/effects/AmbientOrb';
-import { MagneticButton } from '../../components/effects/MagneticButton';
-import { AccentHalo } from '../../components/effects/AccentHalo';
 import { useSEO } from '../../hooks/useSEO';
 import { solutions } from '../../data/solutions';
 
@@ -42,79 +38,74 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
   const Icon = iconMap[solution.icon] || Brain;
 
   return (
-    <PageContainer>
+    <PageContainer className="bg-white">
       {/* ── HERO ── */}
-      <section className="relative py-20 md:py-28 bg-black text-white border-b border-white/10 overflow-hidden" aria-label="Solution Hero">
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none -z-0"
-          style={{
-            background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <AmbientScene variant="hero" />
+      <section
+        className="relative py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-[#F8FAFC] border-b border-slate-200/80 overflow-hidden"
+        aria-label="Solution Hero"
+      >
         <div className="nox-container relative z-10">
-          <div className="flex items-center gap-3 mb-4 font-mono">
-            <Link to="/solutions" className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 hover:text-white transition-colors">
+          <div className="flex items-center gap-2 mb-5 font-mono">
+            <Link
+              to="/solutions"
+              className="text-xs font-semibold tracking-wider uppercase text-[#1E3A8A] hover:underline"
+            >
               SOLUTIONS
             </Link>
-            <span className="text-zinc-600 text-xs">/</span>
-            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
+            <span className="text-slate-400 text-xs">/</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-slate-500">
               {solution.id}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-8">
-              <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.1] tracking-[-0.03em] text-white mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-[52px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0A2540] mb-5">
                 {solution.title}
               </h1>
-              <p className="text-zinc-400 text-lg md:text-xl leading-relaxed max-w-3xl mb-8">
+              <p className="text-[#4A6080] text-lg md:text-xl leading-relaxed max-w-3xl mb-8">
                 {solution.description}
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <MagneticButton strength={8}>
-                  <AccentHalo intensity="normal">
-                    <Button to="/contact" variant="primary" size="md">
-                      {solution.cta}
-                    </Button>
-                  </AccentHalo>
-                </MagneticButton>
+                <Button to="/contact" variant="primary" size="md">
+                  {solution.cta}
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Button>
                 <Button to="/solutions" variant="secondary" size="md">
                   View All Solutions
                 </Button>
               </div>
             </div>
 
-            {/* Right Tech Card with 3D Depth */}
+            {/* Right Tech Card */}
             <div className="lg:col-span-4">
-              <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.15)">
-                <div className="bg-[#0e0e12] text-white border border-white/10 p-6 shadow-[0_16px_40px_rgba(0,0,0,0.8)] rounded-2xl">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                    <div className="flex items-center gap-2">
-                      <Icon size={18} className="text-blue-400" />
-                      <span className="text-xs font-mono font-bold text-white">{solution.id} SPEC</span>
-                    </div>
-                    <Badge variant="cyan">PRODUCTION</Badge>
+              <div className="nox-card p-6 bg-white border border-slate-200">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Icon size={20} className="text-[#1E3A8A]" />
+                    <span className="text-xs font-mono font-bold text-[#0A2540]">
+                      {solution.id} SPEC
+                    </span>
                   </div>
-                  <p className="text-[10px] uppercase font-mono tracking-widest text-zinc-500 font-semibold mb-3">
-                    INTEGRATED TOOLSET
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {solution.tools.map((t) => (
-                      <TechBadge key={t} label={t} />
-                    ))}
-                  </div>
+                  <Badge variant="default">PRODUCTION</Badge>
                 </div>
-              </Card3D>
+
+                <p className="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-semibold mb-3">
+                  INTEGRATED TOOLSET
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {solution.tools.map((t) => (
+                    <TechBadge key={t} label={t} />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CORE CAPABILITIES ── */}
-      <section className="nox-section border-b border-white/10 bg-[#070709]" aria-label="Core Capabilities">
+      <section className="nox-section border-b border-slate-200/80 bg-[#F8FAFC]" aria-label="Core Capabilities">
         <div className="nox-container">
           <SectionHeader
             eyebrow="CAPABILITY SPECIFICATION"
@@ -125,29 +116,30 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {solution.capabilities.map((cap, i) => (
-              <Card3D key={i} intensity="low" glowColor="rgba(59, 130, 246, 0.12)" className="h-full">
-                <div className="h-full bg-[#0e0e12] border border-white/10 rounded-2xl p-6 flex items-start gap-4 hover:border-blue-500/40 hover:shadow-[0_16px_36px_rgba(59,130,246,0.12)] transition-all duration-300">
-                  <div className="p-2.5 rounded-lg border border-white/10 bg-white/[0.04] text-blue-400 shrink-0">
-                    <CheckCircle2 size={18} />
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-mono text-zinc-500 font-semibold">CAP-{String(i + 1).padStart(2, '0')}</span>
-                    </div>
-                    <h3 className="text-base font-bold text-white mb-1">{cap}</h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed">
-                      Engineered according to rigorous validation benchmarks, failsafe redundancies, and clean modular APIs.
-                    </p>
-                  </div>
+              <div
+                key={i}
+                className="nox-card p-6 md:p-7 flex items-start gap-4 bg-white"
+              >
+                <div className="p-2.5 rounded-lg bg-blue-50 text-[#1E3A8A] shrink-0">
+                  <CheckCircle2 size={20} />
                 </div>
-              </Card3D>
+                <div>
+                  <span className="text-[10px] font-mono text-slate-400 font-semibold block mb-1">
+                    CAP-{String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-base font-bold text-[#0A2540] mb-1.5">{cap}</h3>
+                  <p className="text-xs text-[#4A6080] leading-relaxed">
+                    Engineered according to rigorous validation benchmarks, failsafe redundancies, and clean modular APIs.
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── TECHNOLOGY MATRIX ── */}
-      <section className="nox-section border-b border-white/10 bg-black" aria-label="Technology Matrix">
+      <section className="nox-section border-b border-slate-200/80 bg-white" aria-label="Technology Matrix">
         <div className="nox-container">
           <SectionHeader
             eyebrow="STACK INTEGRATION"
@@ -159,11 +151,11 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
             {solution.tools.map((tool) => (
               <div
                 key={tool}
-                className="bg-[#0e0e12] border border-white/10 rounded-xl p-5 text-center flex flex-col items-center justify-center gap-2 hover:border-blue-500/40 hover:shadow-[0_8px_20px_rgba(59,130,246,0.1)] transition-all duration-200"
+                className="nox-card p-5 text-center flex flex-col items-center justify-center gap-2 bg-[#F8FAFC]"
               >
-                <Terminal size={20} className="text-blue-400 mb-1" />
-                <span className="text-sm font-bold text-white">{tool}</span>
-                <span className="text-[10px] font-mono text-zinc-500 font-semibold">STABLE</span>
+                <Terminal size={20} className="text-[#1E3A8A] mb-1" />
+                <span className="text-sm font-bold text-[#0A2540]">{tool}</span>
+                <span className="text-[10px] font-mono text-slate-500 font-semibold">VERIFIED</span>
               </div>
             ))}
           </div>
@@ -171,37 +163,27 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ customSl
       </section>
 
       {/* ── INTEGRATION CTA ── */}
-      <section className="nox-section bg-black text-white relative overflow-hidden border-t border-white/10" aria-label="Solution CTA">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(59,130,246,0.16) 0%, transparent 70%)',
-          }}
-        />
-
-        <AmbientScene variant="cta" />
-        <div className="nox-container text-center relative z-10">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4 font-mono">
-            INITIATE DEPLOYMENT
+      <section className="nox-section bg-gradient-to-b from-white to-blue-50/50 text-center" aria-label="Solution CTA">
+        <div className="nox-container max-w-2xl mx-auto">
+          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#1E3A8A] mb-3 font-mono">
+            DEPLOYMENT READINESS
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540] mb-4">
             Ready to integrate {solution.title}?
           </h2>
-          <p className="text-zinc-400 text-base max-w-xl mx-auto mb-8 leading-relaxed">
-            Engage directly with our engineering syndicate to scope architecture, prototyping timeline, and integration milestones.
+          <p className="text-[#4A6080] text-base max-w-xl mx-auto mb-8 leading-relaxed">
+            Engage directly with our engineering team to scope architecture, prototyping timelines, and integration milestones.
           </p>
-          <MagneticButton strength={10}>
-            <AccentHalo intensity="normal">
-              <Button to="/contact" variant="primary" size="lg">
-                {solution.cta}
-                <ArrowRight size={16} aria-hidden="true" />
-              </Button>
-            </AccentHalo>
-          </MagneticButton>
+          <div className="flex justify-center">
+            <Button to="/contact" variant="primary" size="lg">
+              {solution.cta}
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </section>
     </PageContainer>
   );
 };
+
+export default SolutionDetailPage;

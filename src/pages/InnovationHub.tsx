@@ -4,9 +4,6 @@ import { ArrowRight, CheckCircle2, AlertCircle, ExternalLink } from 'lucide-reac
 import { PageContainer } from '../components/layout/PageContainer';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { Badge } from '../components/ui/Badge';
-import { FoldText } from '../components/effects/FoldText';
-import { Card3D } from '../components/effects/Card3D';
-import { AmbientScene } from '../components/effects/AmbientOrb';
 import { useSEO } from '../hooks/useSEO';
 import { articleCategories } from '../data/articles';
 import { contactConfig, isConfigured } from '../config/contact';
@@ -30,13 +27,12 @@ export const InnovationHub: React.FC = () => {
   } = useForm<NewsletterFormValues>();
 
   useSEO({
-    title: 'Innovation Hub — Ideas. Research. Technology. Progress.',
+    title: 'Innovation Hub — Research, Insights & Progress | NOXVION',
     description:
       'Explore technology insights, research notes, engineering developments, and breakthroughs emerging from the Noxvion ecosystem.',
   });
 
   const onSubmit = async (data: NewsletterFormValues) => {
-    // 1. If backend newsletter endpoint configured
     if (isConfigured(contactConfig.newsletterEndpoint)) {
       try {
         const res = await fetch(contactConfig.newsletterEndpoint!, {
@@ -61,7 +57,6 @@ export const InnovationHub: React.FC = () => {
       }
     }
 
-    // 2. If client email configured, dispatch via mailto
     if (isConfigured(contactConfig.email)) {
       const subject = 'NOXVION Lab Telemetry Subscription';
       const body = `Please register ${data.email} to receive NOXVION lab telemetry and research publications.`;
@@ -71,58 +66,45 @@ export const InnovationHub: React.FC = () => {
       return;
     }
 
-    // 3. If neither endpoint nor email configured
     setStatus('config_notice');
     setStatusMessage('Subscription staged. Distribution endpoint (VITE_NEWSLETTER_ENDPOINT) is pending configuration.');
   };
 
   return (
-    <PageContainer>
+    <PageContainer className="bg-white">
       {/* ── HERO ── */}
-      <section className="relative py-20 md:py-28 bg-black text-white border-b border-white/10 overflow-hidden" aria-label="Innovation Hub Hero">
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] pointer-events-none -z-0"
-          style={{
-            background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.18) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <AmbientScene variant="hero" />
+      <section
+        className="relative py-20 md:py-28 bg-gradient-to-b from-white via-slate-50 to-[#F8FAFC] border-b border-slate-200/80 overflow-hidden"
+        aria-label="Innovation Hub Hero"
+      >
         <div className="nox-container relative z-10">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4 font-mono flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
+          <p className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#1E3A8A] mb-4 font-mono flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
             NOXVION / INNOVATION HUB
           </p>
-          <FoldText
-            as="h1"
-            splitBy="word"
-            hinge="top"
-            trigger="scroll"
-            className="text-4xl md:text-5xl lg:text-[60px] font-semibold leading-[1.05] tracking-[-0.03em] text-white mb-6"
-          >
+          <h1 className="text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.1] tracking-[-0.03em] text-[#0A2540] mb-5">
             Ideas. Research.<br />
-            <span className="text-blue-400">Technology.</span> Progress.
-          </FoldText>
-          <p className="text-zinc-400 text-base md:text-xl leading-relaxed max-w-2xl">
-            Explore technology insights, research notes, engineering developments, and breakthroughs
+            <span className="text-[#1E3A8A]">Technology.</span> Progress.
+          </h1>
+          <p className="text-[#4A6080] text-base md:text-xl leading-relaxed max-w-2xl">
+            Explore technology insights, applied research notes, engineering developments, and breakthroughs
             emerging from the Noxvion ecosystem.
           </p>
         </div>
       </section>
 
       {/* ── CATEGORY BAR ── */}
-      <section className="border-b border-white/10 bg-black/90 backdrop-blur-xl sticky top-16 md:top-[72px] z-30 overflow-x-auto shadow-md">
+      <section className="border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-16 md:top-[72px] z-30 overflow-x-auto shadow-xs">
         <div className="nox-container">
           <div className="flex items-center gap-6 py-4 min-w-max font-mono">
             {articleCategories.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
-                className={`cursor-target text-xs font-semibold tracking-widest uppercase pb-1 transition-colors relative ${
+                className={`cursor-target text-xs font-semibold tracking-wider uppercase pb-1 transition-colors relative ${
                   activeCategory === cat.slug
-                    ? 'text-blue-400 font-bold border-b-2 border-blue-500'
-                    : 'text-zinc-500 hover:text-white'
+                    ? 'text-[#1E3A8A] font-bold border-b-2 border-[#1E3A8A]'
+                    : 'text-slate-500 hover:text-[#0A2540]'
                 }`}
               >
                 {cat.label}
@@ -133,117 +115,99 @@ export const InnovationHub: React.FC = () => {
       </section>
 
       {/* ── FEATURED INNOVATION CARD (Varuna X) ── */}
-      <section className="nox-section border-b border-white/10 bg-[#070709]" aria-label="Featured Innovation">
+      <section className="nox-section border-b border-slate-200/80 bg-[#F8FAFC]" aria-label="Featured Innovation">
         <div className="nox-container">
           <div className="flex items-center justify-between mb-8">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-blue-400 font-mono flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" aria-hidden="true" />
-              [ SYS_MODULE ] / INNOVATION SPOTLIGHT
+            <p className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#1E3A8A] font-mono flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
+              INNOVATION SPOTLIGHT
             </p>
-            <span className="text-[10px] font-mono text-zinc-500 font-semibold uppercase hidden sm:inline-block">
-              FLAGSHIP R&amp;D INITIATIVE
+            <span className="text-[10px] font-mono text-slate-500 font-semibold uppercase hidden sm:inline-block">
+              FLAGSHIP R&D INITIATIVE
             </span>
           </div>
 
-          <Card3D intensity="low" glowColor="rgba(59, 130, 246, 0.2)">
-            <a
-              href="https://varuna-x-22174.web.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Explore Varuna X — AI Flood Intelligence &amp; Drainage Response System"
-              className="cursor-target block rounded-2xl focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
-            >
-              <div className="border border-white/10 bg-[#0e0e12] rounded-2xl grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:border-blue-500/50 hover:shadow-[0_24px_60px_rgba(59,130,246,0.18)] transition-all duration-300 group">
-                
-                {/* Visual side */}
-                <div className="lg:col-span-6 bg-[#09090c] relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 flex items-center justify-center min-h-[300px] md:min-h-[360px]">
-                  <img
-                    src="/projects/varuna-x/varuna-dashboard.png"
-                    alt="Varuna X AI Flood Intelligence &amp; Drainage Response System"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  {/* Subtle overlay */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-blue-500/10 opacity-70 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none"
-                    aria-hidden="true"
-                  />
-                  {/* Scanning line animation */}
-                  <div
-                    className="absolute top-0 left-0 w-full h-0.5 pointer-events-none z-10"
-                    aria-hidden="true"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.8), transparent)',
-                      animation: 'scanLine 4s ease-in-out infinite',
-                    }}
-                  />
-                  {/* High-tech HUD telemetry badge */}
-                  <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-lg text-[10px] font-mono text-blue-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
-                    <span>LIVE TELEMETRY // ACTIVE</span>
-                  </div>
-                  <div className="absolute bottom-4 right-4 z-10 hidden sm:flex items-center gap-1.5 bg-black/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-lg text-[10px] font-mono text-zinc-300">
-                    <ExternalLink size={12} className="text-blue-400" />
-                    <span>EXTERNAL DEPLOYMENT</span>
-                  </div>
+          <a
+            href="https://varuna-x-22174.web.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Explore Varuna X — AI Flood Intelligence & Drainage Response System"
+            className="cursor-target block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]"
+          >
+            <div className="nox-card grid grid-cols-1 lg:grid-cols-12 overflow-hidden bg-white group">
+              {/* Visual side */}
+              <div className="lg:col-span-6 bg-slate-100 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-200 flex items-center justify-center min-h-[300px] md:min-h-[360px]">
+                <img
+                  src="/projects/varuna-x/varuna-dashboard.png"
+                  alt="Varuna X Dashboard"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-md border border-slate-200 px-3 py-1.5 rounded-lg text-[10px] font-mono text-[#0A2540] shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>OPERATIONAL // ACTIVE</span>
                 </div>
-
-                {/* Info side */}
-                <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-[#0e0e12]">
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                      <Badge variant="cyan">FEATURED PROJECT</Badge>
-                      <span className="text-[11px] font-mono text-emerald-400 font-semibold flex items-center gap-1.5 border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 rounded-md">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
-                        PROJECT ACTIVE
-                      </span>
-                    </div>
-
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                      Varuna X
-                    </h2>
-                    <p className="text-xs font-mono uppercase tracking-wider text-blue-400/90 mb-4">
-                      AI Flood Intelligence &amp; Drainage Response System
-                    </p>
-                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6">
-                      An AI-powered flood intelligence system combining IoT drain sensors, AI/ML prediction, GIS mapping, and digital-twin technology to help predict and respond to urban flooding.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {['LSTM / RF', 'ESP32 IOT', 'GIS MAPPING', 'DIGITAL TWIN'].map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] font-mono tracking-widest text-zinc-300 uppercase border border-white/10 px-2.5 py-1 bg-white/[0.04] rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                    <span className="text-xs font-mono text-zinc-500 uppercase">
-                      ID: PRJ_01 // AI &amp; IOT
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase text-blue-400 font-mono group-hover:text-blue-300 group-hover:translate-x-1 transition-all duration-200">
-                      EXPLORE VARUNA X <ArrowRight size={14} />
-                    </span>
-                  </div>
+                <div className="absolute bottom-4 right-4 z-10 hidden sm:flex items-center gap-1.5 bg-white/95 backdrop-blur-md border border-slate-200 px-3 py-1.5 rounded-lg text-[10px] font-mono text-slate-700 shadow-xs">
+                  <ExternalLink size={12} className="text-[#1E3A8A]" />
+                  <span>LIVE DASHBOARD</span>
                 </div>
-
               </div>
-            </a>
-          </Card3D>
+
+              {/* Info side */}
+              <div className="lg:col-span-6 p-8 md:p-10 flex flex-col justify-between bg-white">
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                    <Badge variant="default">FEATURED CASE STUDY</Badge>
+                    <span className="text-[11px] font-mono text-emerald-700 font-semibold flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                      LIVE TELEMETRY
+                    </span>
+                  </div>
+
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
+                    Varuna X
+                  </h2>
+                  <p className="text-xs font-mono uppercase tracking-wider text-[#1E3A8A] mb-4">
+                    AI Flood Intelligence & Drainage Response System
+                  </p>
+                  <p className="text-sm md:text-base text-[#4A6080] leading-relaxed mb-6">
+                    An AI-powered flood prediction platform integrating IoT drain sensors, AI/ML inference,
+                    GIS mapping, and digital-twin analytics to help predict and respond to urban flooding.
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {['LSTM / RF', 'ESP32 IOT', 'GIS MAPPING', 'DIGITAL TWIN'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono tracking-wider text-slate-600 uppercase border border-slate-200 px-2.5 py-1 bg-slate-50 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-xs font-mono text-slate-500 uppercase">
+                    PRJ_01 // APPLIED AI
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#1E3A8A] group-hover:text-[#172554] font-mono">
+                    EXPLORE VARUNA X <ArrowRight size={14} />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
 
           {/* ── INNOVATION ROADMAP ── */}
-          <div className="mt-10 pt-8 border-t border-white/10">
+          <div className="mt-12 pt-8 border-t border-slate-200">
             <div className="flex items-center justify-between mb-6">
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 font-mono flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]" aria-hidden="true" />
-                INNOVATION ROADMAP
+              <p className="text-[11px] font-semibold tracking-[0.16em] uppercase text-slate-600 font-mono flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
+                R&D ROADMAP MILESTONES
               </p>
-              <span className="text-[10px] font-mono text-blue-400 font-semibold uppercase">
-                STAGE 05 // RELEASED &amp; OPERATIONAL
+              <span className="text-[10px] font-mono text-[#1E3A8A] font-semibold uppercase">
+                PHASE 05 // DEPLOYED
               </span>
             </div>
 
@@ -257,111 +221,113 @@ export const InnovationHub: React.FC = () => {
               ].map((stage, idx) => (
                 <div
                   key={stage.step}
-                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                  className={`p-4 rounded-xl border transition-all duration-200 ${
                     stage.status === 'active'
-                      ? 'bg-blue-950/30 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.15)]'
-                      : 'bg-[#0e0e12] border-white/10 hover:border-white/20'
+                      ? 'bg-blue-50/70 border-blue-300 shadow-xs'
+                      : 'bg-white border-slate-200'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500">
+                    <span className="text-[10px] font-mono font-bold text-slate-400">
                       PHASE_{stage.step}
                     </span>
                     <span
                       className={`w-2 h-2 rounded-full ${
                         stage.status === 'active'
-                          ? 'bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.9)] animate-pulse'
-                          : 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]'
+                          ? 'bg-[#1E3A8A]'
+                          : 'bg-emerald-500'
                       }`}
                       aria-hidden="true"
                     />
                   </div>
-                  <h4 className="text-xs font-bold font-mono tracking-wider text-white uppercase mb-1 flex items-center gap-1.5">
+                  <h4 className="text-xs font-bold font-mono tracking-wider text-[#0A2540] uppercase mb-1 flex items-center gap-1">
                     {stage.title}
-                    {idx < 4 && (
-                      <span className="text-zinc-600 hidden lg:inline ml-auto">→</span>
-                    )}
+                    {idx < 4 && <span className="text-slate-300 hidden lg:inline ml-auto">→</span>}
                   </h4>
-                  <p className="text-[11px] text-zinc-400 leading-snug">
+                  <p className="text-[11px] text-[#4A6080] leading-snug">
                     {stage.desc}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-
         </div>
       </section>
 
       {/* ── LATEST FROM THE LAB ── */}
-      <section className="nox-section border-b border-white/10 bg-black" aria-label="Latest Publications">
+      <section className="nox-section border-b border-slate-200/80 bg-white" aria-label="Latest Publications">
         <div className="nox-container">
           <SectionHeader
-            eyebrow="REPOSITORY"
+            eyebrow="PUBLICATIONS & NOTES"
             title="Latest From The Lab"
+            description="Technical monographs, system benchmarks, and research discoveries."
             className="mb-12"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                id: 'NODE-A1',
+                id: 'NOTE-01',
                 category: 'Engineering',
-                title: 'Quantum State Preservation Framework',
-                desc: 'Initial results from the QSP framework show coherence loss mitigation across distributed nodes.',
-                date: '2024.10.15',
+                title: 'Low-Latency Sensor Mesh Routing Over ESP32',
+                desc: 'Empirical benchmark results reducing packet drop rates across multi-hop sub-gigahertz mesh topologies.',
+                date: '2024.11.10',
               },
               {
-                id: 'NODE-B2',
-                category: 'Research',
-                title: 'Algorithmic Efficiency in High-Density Environments',
-                desc: 'A review of routing optimizations within dense, multi-layered neural networks proposing a novel geometric approach.',
-                date: '2024.10.02',
+                id: 'NOTE-02',
+                category: 'Machine Learning',
+                title: 'Quantized Neural Inference on Edge Hardware',
+                desc: 'Evaluating INT8 quantization precision trade-offs in real-time hydrological computer vision workflows.',
+                date: '2024.10.22',
               },
               {
-                id: 'NODE-C3',
-                category: 'Insights',
-                title: 'The Future of Automated Fabrication Tolerances',
-                desc: 'Examining the physical limits of current fabrication technologies and AI-driven precision calibration.',
-                date: '2024.09.28',
+                id: 'NOTE-03',
+                category: 'Systems',
+                title: 'Deterministic State Reconciliation in Offline-First Apps',
+                desc: 'Architecture patterns for seamless telemetry buffering during extended remote connectivity outages.',
+                date: '2024.09.15',
               },
             ].map((article) => (
-              <Card3D key={article.id} intensity="low" glowColor="rgba(59, 130, 246, 0.12)" className="h-full">
-                <div className="h-full bg-[#0e0e12] border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-blue-500/40 hover:shadow-[0_16px_36px_rgba(59,130,246,0.12)] transition-all duration-300 shadow-[0_12px_30px_rgba(0,0,0,0.6)]">
-                  <div>
-                    <div className="flex items-center justify-between mb-4 text-[10px] font-mono">
-                      <span className="text-blue-400 font-bold uppercase">{article.category}</span>
-                      <span className="text-zinc-500 font-semibold">{article.id}</span>
-                    </div>
-                    <h3 className="text-base font-bold text-white mb-3 leading-snug">
-                      {article.title}
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                      {article.desc}
-                    </p>
+              <div
+                key={article.id}
+                className="nox-card p-7 flex flex-col justify-between bg-[#F8FAFC] hover:bg-white transition-all duration-200"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4 text-[10px] font-mono">
+                    <span className="text-[#1E3A8A] font-bold uppercase">{article.category}</span>
+                    <span className="text-slate-400 font-semibold">{article.id}</span>
                   </div>
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-zinc-500">
-                    <span>{article.date}</span>
-                    <span className="text-blue-400 font-bold">ARCHIVED REPORT</span>
-                  </div>
+                  <h3 className="text-base font-bold text-[#0A2540] mb-2.5 leading-snug">
+                    {article.title}
+                  </h3>
+                  <p className="text-xs text-[#4A6080] leading-relaxed mb-6">
+                    {article.desc}
+                  </p>
                 </div>
-              </Card3D>
+                <div className="pt-4 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                  <span>{article.date}</span>
+                  <span className="text-[#1E3A8A] font-bold">MONOGRAPH</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── NEWSLETTER SECTION (Stay Connected) ── */}
-      <section className="nox-section bg-[#070709]" aria-label="Stay Connected Newsletter">
+      <section className="nox-section bg-[#F8FAFC]" aria-label="Stay Connected Newsletter">
         <div className="nox-container">
-          <div className="bg-[#0e0e12] border border-white/10 rounded-2xl p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+          <div className="nox-card p-8 md:p-12 bg-white border border-slate-200">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                  Stay Connected
+                <p className="text-[10px] font-mono tracking-widest uppercase text-[#1E3A8A] font-bold mb-2">
+                  NEWSLETTER DISPATCH
+                </p>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#0A2540] mb-2">
+                  Stay Informed on Lab Developments
                 </h2>
-                <p className="text-sm text-zinc-400 leading-relaxed">
-                  Subscribe to receive latest insights and technology breakthroughs from our labs.
+                <p className="text-sm text-[#4A6080] leading-relaxed">
+                  Subscribe to receive periodic engineering notes, technical articles, and project releases.
                 </p>
               </div>
 
@@ -370,17 +336,17 @@ export const InnovationHub: React.FC = () => {
                   <div
                     className={`rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border ${
                       status === 'success' || status === 'client_launched'
-                        ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
+                        ? 'bg-blue-50 border-blue-200 text-[#1E3A8A]'
                         : status === 'config_notice'
-                        ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
-                        : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+                        ? 'bg-amber-50 border-amber-200 text-amber-800'
+                        : 'bg-rose-50 border-rose-200 text-rose-800'
                     }`}
                     role="status"
                     aria-live="polite"
                   >
                     <div className="flex items-center gap-3">
                       {status === 'success' || status === 'client_launched' ? (
-                        <CheckCircle2 size={18} className="shrink-0" />
+                        <CheckCircle2 size={18} className="shrink-0 text-[#1E3A8A]" />
                       ) : (
                         <AlertCircle size={18} className="shrink-0" />
                       )}
@@ -391,7 +357,7 @@ export const InnovationHub: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setStatus('idle')}
-                      className="text-[10px] font-mono tracking-widest uppercase underline hover:text-white transition-colors self-end sm:self-auto shrink-0"
+                      className="text-[10px] font-mono tracking-wider uppercase underline hover:text-[#0A2540] transition-colors self-end sm:self-auto shrink-0"
                     >
                       Subscribe Another
                     </button>
@@ -401,7 +367,7 @@ export const InnovationHub: React.FC = () => {
                     <div className="flex flex-col sm:flex-row gap-2.5">
                       <input
                         type="email"
-                        placeholder="ENTER EMAIL ADDRESS"
+                        placeholder="Enter email address"
                         {...register('email', {
                           required: 'Email is required',
                           pattern: {
@@ -409,23 +375,23 @@ export const InnovationHub: React.FC = () => {
                             message: 'Invalid email address',
                           },
                         })}
-                        className="flex-1 bg-black/60 border border-white/15 rounded-lg px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all font-mono"
+                        className="flex-1 bg-white border border-slate-300 rounded-lg px-4 py-3 text-sm text-[#0A2540] placeholder:text-slate-400 focus:outline-none focus:border-[#1E3A8A] focus:ring-2 focus:ring-blue-100 transition-all"
                       />
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 text-xs tracking-widest uppercase rounded-lg transition-colors shrink-0 disabled:opacity-50 shadow-[0_0_20px_rgba(59,130,246,0.3)] font-mono"
+                        className="bg-[#1E3A8A] hover:bg-[#172554] text-white font-semibold px-6 py-3 text-xs tracking-wider uppercase rounded-lg transition-colors shrink-0 disabled:opacity-50 shadow-sm"
                       >
                         {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                       </button>
                     </div>
                     {errors.email && (
-                      <p className="text-rose-400 text-xs flex items-center gap-1 font-medium mt-1 font-mono">
+                      <p className="text-rose-600 text-xs flex items-center gap-1 font-medium mt-1 font-mono">
                         <AlertCircle size={12} /> {errors.email.message}
                       </p>
                     )}
-                    <p className="text-[10px] text-zinc-500 mt-1 font-mono">
-                      By subscribing, you agree to our telemetry and communication policies.
+                    <p className="text-[11px] text-slate-500 mt-1.5">
+                      We respect your inbox. Unsubscribe anytime. No spam.
                     </p>
                   </form>
                 )}
@@ -437,3 +403,5 @@ export const InnovationHub: React.FC = () => {
     </PageContainer>
   );
 };
+
+export default InnovationHub;

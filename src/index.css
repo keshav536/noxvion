@@ -1,15 +1,13 @@
 :root {
-  --text: #A1A1AA;
-  --text-h: #FFFFFF;
-  --bg: #000000;
-  --border: rgba(255, 255, 255, 0.10);
-  --code-bg: #111111;
-  --accent: #3B82F6;
-  --accent-bg: rgba(59, 130, 246, 0.12);
-  --accent-border: rgba(59, 130, 246, 0.4);
-  --social-bg: rgba(17, 17, 17, 0.8);
-  --shadow:
-    rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
+  --text: #0A2540;
+  --text-h: #0A2540;
+  --bg: #FFFFFF;
+  --border: rgba(10, 37, 64, 0.08);
+  --code-bg: #F1F5F9;
+  --accent: #1E3A8A;
+  --accent-bg: #EFF6FF;
+  --accent-border: #3B82F6;
+  --shadow: 0 4px 20px -2px rgba(10, 37, 64, 0.05);
 
   --sans: 'Geist', system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: 'Geist', system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -17,77 +15,29 @@
 
   font: 16px/160% var(--sans);
   letter-spacing: 0.01px;
-  color-scheme: dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 15px;
-  }
 }
 
 #root {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  text-align: left;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background-color: #FFFFFF;
+  color: #0A2540;
 }
 
 body {
   margin: 0;
-  background: #000000;
-  color: #FFFFFF;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 600;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 14px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
+  background-color: #FFFFFF;
+  color: #0A2540;
 }

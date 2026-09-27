@@ -1,57 +1,91 @@
-.target-cursor-wrapper {
+/* ── Custom Cursor Styles ────────────────────────────────────────── */
+
+/* Hide default cursor only when custom cursor is active on fine pointer devices */
+@media (pointer: fine) and (hover: hover) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor input,
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor select,
+  body.has-custom-cursor .cursor-target {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-container {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0;
-  height: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  z-index: 2147483647;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
+  z-index: 99999;
+  overflow: hidden;
 }
 
-.target-cursor-dot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  will-change: transform;
+/* Hide completely on mobile/touch screens */
+@media (pointer: coarse), (hover: none) {
+  .custom-cursor-container {
+    display: none !important;
+  }
 }
 
-.target-cursor-corner {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+/* Inner royal blue dot (10–14px, set to 12px) */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 12px;
   height: 12px;
-  border: 3px solid #fff;
+  margin-top: -6px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background-color: #1E3A8A; /* Royal Blue */
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              background-color 0.2s ease,
+              opacity 0.2s ease;
   will-change: transform;
 }
 
-.corner-tl {
-  transform: translate(-150%, -150%);
-  border-right: none;
-  border-bottom: none;
+/* Hover state for inner dot: scales up and softens/fades to light sky blue */
+.custom-cursor-dot.is-hovering {
+  transform: scale(1.4);
+  background-color: #3B82F6; /* Sky Blue */
+  opacity: 0.45;
 }
 
-.corner-tr {
-  transform: translate(50%, -150%);
-  border-left: none;
-  border-bottom: none;
+/* Soft outer trailing ring (~32px, scales to 1.6x on hover) */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(30, 58, 138, 0.45);
+  background-color: transparent;
+  pointer-events: none;
+  transition: width 0.22s cubic-bezier(0.25, 0.1, 0.25, 1),
+              height 0.22s cubic-bezier(0.25, 0.1, 0.25, 1),
+              margin 0.22s cubic-bezier(0.25, 0.1, 0.25, 1),
+              border-color 0.22s ease,
+              background-color 0.22s ease,
+              opacity 0.22s ease;
+  will-change: transform;
 }
 
-.corner-br {
-  transform: translate(50%, 50%);
-  border-left: none;
-  border-top: none;
-}
-
-.corner-bl {
-  transform: translate(-150%, 50%);
-  border-right: none;
-  border-top: none;
+/* Hover state for outer ring: scales up (1.6x), outlines in sky blue with soft tint */
+.custom-cursor-ring.is-hovering {
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  margin-left: -26px;
+  border-color: #3B82F6; /* Sky Blue */
+  background-color: rgba(59, 130, 246, 0.08);
+  opacity: 0.9;
 }
