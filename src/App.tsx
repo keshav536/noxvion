@@ -130,7 +130,7 @@ const AppContent: React.FC = () => {
     <BrowserRouter>
       <TargetCursor />
       <AppLoader />
-      <div className="min-h-screen flex flex-col bg-white text-[#0A2540] selection:bg-blue-500/15 selection:text-[#0A2540]">
+      <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-page, #FBFAF8)', color: 'var(--text-body, #4B5563)' }}>
         <Navbar />
         <AnimatedRoutes />
         <Footer />

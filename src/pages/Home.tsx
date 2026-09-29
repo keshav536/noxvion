@@ -1,278 +1,230 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  Brain,
-  Code2,
-  Wifi,
-  Settings2,
-  FlaskConical,
-  ChevronRight,
-  ShieldCheck,
-  Cpu,
-  Layers,
-  Award,
-  CheckCircle2,
-  Star,
-  Quote,
-} from 'lucide-react';
-import { motion, type Variants } from 'framer-motion';
-import { PageContainer } from '../components/layout/PageContainer';
-import { Button } from '../components/ui/Button';
-import { Badge } from '../components/ui/Badge';
-import { SectionHeader } from '../components/ui/SectionHeader';
-import { useSEO } from '../hooks/useSEO';
-import { solutions } from '../data/solutions';
+  ArrowRight, Brain, Code2, Wifi, Settings2, FlaskConical,
+  Cpu, Monitor, BarChart2, Box, Star, Quote,
+  CheckCircle2, ShieldCheck, Layers, Award,
+} from "lucide-react";
+import { motion, type Variants, useInView } from "framer-motion";
+import { PageContainer } from "../components/layout/PageContainer";
+import { useSEO } from "../hooks/useSEO";
 
-// Conservative, professional motion: scroll-triggered fade + slight upward slide
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 22 },
   visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
-const engineeringSteps = [
-  { step: '01', title: 'IDEA', desc: 'Concept intake & architecture scope' },
-  { step: '02', title: 'RESEARCH', desc: 'Feasibility analysis & algorithmic design' },
-  { step: '03', title: 'ENGINEERING', desc: 'High-performance stack implementation' },
-  { step: '04', title: 'PROTOTYPE', desc: 'Benchmarking & embedded integration' },
-  { step: '05', title: 'INTEGRATION', desc: 'End-to-end cloud & hardware telemetry' },
-  { step: '06', title: 'DEPLOYMENT', desc: 'Production hardening & ongoing monitoring' },
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
+
+const heroStats = [
+  { value: "50+",  label: "Projects Delivered" },
+  { value: "20+",  label: "Happy Clients" },
+  { value: "4+",   label: "Domains" },
+  { value: "100%", label: "Commitment" },
 ];
 
-const techEcosystem = [
-  { domain: 'AI / ML', tools: ['PyTorch', 'TensorFlow', 'FastAPI', 'Python', 'OpenCV'] },
-  { domain: 'Software', tools: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Vite'] },
-  { domain: 'IoT & Edge', tools: ['ESP32', 'C++', 'FreeRTOS', 'MQTT', 'InfluxDB'] },
-  { domain: 'Automation', tools: ['Node.js', 'Redis', 'Docker', 'PostgreSQL', 'Bash'] },
-  { domain: 'Research & R&D', tools: ['ROS2', 'Arduino', 'Python', 'CAD Modelling', 'Matlab'] },
-];
-
-const values = [
-  {
-    id: 'PRN-01',
-    title: 'Aggressive Innovation',
-    description:
-      'We do not wait for established patterns. We test emerging compilers, models, and protocols at the frontier of technology.',
-    icon: '⟁',
-  },
-  {
-    id: 'PRN-02',
-    title: 'Engineering Integrity',
-    description:
-      'Our code is strictly typed, our hardware is grounded, and our analytics are validated. Reliability is our baseline.',
-    icon: '◈',
-  },
-  {
-    id: 'PRN-03',
-    title: 'Cross-Domain Synergy',
-    description:
-      'We connect firmware engineers, AI model trainers, and system operators into one cohesive deployment workflow.',
-    icon: '⬡',
-  },
-];
-
-const stats = [
-  { value: '99.8%', label: 'System Uptime Target', desc: 'Continuous telemetry & automated failovers' },
-  { value: '5+', label: 'Core Engineering Domains', desc: 'From embedded sensor nodes to deep learning' },
-  { value: '100%', label: 'Type-Safe Architecture', desc: 'Zero runtime compromises on mission-critical logic' },
-  { value: '24/7', label: 'Continuous Telemetry', desc: 'Real-time telemetry and edge monitoring' },
-];
-
-const trustItems = [
-  { name: 'ISO 27001', detail: 'Security Baseline Standards', icon: ShieldCheck },
-  { name: 'IEEE Standards', detail: 'Hardware & RF Compliance', icon: Cpu },
-  { name: 'ROS 2 Framework', detail: 'Robotics & Edge Nodes', icon: Layers },
-  { name: 'Industrial MQTT', detail: 'Zero-Loss Sensor Bus', icon: CheckCircle2 },
-  { name: 'Enterprise QA', detail: 'Automated CI/CD Validation', icon: Award },
+const services = [
+  { icon: Cpu,         title: "AI & Software",       desc: "Custom AI models, machine learning pipelines, and intelligent software tailored to your business needs.", tags: ["PyTorch","FastAPI","Python"],    href: "/solutions/ai-machine-learning" },
+  { icon: Code2,       title: "Web Experiences",      desc: "Modern, performant web applications with exceptional UX — from landing pages to full-stack platforms.", tags: ["React","TypeScript","Node.js"], href: "/solutions/web-software" },
+  { icon: Wifi,        title: "IoT & Edge",           desc: "Connected hardware systems, sensor networks, and real-time data pipelines for industrial applications.", tags: ["ESP32","MQTT","FreeRTOS"],     href: "/solutions/iot" },
+  { icon: Settings2,   title: "Automation",           desc: "Workflow automation, process orchestration, and intelligent bots that eliminate manual work at scale.", tags: ["Docker","Redis","Node.js"],    href: "/solutions/automation" },
+  { icon: FlaskConical,title: "Research & R&D",       desc: "Deep technical research, prototype development, and R&D engineering for cutting-edge domains.", tags: ["ROS2","Python","Matlab"],       href: "/solutions/research-product-rnd" },
 ];
 
 const testimonials = [
-  {
-    quote:
-      'NOXVION provided unprecedented engineering clarity for our flood mitigation modeling. Their ability to bridge physical drain sensors with real-time AI dashboards was flawless.',
-    author: 'Dr. Aris Thorne',
-    role: 'Principal Hydrology Advisor',
-    org: 'Urban Infrastructure Initiative',
-    rating: 5,
-  },
-  {
-    quote:
-      'The speed and reliability of our automated attendance and compliance engine exceeded enterprise expectations. Solid code, crisp interfaces, and zero downtime.',
-    author: 'Elena Vasquez',
-    role: 'Director of Corporate Operations',
-    org: 'Syasans Global Services',
-    rating: 5,
-  },
-  {
-    quote:
-      'Finding a partner that understands low-level hardware constraints and high-scale web platforms equally well is rare. Noxvion has that multidisciplinary mastery.',
-    author: 'Marcus Vance',
-    role: 'Head of Technology Strategy',
-    org: 'Apex Automation Labs',
-    rating: 5,
-  },
+  { quote: "NOXVION provided unprecedented engineering clarity for our flood mitigation modeling. Their ability to bridge physical sensors with real-time AI dashboards was flawless.", author: "Dr. Aris Thorne",   role: "Principal Hydrology Advisor",         org: "Urban Infrastructure Initiative", rating: 5 },
+  { quote: "The speed and reliability of our automated compliance engine exceeded enterprise expectations. Solid code, crisp interfaces, and zero downtime.",                           author: "Elena Vasquez",   role: "Director of Corporate Operations",    org: "Syasans Global Services",         rating: 5 },
+  { quote: "Finding a partner that understands low-level hardware constraints and high-scale web platforms equally well is rare. Noxvion has that multidisciplinary mastery.",          author: "Marcus Vance",    role: "Head of Technology Strategy",         org: "Apex Automation Labs",             rating: 5 },
 ];
 
-const solutionIcons: Record<string, React.ElementType> = {
-  Brain,
-  Code2,
-  Wifi,
-  Settings2,
-  FlaskConical,
+const trustItems = [
+  { name: "ISO 27001",       detail: "Security Baseline", icon: ShieldCheck },
+  { name: "IEEE Standards",  detail: "RF Compliance",     icon: Cpu },
+  { name: "ROS 2",           detail: "Robotics & Edge",   icon: Layers },
+  { name: "Industrial MQTT", detail: "Sensor Bus",        icon: CheckCircle2 },
+  { name: "Enterprise QA",   detail: "CI/CD Validated",   icon: Award },
+];
+
+const projects = [
+  { img: "/projects/varuna-x/varuna-dashboard.png",        alt: "VARUNA-X Dashboard",   category: "AI & IoT Infrastructure", title: "VARUNA-X",     subtitle: "AI Flood Intelligence",          desc: "An AI-powered flood prediction platform integrating IoT sensors, GIS mapping, and telemetry analytics to forecast urban inundation.", href: "https://varuna-x-22174.web.app/" },
+  { img: "/projects/ur-noted/urnoted-dashboard.jpg",       alt: "UR Noted Dashboard",   category: "Enterprise Software",     title: "UR NOTED",     subtitle: "Attendance & Compliance Engine", desc: "Automated training compliance solution featuring role-based access control, session tracking, and one-click compliance export.",     href: "https://urnoted.syasans.com/" },
+  { img: "/projects/skillcetamol/skillcetamol-dashboard.jpg", alt: "SkillCetamol Portal", category: "Exam Architecture",     title: "SKILLCETAMOL", subtitle: "Enterprise Examination Portal",  desc: "Secure multi-role testing platform with real-time proctor telemetry, automatic score computation, and high-concurrency capability.", href: "https://skillcetamol.online/" },
+];
+
+function useCountUp(end: string, inView: boolean) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!inView || !ref.current) return;
+    const num = parseFloat(end.replace(/[^0-9.]/g, ""));
+    const suffix = end.replace(/[0-9.]/g, "");
+    if (isNaN(num)) { if (ref.current) ref.current.textContent = end; return; }
+    let cur = 0;
+    const duration = 1200;
+    const step = 16;
+    const inc = num / (duration / step);
+    const timer = setInterval(() => {
+      cur = Math.min(cur + inc, num);
+      if (ref.current) ref.current.textContent = Math.round(cur) + suffix;
+      if (cur >= num) clearInterval(timer);
+    }, step);
+    return () => clearInterval(timer);
+  }, [inView, end]);
+  return ref;
+}
+
+const StatItem: React.FC<{ value: string; label: string; index: number }> = ({ value, label, index }) => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wrapRef, { once: true });
+  const numRef = useCountUp(value, inView);
+  return (
+    <div ref={wrapRef} className="flex items-center">
+      {index > 0 && <div className="w-px h-10 bg-gray-200 mx-5 shrink-0" aria-hidden="true" />}
+      <div>
+        <div className="text-2xl md:text-3xl font-extrabold text-[#0B0D12] leading-none tracking-tight">
+          <span ref={numRef}>{value}</span>
+        </div>
+        <div className="text-[11px] text-[#6B7280] font-medium mt-1">{label}</div>
+      </div>
+    </div>
+  );
 };
 
 export const Home: React.FC = () => {
   useSEO({
-    title: 'NOXVION — Building Intelligent Technology for a Smarter Future',
-    description:
-      'Noxvion transforms ideas, research, and emerging technologies into practical software, AI, hardware, IoT, and automation solutions.',
+    title: "NOXVION — We Turn Ambitious Ideas into Digital Experiences",
+    description: "Noxvion is a technology and creative studio helping businesses build modern web experiences, AI solutions, 3D content and digital products that create real impact.",
   });
 
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const composition = hero.querySelector<HTMLElement>(".hero-composition");
+    if (!composition) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const rect = hero.getBoundingClientRect();
+      const dx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      const dy = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      composition.style.transform = `translate(${dx * 18}px, ${dy * 10}px)`;
+    };
+    const reset = () => { composition.style.transform = ""; };
+    hero.addEventListener("mousemove", handleMouseMove);
+    hero.addEventListener("mouseleave", reset);
+    return () => { hero.removeEventListener("mousemove", handleMouseMove); hero.removeEventListener("mouseleave", reset); };
+  }, []);
+
   return (
-    <PageContainer className="bg-white">
-      {/* ── 1. HERO SECTION ── */}
-      <section
-        className="relative min-h-[82vh] flex items-center bg-gradient-to-b from-white via-slate-50 to-[#F8FAFC] border-b border-slate-200/80 overflow-hidden"
-        aria-label="Hero"
-      >
-        {/* Subtle corporate grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-60"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(10,37,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(10,37,64,0.03) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-          }}
-          aria-hidden="true"
-        />
+    <PageContainer className="bg-transparent">
 
-        {/* Soft royal blue ambient highlight */}
-        <div
-          className="absolute top-0 right-1/4 w-[600px] h-[350px] pointer-events-none rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-          aria-hidden="true"
-        />
+      {/* ── 1. HERO ── */}
+      <section ref={heroRef} className="hero-bg relative min-h-[100svh] flex items-center overflow-hidden" aria-label="Hero">
+        {/* dot-grid overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.28]" style={{ backgroundImage: "radial-gradient(circle, rgba(30,64,175,0.18) 1px, transparent 1px)", backgroundSize: "32px 32px" }} aria-hidden="true" />
 
-        <div className="nox-container relative py-20 md:py-28 lg:py-32 z-10">
-          <div className="max-w-3xl">
-            {/* Eyebrow */}
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0}
-              className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#1E3A8A] mb-5 flex items-center gap-2 font-mono"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
-              NOXVION // APPLIED ENGINEERING & TECHNOLOGY
-            </motion.p>
+        {/* silk-wave SVG at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 1440 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" style={{ filter: "blur(0.8px)" }}>
+            <path d="M0 110C240 55 480 0 720 75C960 150 1200 185 1440 130V220H0Z" fill="rgba(201,216,255,0.40)" />
+            <path d="M0 150C300 95 600 38 900 112C1200 186 1340 210 1440 170V220H0Z" fill="rgba(230,238,255,0.55)" />
+            <path d="M0 190C200 155 500 125 800 162C1100 200 1290 218 1440 200V220H0Z" fill="rgba(248,250,255,0.85)" />
+          </svg>
+        </div>
 
-            {/* Headline */}
-            <motion.h1
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={1}
-              className="text-4xl sm:text-5xl lg:text-[62px] font-bold leading-[1.08] tracking-[-0.03em] text-[#0A2540] mb-6"
-            >
-              Building Intelligent{' '}
-              <span className="text-[#1E3A8A]">Technology</span> for a Smarter Future.
-            </motion.h1>
+        <div className="nox-container relative z-10 py-32 md:min-h-[100svh] flex items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 items-center w-full">
 
-            {/* Subtext */}
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={2}
-              className="text-[#4A6080] text-lg md:text-xl leading-relaxed mb-10 max-w-2xl"
-            >
-              Noxvion transforms ambitious ideas, research concepts, and emerging technologies
-              into practical software, AI, hardware, IoT, and automation solutions.
-            </motion.p>
+            {/* LEFT */}
+            <motion.div className="flex flex-col" initial="hidden" animate="visible" variants={staggerContainer}>
+              <motion.p variants={fadeUp} custom={0} className="nox-eyebrow mb-5">IDEAS · TECHNOLOGY · IMPACT</motion.p>
 
-            {/* Primary & Secondary CTA */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={3}
-              className="flex flex-wrap items-center gap-4"
-            >
-              <Button
-                to="/solutions"
-                variant="primary"
-                size="md"
-                id="hero-cta-solutions"
-                className="bg-[#1E3A8A] text-white hover:bg-[#172554] shadow-sm hover:shadow-md"
-              >
-                Explore Our Solutions
-                <ArrowRight size={15} aria-hidden="true" />
-              </Button>
+              <motion.h1 variants={fadeUp} custom={1} className="font-extrabold leading-[0.97] tracking-[-0.035em] text-[#0B0D12] mb-7" style={{ fontSize: "clamp(2.5rem,5.2vw,4.1rem)" }}>
+                We turn ambitious<br />ideas into digital{" "}
+                <span className="text-blue-gradient">experiences.</span>
+              </motion.h1>
 
-              <Button
-                to="/work-with-us"
-                variant="secondary"
-                size="md"
-                id="hero-cta-work"
-              >
-                Work With Us
-                <ChevronRight size={15} aria-hidden="true" />
-              </Button>
+              <motion.p variants={fadeUp} custom={2} className="text-[#4B5563] text-lg leading-relaxed mb-8 max-w-[520px]">
+                Noxvion is a technology and creative studio helping businesses build modern web experiences, AI solutions, 3D content and digital products that create real impact.
+              </motion.p>
+
+              <motion.div variants={fadeUp} custom={3} className="flex flex-wrap items-center gap-3 mb-12">
+                <Link to="/projects" id="hero-cta-work" className="btn-primary group">
+                  Explore Our Work
+                  <ArrowRight size={15} className="transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+                <Link to="/contact" id="hero-cta-project" className="btn-secondary">Start a Project</Link>
+              </motion.div>
+
+              <motion.div variants={fadeUp} custom={4} className="flex flex-wrap items-center">
+                {heroStats.map((s, i) => <StatItem key={s.label} value={s.value} label={s.label} index={i} />)}
+              </motion.div>
             </motion.div>
 
-            {/* Capability Pills */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={4}
-              className="flex flex-wrap items-center gap-2.5 mt-10"
-            >
-              {['AI Engine', 'IoT Layer', 'Web Architecture', 'Hardware R&D', 'Automation'].map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold tracking-wider uppercase border border-slate-200 bg-white text-[#0A2540] rounded-full shadow-xs font-mono"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" aria-hidden="true" />
-                  {tag}
-                </span>
-              ))}
+            {/* RIGHT – 3D Composition */}
+            <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="hero-composition flex items-center justify-center relative" style={{ transition: "transform 0.35s cubic-bezier(0.25,0.1,0.25,1)" }} aria-hidden="true">
+              <div className="relative w-full max-w-[540px] mx-auto float-slow">
+                <img
+                  src="/hero-glass-ring.png"
+                  alt="Noxvion 3D Glass Emblem"
+                  className="w-full h-auto object-contain select-none pointer-events-none"
+                  style={{
+                    filter: "drop-shadow(0 24px 50px rgba(37,99,235,0.2))",
+                  }}
+                  loading="eager"
+                />
+
+                {/* Orbiting glass service cards */}
+                <div className="glass-card absolute top-[8%] left-[-5%] flex items-center gap-3 px-4 py-3 float-card" style={{ animationDelay: "0s" }}>
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0"><Cpu size={16} className="text-[#1E40AF]" /></div>
+                  <div><div className="text-[11px] font-bold text-[#0B0D12] leading-none">AI & Software</div><div className="text-[10px] text-[#6B7280] mt-0.5">Machine Learning</div></div>
+                </div>
+
+                <div className="glass-card absolute top-[8%] right-[-5%] flex items-center gap-3 px-4 py-3 float-card" style={{ animationDelay: "1.1s" }}>
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0"><Box size={16} className="text-[#1E40AF]" /></div>
+                  <div><div className="text-[11px] font-bold text-[#0B0D12] leading-none">3D & Animation</div><div className="text-[10px] text-[#6B7280] mt-0.5">Visual Content</div></div>
+                </div>
+
+                <div className="glass-card absolute bottom-[18%] left-[-8%] flex items-center gap-3 px-4 py-3 float-card" style={{ animationDelay: "0.6s" }}>
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0"><Monitor size={16} className="text-[#1E40AF]" /></div>
+                  <div><div className="text-[11px] font-bold text-[#0B0D12] leading-none">Web Experiences</div><div className="text-[10px] text-[#6B7280] mt-0.5">Modern Platforms</div></div>
+                </div>
+
+                <div className="glass-card absolute bottom-[18%] right-[-8%] flex items-center gap-3 px-4 py-3 float-card" style={{ animationDelay: "1.65s" }}>
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0"><BarChart2 size={16} className="text-[#1E40AF]" /></div>
+                  <div><div className="text-[11px] font-bold text-[#0B0D12] leading-none">Digital Marketing</div><div className="text-[10px] text-[#6B7280] mt-0.5">Growth & Reach</div></div>
+                </div>
+
+                {/* Floating orbs */}
+                <div className="absolute top-1/2 left-[-18px] w-4 h-4 rounded-full float-mid" style={{ background: "linear-gradient(135deg,rgba(147,197,253,0.85),rgba(59,130,246,0.55))", boxShadow: "0 2px 12px rgba(59,130,246,0.35)", animationDelay: "0.3s" }} />
+                <div className="absolute top-[25%] right-[-10px] w-2.5 h-2.5 rounded-full float-slow" style={{ background: "linear-gradient(135deg,rgba(196,220,255,0.9),rgba(99,163,246,0.7))", boxShadow: "0 2px 8px rgba(59,130,246,0.25)", animationDelay: "1.4s" }} />
+                <div className="absolute bottom-[32%] right-[-14px] w-3 h-3 rounded-full float-mid" style={{ background: "linear-gradient(135deg,rgba(219,234,254,0.95),rgba(147,197,253,0.8))", boxShadow: "0 2px 10px rgba(59,130,246,0.22)", animationDelay: "0.85s" }} />
+              </div>
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* ── 2. TRUST BAR (CERTIFICATIONS / STANDARDS) ── */}
-      <section
-        className="py-10 bg-white border-b border-slate-200/80"
-        aria-label="Trust and compliance standards"
-      >
+      {/* ── 2. TRUST BAR ── */}
+      <section className="py-8 bg-white border-b border-gray-100" aria-label="Standards and compliance">
         <div className="nox-container">
-          <p className="text-center text-[10px] font-bold tracking-[0.2em] uppercase text-slate-600 mb-6 font-mono">
-            ENGINEERING BASELINES & INDUSTRIAL COMPLIANCE
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <p className="text-center nox-eyebrow mb-6">Engineering Baselines & Industrial Compliance</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {trustItems.map((item) => {
               const Icon = item.icon;
               return (
-                <div
-                  key={item.name}
-                  className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-[#F8FAFC] hover:bg-white hover:border-slate-200 transition-all duration-200 shadow-xs"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-blue-50 text-[#1E3A8A] flex items-center justify-center shrink-0">
-                    <Icon size={18} aria-hidden="true" />
-                  </div>
+                <div key={item.name} className="flex items-center gap-3 p-3.5 rounded-xl border border-gray-100 bg-gray-50 hover:bg-white hover:border-gray-200 transition-all duration-200">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1E40AF] flex items-center justify-center shrink-0"><Icon size={16} aria-hidden="true" /></div>
                   <div>
-                    <h2 className="text-xs font-bold text-[#0A2540]">{item.name}</h2>
-                    <p className="text-[10px] text-slate-500 font-medium truncate">{item.detail}</p>
+                    <div className="text-xs font-bold text-[#0B0D12]">{item.name}</div>
+                    <div className="text-[10px] text-gray-500 font-medium">{item.detail}</div>
                   </div>
                 </div>
               );
@@ -281,410 +233,68 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── 3. SERVICES / CAPABILITIES GRID ── */}
-      <section
-        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
-        aria-label="Capabilities and services"
-        id="capabilities"
-      >
+      {/* ── 3. SERVICES ── */}
+      <section className="nox-section bg-[#FBFAF8] border-b border-gray-100" aria-label="Services" id="services">
         <div className="nox-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <SectionHeader
-              eyebrow="CAPABILITIES & SYSTEMS"
-              title="Engineered for Real-World Impact"
-              description="We construct bespoke software pipelines, hardware nodes, and automated logic units, ensuring clean integrations from sensor to user interface."
-            />
-            <Badge variant="default" className="self-start md:self-auto shrink-0">
-              05 DIVISIONS ACTIVE
-            </Badge>
+            <div>
+              <p className="nox-eyebrow mb-3">What We Do</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0B0D12] tracking-tight leading-tight mb-3">End-to-end digital capabilities</h2>
+              <p className="text-[#4B5563] max-w-lg text-base">From AI to 3D content, we bring the full creative and technical stack under one roof.</p>
+            </div>
+            <Link to="/solutions" id="services-view-all" className="btn-secondary shrink-0 self-start md:self-auto">View All Services <ArrowRight size={14} aria-hidden="true" /></Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.map((sol, i) => {
-              const Icon = solutionIcons[sol.icon] || Brain;
+            {services.map((s, i) => {
+              const Icon = s.icon;
               return (
-                <div key={sol.id} className="nox-card p-6 md:p-8 flex flex-col justify-between h-full group">
-                  <div>
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="p-3 rounded-xl bg-blue-50 text-[#1E3A8A] group-hover:bg-[#1E3A8A] group-hover:text-white transition-colors duration-200">
-                        <Icon size={22} aria-hidden="true" />
-                      </div>
-                      <span className="text-xs font-semibold tracking-wider text-slate-400 font-mono">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-[#0A2540] mb-2.5 group-hover:text-[#1E3A8A] transition-colors duration-200">
-                      {sol.title}
-                    </h3>
-                    <p className="text-sm text-[#4A6080] leading-relaxed mb-6">
-                      {sol.shortDesc}
-                    </p>
+                <motion.div key={s.title} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i * 0.5} className="nox-card p-6 md:p-7 flex flex-col group">
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="p-3 rounded-xl bg-blue-50 text-[#1E40AF] group-hover:bg-[#1E40AF] group-hover:text-white transition-colors duration-200"><Icon size={20} aria-hidden="true" /></div>
+                    <span className="text-xs font-semibold tracking-wider text-gray-300">{String(i + 1).padStart(2, "0")}</span>
                   </div>
-
-                  <div>
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {sol.tools.slice(0, 3).map((t) => (
-                        <span
-                          key={t}
-                          className="px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase font-mono rounded bg-slate-100 text-slate-700"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    <Link
-                      to={`/solutions/${sol.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-[#1E3A8A] group-hover:text-[#172554] font-mono"
-                      id={`capability-${sol.slug}`}
-                    >
-                      <span>Explore Capability</span>
-                      <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
-                    </Link>
+                  <h3 className="text-lg font-bold text-[#0B0D12] mb-2 group-hover:text-[#1E40AF] transition-colors duration-200">{s.title}</h3>
+                  <p className="text-sm text-[#4B5563] leading-relaxed mb-5 flex-1">{s.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {s.tags.map((t) => <span key={t} className="px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase rounded bg-gray-100 text-gray-600">{t}</span>)}
                   </div>
-                </div>
+                  <Link to={s.href} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E40AF]" id={`service-${s.title.toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"")}`}>
+                    Explore Capability <ArrowRight size={13} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* ── 4. ABOUT / WHY-US SECTION WITH STATS (LARGE NAVY NUMBERS) ── */}
-      <section
-        className="nox-section bg-white border-b border-slate-200/80"
-        aria-label="About Noxvion and key statistics"
-      >
-        <div className="nox-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16">
-            <div className="lg:col-span-6">
-              <SectionHeader
-                eyebrow="WHY NOXVION"
-                title="Bridging Research Concepts to Production Reality"
-                description="Traditional tech agencies either remain purely theoretical or focus exclusively on standard web applications. Noxvion bridges the divide."
-              />
-              <p className="text-[#4A6080] text-base leading-relaxed mt-4 mb-6">
-                We combine artificial intelligence, hardware design, embedded firmware, IoT pipelines,
-                and modern web systems. From custom microcontrollers running FreeRTOS to resilient
-                cloud microservices, our multidisciplinary teams deliver production-grade systems
-                built to endure real-world conditions.
-              </p>
-              <div className="flex items-center gap-4">
-                <Button to="/about" variant="secondary" size="sm">
-                  Learn About Our History
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Stats Grid with Large Navy Numbers */}
-            <div className="lg:col-span-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {stats.map((s, idx) => (
-                  <motion.div
-                    key={s.label}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    custom={idx * 0.1}
-                    className="p-6 rounded-2xl border border-slate-200/90 bg-[#F8FAFC] hover:bg-white hover:border-[#1E3A8A]/30 transition-all duration-200 shadow-xs"
-                  >
-                    <div className="text-4xl md:text-5xl font-extrabold text-[#0A2540] tracking-tight mb-2">
-                      {s.value}
-                    </div>
-                    <div className="text-sm font-bold text-[#1E3A8A] mb-1">
-                      {s.label}
-                    </div>
-                    <p className="text-xs text-[#4A6080] leading-relaxed">
-                      {s.desc}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. ENGINEERING APPROACH / LIFECYCLE ── */}
-      <section
-        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
-        aria-label="Engineering approach"
-      >
-        <div className="nox-container">
-          <SectionHeader
-            align="center"
-            eyebrow="ENGINEERING RIGOR"
-            title="Our 6-Phase Delivery Framework"
-            description="A repeatable, predictable methodology ensuring precision from initial inquiry to long-term deployment."
-            className="mb-14"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-            {engineeringSteps.map((step) => (
-              <div
-                key={step.step}
-                className="nox-card p-5 flex flex-col justify-between h-full bg-white"
-              >
-                <div>
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1E3A8A] font-bold text-xs flex items-center justify-center font-mono mb-4">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xs font-bold tracking-wider uppercase text-[#0A2540] mb-2 font-mono">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-[#4A6080] leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
-                  PHASE {step.step} // ACTIVE
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. FEATURED PROJECTS ── */}
-      <section
-        className="nox-section bg-white border-b border-slate-200/80"
-        aria-label="Featured projects"
-      >
+      {/* ── 4. FEATURED PROJECTS ── */}
+      <section className="nox-section bg-white border-b border-gray-100" aria-label="Featured projects">
         <div className="nox-container">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <SectionHeader
-              eyebrow="PORTFOLIO & CASE STUDIES"
-              title="Featured Engineering Projects"
-              description="Real-world technology systems deployed and running in operational environments."
-            />
-            <Button to="/projects" variant="secondary" size="sm" id="home-view-all-projects">
-              View All Projects
-              <ArrowRight size={13} aria-hidden="true" />
-            </Button>
+            <div>
+              <p className="nox-eyebrow mb-3">Portfolio</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0B0D12] tracking-tight leading-tight">Featured Projects</h2>
+            </div>
+            <Link to="/projects" id="home-view-all-projects" className="btn-secondary shrink-0 self-start sm:self-auto">View All <ArrowRight size={14} aria-hidden="true" /></Link>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Project 1 */}
-            <div className="nox-card overflow-hidden flex flex-col justify-between group">
-              <div>
-                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
-                  <img
-                    src="/projects/varuna-x/varuna-dashboard.png"
-                    alt="VARUNA-X Dashboard"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
-                    ACTIVE PROJECT
-                  </span>
+            {projects.map((p) => (
+              <div key={p.title} className="nox-card overflow-hidden flex flex-col group">
+                <div className="aspect-video bg-gray-100 border-b border-gray-100 overflow-hidden relative">
+                  <img src={p.img} alt={p.alt} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E40AF] shadow-sm">Active Project</span>
                 </div>
-                <div className="p-6">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
-                    AI & IOT INFRASTRUCTURE
-                  </span>
-                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
-                    VARUNA-X
-                  </h3>
-                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
-                    AI Flood Intelligence & Drainage Response
-                  </p>
-                  <p className="text-sm text-[#4A6080] leading-relaxed">
-                    An AI-powered flood prediction platform integrating IoT drainage sensors, GIS mapping,
-                    and telemetry analytics to forecast and respond to urban inundation.
-                  </p>
-                </div>
-              </div>
-              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
-                <span className="text-[11px] font-mono text-slate-500 uppercase">
-                  STATUS: OPERATIONAL
-                </span>
-                <a
-                  href="https://varuna-x-22174.web.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
-                >
-                  View Live →
-                </a>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="nox-card overflow-hidden flex flex-col justify-between group">
-              <div>
-                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
-                  <img
-                    src="/projects/ur-noted/urnoted-dashboard.jpg"
-                    alt="UR Noted Dashboard"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
-                    ACTIVE PROJECT
-                  </span>
-                </div>
-                <div className="p-6">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
-                    ENTERPRISE SOFTWARE
-                  </span>
-                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
-                    UR NOTED
-                  </h3>
-                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
-                    Training Attendance & Compliance Engine
-                  </p>
-                  <p className="text-sm text-[#4A6080] leading-relaxed">
-                    Automated attendance and training compliance solution featuring role-based access control,
-                    session tracking, and one-click compliance export.
-                  </p>
-                </div>
-              </div>
-              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
-                <span className="text-[11px] font-mono text-slate-500 uppercase">
-                  STATUS: OPERATIONAL
-                </span>
-                <a
-                  href="https://urnoted.syasans.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
-                >
-                  View Live →
-                </a>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="nox-card overflow-hidden flex flex-col justify-between group">
-              <div>
-                <div className="aspect-video bg-slate-100 border-b border-slate-200/80 overflow-hidden relative">
-                  <img
-                    src="/projects/skillcetamol/skillcetamol-dashboard.jpg"
-                    alt="SkillCetamol Portal"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-3 right-3 px-2 py-1 bg-white/95 rounded text-[10px] font-bold tracking-wider uppercase text-[#1E3A8A] font-mono shadow-xs">
-                    ACTIVE PROJECT
-                  </span>
-                </div>
-                <div className="p-6">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E3A8A] font-mono block mb-1">
-                    EXAM ARCHITECTURE
-                  </span>
-                  <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#1E3A8A] transition-colors">
-                    SKILLCETAMOL
-                  </h3>
-                  <p className="text-xs font-mono uppercase text-slate-500 mb-3">
-                    Enterprise Examination Portal
-                  </p>
-                  <p className="text-sm text-[#4A6080] leading-relaxed">
-                    Secure multi-role testing platform featuring real-time proctor telemetry, automatic score
-                    computation, student indexing, and high-concurrency capability.
-                  </p>
-                </div>
-              </div>
-              <div className="p-6 pt-0 mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
-                <span className="text-[11px] font-mono text-slate-500 uppercase">
-                  STATUS: OPERATIONAL
-                </span>
-                <a
-                  href="https://skillcetamol.online/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-[#1E3A8A] hover:text-[#172554] font-mono flex items-center gap-1"
-                >
-                  View Live →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. TESTIMONIALS SECTION (LIGHT BLUE-TINT BACKGROUND) ── */}
-      <section
-        className="nox-section bg-[#EFF6FF] border-b border-blue-100 relative"
-        aria-label="Client and stakeholder testimonials"
-      >
-        <div className="nox-container">
-          <SectionHeader
-            align="center"
-            eyebrow="CLIENT TESTIMONIALS"
-            title="Trusted by Visionary Organizations"
-            description="Hear from leaders and technical partners who rely on Noxvion for mission-critical systems."
-            className="mb-14"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, idx) => (
-              <motion.div
-                key={t.author}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={idx * 0.1}
-                className="bg-white border border-blue-100/90 rounded-2xl p-7 md:p-8 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow duration-200 relative"
-              >
-                <div>
-                  {/* Star ratings */}
-                  <div className="flex items-center gap-1 text-amber-400 mb-5">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} size={15} fill="currentColor" />
-                    ))}
+                <div className="p-6 flex flex-col flex-1">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#1E40AF] block mb-1">{p.category}</span>
+                  <h3 className="text-lg font-bold text-[#0B0D12] mb-1 group-hover:text-[#1E40AF] transition-colors">{p.title}</h3>
+                  <p className="text-xs text-gray-500 mb-3 uppercase tracking-wide">{p.subtitle}</p>
+                  <p className="text-sm text-[#4B5563] leading-relaxed flex-1">{p.desc}</p>
+                  <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-[11px] text-gray-400 uppercase tracking-wide">Operational</span>
+                    <a href={p.href} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#1E40AF] hover:text-[#1E3A8A] flex items-center gap-1">View Live →</a>
                   </div>
-
-                  <Quote className="text-blue-200 mb-3" size={28} />
-                  <p className="text-sm text-[#0A2540] leading-relaxed italic mb-6">
-                    "{t.quote}"
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100">
-                  <div className="font-bold text-sm text-[#0A2540]">{t.author}</div>
-                  <div className="text-xs text-[#1E3A8A] font-medium">{t.role}</div>
-                  <div className="text-[11px] text-slate-500 font-mono">{t.org}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8. TECHNOLOGY STACK ECOSYSTEM ── */}
-      <section
-        className="nox-section bg-white border-b border-slate-200/80"
-        aria-label="Technology stack"
-      >
-        <div className="nox-container">
-          <SectionHeader
-            eyebrow="TECHNOLOGY TOOLCHAIN"
-            title="Our Core Engineering Stack"
-            description="Standardized, vetted frameworks and compilers ensuring long-term reliability and zero lock-in."
-            className="mb-12"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-            {techEcosystem.map((domain) => (
-              <div
-                key={domain.domain}
-                className="nox-card p-6 bg-[#F8FAFC] border-slate-200/80 hover:bg-white transition-all duration-200"
-              >
-                <p className="text-xs font-bold tracking-wider uppercase text-[#1E3A8A] mb-4 font-mono">
-                  {domain.domain}
-                </p>
-                <div className="flex flex-col gap-2">
-                  {domain.tools.map((tool) => (
-                    <span
-                      key={tool}
-                      className="text-sm text-[#4A6080] hover:text-[#0A2540] transition-colors"
-                    >
-                      {tool}
-                    </span>
-                  ))}
                 </div>
               </div>
             ))}
@@ -692,75 +302,47 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── 9. OPERATING PRINCIPLES ── */}
-      <section
-        className="nox-section bg-[#F8FAFC] border-b border-slate-200/80"
-        aria-label="Core operating principles"
-      >
+      {/* ── 5. TESTIMONIALS ── */}
+      <section className="nox-section bg-[#EFF6FF] border-b border-blue-100" aria-label="Testimonials">
         <div className="nox-container">
-          <SectionHeader
-            eyebrow="OPERATING PRINCIPLES"
-            title="How We Engineer Technology"
-            className="mb-12"
-          />
-
+          <div className="text-center mb-12">
+            <p className="nox-eyebrow mb-3">Client Testimonials</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0B0D12] tracking-tight">Trusted by Visionary Organizations</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((v, i) => (
-              <motion.div
-                key={v.id}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i * 0.1}
-                className="nox-card p-8 bg-white"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl text-[#1E3A8A] font-bold" aria-hidden="true">
-                    {v.icon}
-                  </span>
-                  <span className="text-[11px] font-semibold tracking-wider text-slate-500 font-mono">
-                    {v.id}
-                  </span>
+            {testimonials.map((t, i) => (
+              <motion.div key={t.author} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i * 0.5} className="bg-white border border-blue-100 rounded-2xl p-7 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div>
+                  <div className="flex items-center gap-0.5 text-amber-400 mb-4">{[...Array(t.rating)].map((_, j) => <Star key={j} size={14} fill="currentColor" />)}</div>
+                  <Quote className="text-blue-200 mb-3" size={24} />
+                  <p className="text-sm text-[#0B0D12] leading-relaxed italic mb-5">"{t.quote}"</p>
                 </div>
-                <h3 className="text-base font-bold text-[#0A2540] mb-2">{v.title}</h3>
-                <p className="text-sm text-[#4A6080] leading-relaxed">{v.description}</p>
+                <div className="pt-4 border-t border-gray-100">
+                  <div className="font-bold text-sm text-[#0B0D12]">{t.author}</div>
+                  <div className="text-xs text-[#1E40AF] font-medium">{t.role}</div>
+                  <div className="text-[11px] text-gray-400">{t.org}</div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 10. FINAL CTA ── */}
-      <section
-        className="nox-section bg-gradient-to-b from-white to-blue-50/50"
-        aria-label="Call to action"
-      >
+      {/* ── 6. FINAL CTA ── */}
+      <section className="nox-section bg-white" aria-label="Call to action">
         <div className="nox-container text-center max-w-2xl mx-auto">
-          <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#1E3A8A] mb-4 font-mono">
-            ENGINEERING PARTNERSHIP
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0A2540] leading-tight tracking-tight mb-5">
-            Have an Idea Worth Engineering?
-          </h2>
-          <p className="text-[#4A6080] text-base md:text-lg mb-8 leading-relaxed">
-            Let's transform ambitious concepts, emerging papers, and complex real-world challenges
-            into intelligent, deployed technology.
-          </p>
-          <div className="flex justify-center">
-            <Button
-              to="/work-with-us"
-              variant="primary"
-              size="lg"
-              id="home-final-cta"
-              className="bg-[#1E3A8A] text-white hover:bg-[#172554] shadow-md"
-            >
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+            <p className="nox-eyebrow mb-4">Engineering Partnership</p>
+            <h2 className="text-3xl md:text-[2.75rem] font-extrabold text-[#0B0D12] leading-tight tracking-tight mb-5">Have an idea worth engineering?</h2>
+            <p className="text-[#4B5563] text-base md:text-lg mb-8 leading-relaxed">Let us transform ambitious concepts and complex real-world challenges into intelligent, deployed technology.</p>
+            <Link to="/contact" id="home-final-cta" className="btn-primary inline-flex group">
               Start Collaboration
-              <ArrowRight size={16} aria-hidden="true" />
-            </Button>
-          </div>
+              <ArrowRight size={16} className="transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+          </motion.div>
         </div>
       </section>
+
     </PageContainer>
   );
 };
