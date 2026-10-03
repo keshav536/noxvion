@@ -35,14 +35,35 @@ interface ContactFormInputs {
 }
 
 const projectTypeOptions = [
-  'AI & Machine Learning',
-  'Web & Software',
-  'IoT & Embedded',
-  'Automation',
+  'Website Development',
+  'AI Solutions',
+  'Business Automation',
+  'Custom Software Development',
+  'Mobile App Development',
+  'UI/UX Design',
+  'SEO & Digital Marketing',
+  'Cloud & Deployment',
+  'IoT & Smart Systems',
   'Research & Product R&D',
   'Partnership Inquiry',
   'Other Inquiry',
 ];
+
+const getInitialProjectType = (type: string): string => {
+  const t = type.toLowerCase();
+  if (t.includes('web') || t.includes('starter') || t.includes('business') || t.includes('advanced')) return 'Website Development';
+  if (t.includes('ai-iot') || t.includes('iot')) return 'IoT & Smart Systems';
+  if (t.includes('ai')) return 'AI Solutions';
+  if (t.includes('auto')) return 'Business Automation';
+  if (t.includes('soft') || t.includes('build')) return 'Custom Software Development';
+  if (t.includes('mobile') || t.includes('app')) return 'Mobile App Development';
+  if (t.includes('design') || t.includes('ui')) return 'UI/UX Design';
+  if (t.includes('seo') || t.includes('market') || t.includes('retainer') || t.includes('social')) return 'SEO & Digital Marketing';
+  if (t.includes('cloud')) return 'Cloud & Deployment';
+  if (t.includes('research')) return 'Research & Product R&D';
+  if (t.includes('partner')) return 'Partnership Inquiry';
+  return 'Website Development';
+};
 
 type SubmissionStatus = 'idle' | 'submitting' | 'server_success' | 'client_dispatched' | 'config_notice' | 'error';
 
@@ -61,14 +82,7 @@ export const Contact: React.FC = () => {
     reset,
   } = useForm<ContactFormInputs>({
     defaultValues: {
-      projectType:
-        defaultType === 'research'
-          ? 'Research & Product R&D'
-          : defaultType === 'partner'
-          ? 'Partnership Inquiry'
-          : defaultType === 'build'
-          ? 'Web & Software'
-          : 'AI & Machine Learning',
+      projectType: getInitialProjectType(defaultType),
     },
   });
 

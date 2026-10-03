@@ -101,7 +101,7 @@ export const InnovationHub: React.FC = () => {
               <button
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
-                className={`cursor-target text-xs font-semibold tracking-wider uppercase pb-1 transition-colors relative ${
+                className={`text-xs font-semibold tracking-wider uppercase pb-1 transition-colors relative ${
                   activeCategory === cat.slug
                     ? 'text-[#1E3A8A] font-bold border-b-2 border-[#1E3A8A]'
                     : 'text-slate-500 hover:text-[#0A2540]'
@@ -132,7 +132,7 @@ export const InnovationHub: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Explore Varuna X — AI Flood Intelligence & Drainage Response System"
-            className="cursor-target block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]"
+            className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A]"
           >
             <div className="nox-card grid grid-cols-1 lg:grid-cols-12 overflow-hidden bg-white group">
               {/* Visual side */}

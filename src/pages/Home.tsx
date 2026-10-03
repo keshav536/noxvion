@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Brain, Code2, Wifi, Settings2, FlaskConical,
+  ArrowRight, Code2, Wifi, Settings2, FlaskConical,
   Cpu, Monitor, BarChart2, Box, Star, Quote,
   CheckCircle2, ShieldCheck, Layers, Award,
 } from "lucide-react";

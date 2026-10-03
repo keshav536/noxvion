@@ -17,7 +17,6 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AppLoader } from './components/effects/AppLoader';
 import { RouteTransition } from './components/layout/RouteTransition';
-import { TargetCursor } from './components/effects/TargetCursor';
 
 const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -28,8 +27,9 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        {/* Solutions */}
+        {/* Solutions & Services */}
         <Route path="/solutions" element={<Solutions />} />
+        <Route path="/services" element={<Solutions />} />
         <Route
           path="/solutions/ai-machine-learning"
           element={<SolutionDetailPage customSlug="ai-machine-learning" />}
@@ -128,7 +128,6 @@ const AppContent: React.FC = () => {
   useMotionPreference();
   return (
     <BrowserRouter>
-      <TargetCursor />
       <AppLoader />
       <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-page, #FBFAF8)', color: 'var(--text-body, #4B5563)' }}>
         <Navbar />

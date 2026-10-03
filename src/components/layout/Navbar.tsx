@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/noxvion-logo.png";
 import { SocialLinks } from "../ui/SocialLinks";

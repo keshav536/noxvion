@@ -169,7 +169,7 @@ export const Projects: React.FC = () => {
                 role="tab"
                 aria-selected={activeCat === cat}
                 onClick={() => setActiveCat(cat)}
-                className={`cursor-target relative text-xs font-semibold tracking-wider uppercase pb-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] ${
+                className={`relative text-xs font-semibold tracking-wider uppercase pb-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] ${
                   activeCat === cat
                     ? 'text-[#1E3A8A] font-bold'
                     : 'text-slate-500 hover:text-[#0A2540]'
@@ -203,7 +203,7 @@ export const Projects: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Open ${proj.title} — ${proj.subtitle ?? proj.description.slice(0, 60)}`}
-                    className="cursor-target block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-2xl"
+                    className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] rounded-2xl"
                   >
                     <div className="nox-card h-full overflow-hidden flex flex-col justify-between bg-white group">
                       {/* Visual */}

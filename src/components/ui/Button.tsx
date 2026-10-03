@@ -49,7 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
   'aria-label': ariaLabel,
 }) => {
   const base =
-    'cursor-target inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2';
+    'inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2';
   const classes = `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   if (to) {
